@@ -97,7 +97,7 @@ namespace RestoWPF.MVVM.ViewModel
                         }
 
                         //totalPrice calculation and Trimming 0's
-                        SelectedOrderProduct.TotalPrice = Convert.ToDecimal((Convert.ToDecimal(SelectedOrderProduct.Price) * SelectedOrderProduct.Piece).ToString("0.####"));
+                        SelectedOrderProduct.TotalPrice = Convert.ToDecimal((Convert.ToDecimal(SelectedOrderProduct.Price) * SelectedOrderProduct.Piece).ToString("0.##"));
                     });
                 }
 
@@ -143,7 +143,7 @@ namespace RestoWPF.MVVM.ViewModel
                     {
                         SelectedOrderProduct.Piece = value;
                         //totalPrice calculation and Trimming 0's
-                        SelectedOrderProduct.TotalPrice = Convert.ToDecimal((Convert.ToDecimal(SelectedOrderProduct.Price) * SelectedOrderProduct.Piece).ToString("0.####"));
+                        SelectedOrderProduct.TotalPrice = Convert.ToDecimal((Convert.ToDecimal(SelectedOrderProduct.Price) * SelectedOrderProduct.Piece).ToString("0.##"));
                     });
 
                     OnPropertyChanged("SelectedOrderProduct");

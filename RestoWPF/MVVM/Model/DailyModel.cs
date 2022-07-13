@@ -13,7 +13,6 @@ namespace RestoWPF.MVVM.Model
         [PrimaryKey]
         public ObjectId Id { get; set; } = ObjectId.GenerateNewId();
         public DateTimeOffset Date { get; set; } = DateTime.Now.Date;
-        public int MyProperty { get; set; }
         public IList<OrderModel>? Orders { get; }
 
     }

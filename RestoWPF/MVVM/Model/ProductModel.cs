@@ -16,8 +16,6 @@ namespace RestoWPF.MVVM.Model
         [MapTo("Price")]
         public Decimal128 Price { get; set; }
         public int Location { get; set; }
-        public int Gram { get; set; }
-        public bool IsChicken { get; set; }
         public bool IsActive { get; set; }
         public CostumeThemeModel? CostumeTheme { get; set; }
     }

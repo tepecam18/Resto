@@ -7,5 +7,7 @@ namespace RestoWPF.MVVM.Model
     {
         [PrimaryKey]
         public ObjectId Id { get; set; } = ObjectId.GenerateNewId();
+        //todo device prop(ip mac name model)
+        public bool IsMain { get; set; }
     }
 }

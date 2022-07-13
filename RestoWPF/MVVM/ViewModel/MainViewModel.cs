@@ -55,7 +55,7 @@ namespace RestoWPF.MVVM.ViewModel
             IsColorAdjusted = Settings.Default.ColorAdjustment;
             #endregion
             _selectedItem = Nv.RestoItems[0];
-            SelectedIndex = 1;
+            SelectedIndex = 0;
         }
         #endregion
 

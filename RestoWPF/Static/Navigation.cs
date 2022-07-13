@@ -73,7 +73,8 @@ namespace RestoWPF.Static
         internal static void GetBack()
         {
             BackList.Remove(BackList.Last());
-            if (BackList.Last() > 0)
+            //BackList her zaman en az 1 değeri olmalı
+            if (BackList.Last() > 1)
             {
                 MainWindow.viewModel.SelectedItem = RestoItems[BackList.Last()];
                 MainWindow.viewModel.SelectedIndex=1;
@@ -81,6 +82,7 @@ namespace RestoWPF.Static
             else
             {
                 MainWindow.viewModel.SelectedItem = RestoItems[0];
+                MainWindow.viewModel.SelectedIndex=0;
                 BackList.Clear();
             }
         }

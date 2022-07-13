@@ -16,6 +16,7 @@ namespace RestoWPF.MVVM.Model
         public int Top { get; set; }
         public int Left { get; set; }
 
+        #region Property
         [Ignored]
         public int CacheLeft { get; set; }
         [Ignored]
@@ -26,7 +27,9 @@ namespace RestoWPF.MVVM.Model
             CacheLeft = Left;
             CacheTop = Top;
         }
+        #endregion
 
+        #region Methods
         public bool Save
         {
             set
@@ -50,5 +53,7 @@ namespace RestoWPF.MVVM.Model
                 }
             }
         }
+        #endregion
+
     }
 }

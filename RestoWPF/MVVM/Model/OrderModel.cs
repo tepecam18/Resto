@@ -12,7 +12,7 @@ namespace RestoWPF.MVVM.Model
     public class OrderModel : EmbeddedObject
     {
         public ObjectId Id { get; set; } = ObjectId.GenerateNewId();
-        public DateTimeOffset Date { get; set; } = DateTime.Now;
+        public DateTimeOffset DateT { get; set; } = DateTime.Now;
         public string? explanation { get; set; }
         public bool IsClosed { get; set; }
         public UsersModel SalesPerson { get; set; } = St.User;

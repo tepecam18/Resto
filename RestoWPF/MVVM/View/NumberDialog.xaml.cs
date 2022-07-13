@@ -32,7 +32,7 @@ namespace RestoWPF.MVVM.View
         private void SimpleButton_Click(object sender, RoutedEventArgs e)
         {
             txNumber.Text += ((Button)sender).Content;
-            txNumber.Text = Convert.ToDecimal(txNumber.Text).ToString("0.####");
+            txNumber.Text = Convert.ToDecimal(txNumber.Text).ToString("0.##");
             Piece = Convert.ToDecimal(txNumber.Text);
         }
 

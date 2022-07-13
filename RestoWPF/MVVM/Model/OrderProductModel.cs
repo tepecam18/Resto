@@ -11,13 +11,13 @@ namespace RestoWPF.MVVM.Model
 {
     public class OrderProductModel : EmbeddedObject
     {
-        public ProductModel? Product { get; set; }
         public Decimal128 Price { get; set; }
         public decimal Piece { get; set; }
+        public bool IsPrinted { get; set; }
+        public ProductModel? Product { get; set; }
+
         [BsonIgnore]
         public Decimal128 TotalPrice { get; set; }
-        [BsonIgnore]
-        public bool IsPrinted { get; set; }
 
     }
 }

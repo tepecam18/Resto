@@ -14,19 +14,19 @@ namespace RestoWPF.MVVM.ViewModel
         #region parameter
         Realm realm = Realm.GetInstance(new ConstantRealmConfig());
 
-        public List<TablesLayerModel> TablesLayer { get; set; }
-        private TablesLayerModel _SelectedTablesLayer { get; set; }
+        public List<TableModel> TablesLayer { get; set; }
+        private TableModel _SelectedTablesLayer { get; set; }
         #endregion
 
         #region methods
         public TablesViewModel()
         {
-            TablesLayer = realm.All<TablesLayerModel>().OrderBy(i => i.Id).ToList();
+            TablesLayer = realm.All<TableModel>().OrderBy(i => i.ID).ToList();
             _SelectedTablesLayer = TablesLayer[0];
         }
         #endregion
 
-        public TablesLayerModel SelectedTablesLayer
+        public TableModel SelectedTablesLayer
         {
             get { return _SelectedTablesLayer; }
             set

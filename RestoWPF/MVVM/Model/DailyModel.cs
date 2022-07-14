@@ -11,9 +11,10 @@ namespace RestoWPF.MVVM.Model
     public class DailyModel : RealmObject
     {
         [PrimaryKey]
-        public ObjectId Id { get; set; } = ObjectId.GenerateNewId();
+        public ObjectId ID { get; set; } = ObjectId.GenerateNewId();
         public DateTimeOffset Date { get; set; } = DateTime.Now.Date;
         public IList<OrderModel>? Orders { get; }
+        public IList<StockModel>? Stocks { get; }
 
     }
 }

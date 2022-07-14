@@ -8,13 +8,14 @@ using System.Threading.Tasks;
 
 namespace RestoWPF.MVVM.Model
 {
-    public class TablesModel : RealmObject
+    public class TableModel : RealmObject
     {
         [PrimaryKey]
-        public ObjectId Id { get; set; } = ObjectId.GenerateNewId();
+        public ObjectId ID { get; set; } = ObjectId.GenerateNewId();
         public string? TableName { get; set; }
         public int Top { get; set; }
         public int Left { get; set; }
+        public int Floor { get; set; }
 
         #region Property
         [Ignored]
@@ -22,7 +23,7 @@ namespace RestoWPF.MVVM.Model
         [Ignored]
         public int CacheTop { get; set; }
 
-        public TablesModel()
+        public TableModel()
         {
             CacheLeft = Left;
             CacheTop = Top;

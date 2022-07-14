@@ -6,8 +6,8 @@ namespace RestoWPF.MVVM.Model
     public class DeviceModel : RealmObject
     {
         [PrimaryKey]
-        public ObjectId Id { get; set; } = ObjectId.GenerateNewId();
-        //todo device prop(ip mac name model)
+        public ObjectId ID { get; set; } = ObjectId.GenerateNewId();
+        public string? MachineGuid { get; set; }
         public bool IsMain { get; set; }
     }
 }

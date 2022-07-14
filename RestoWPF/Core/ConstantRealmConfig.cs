@@ -29,7 +29,7 @@ namespace RestoWPF.Core
             DatabasePath = $"{path}\\RestWPF.realm";
             //todo realm dosyalarını sili kapat
             ShouldDeleteIfMigrationNeeded = true;
-        } 
+        }
 
         //static private string GetPassword()
         //{

@@ -8,16 +8,10 @@ using System.Threading.Tasks;
 
 namespace RestoWPF.MVVM.Model
 {
-    public class PaymentModel : EmbeddedObject
+    public class StockModel : EmbeddedObject
     {
-        public PaymentTypeModel Type { get; set; }
-        public Decimal128 Price { get; set; }
-    }
-
-    public class PaymentTypeModel : RealmObject
-    {
-        [PrimaryKey]
         public ObjectId ID { get; set; } = ObjectId.GenerateNewId();
-        public string Name { get; set; }
+        public Decimal128 Price{ get; set; }
+        public Decimal128 Amount { get; set; }
     }
 }

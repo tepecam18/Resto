@@ -11,7 +11,7 @@ namespace RestoWPF.MVVM.Model
     public class CostumeThemeModel : RealmObject
     {
         [PrimaryKey]
-        public ObjectId Id { get; set; } = ObjectId.GenerateNewId();
+        public ObjectId ID { get; set; } = ObjectId.GenerateNewId();
         public string Color { get; set; }
         public bool IsDefault { get; set; }
     }

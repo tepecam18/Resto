@@ -1,4 +1,5 @@
 ﻿using ControlzEx.Theming;
+using Microsoft.Win32;
 using Realms;
 using RestoWPF.Core;
 using RestoWPF.MVVM.Model;
@@ -24,7 +25,9 @@ namespace RestoWPF.MVVM.View
             }
             catch (Exception)
             {
-                MessageBox.Show("LoginView error realm");
+                //st ctor warning
+                MessageBox.Show("LoginView.cs: Veritabanı bağlantısı yapılamadı", "Kritik Hata");
+                realm = Realm.GetInstance(new ConstantRealmConfig());
             }
         }
 
@@ -64,6 +67,17 @@ namespace RestoWPF.MVVM.View
 
                     realm.Write(() =>
                     {
+                        RegistryKey key = Registry.LocalMachine.OpenSubKey("SOFTWARE\\Microsoft\\Cryptography");
+                        string a = key.GetValue("MachineGUID").ToString();
+                        if (key != null)
+                        {
+                            realm.Add(new DeviceModel()
+                            {
+
+                                MachineGuid = key.GetValue("MachineGUID").ToString()
+                            });
+                        }
+
                         CostumeThemeModel costumeTheme = realm.Add(new CostumeThemeModel()
                         {
                             Color = "#FFFF0000",
@@ -87,7 +101,7 @@ namespace RestoWPF.MVVM.View
                             for (int j = 0; j < 5*i; j++)
                             {
 #pragma warning disable CS8602 // Dereference of a possibly null reference.
-                                TL.Tables.Add(new TablesModel()
+                                TL.Tables.Add(new TableModel()
                                 {
                                     TableName = $"Masa: {j}",
                                 });

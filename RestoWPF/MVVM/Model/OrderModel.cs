@@ -11,14 +11,16 @@ namespace RestoWPF.MVVM.Model
 {
     public class OrderModel : EmbeddedObject
     {
-        public ObjectId Id { get; set; } = ObjectId.GenerateNewId();
+        public ObjectId ID { get; set; } = ObjectId.GenerateNewId();
         public DateTimeOffset DateT { get; set; } = DateTime.Now;
-        public string? explanation { get; set; }
+        public string OrderNote { get; set; } = "";
         public bool IsClosed { get; set; }
-        public UsersModel SalesPerson { get; set; } = St.User;
+        public bool IsCanceled{ get; set; }
+        public CanceledModel? Canceled{ get; set; }
+        public TableModel? Tables { get; set; }
+        public DeviceModel? Device { get; set; } = St.Device;
         public UsersModel? CourierPerson { get; set; }
-        public DeviceModel? Device { get; set; }
-        public TablesModel? Tables { get; set; }
+        public UsersModel SalesPerson { get; set; } = St.User;
         public IList<OrderProductModel>? Products { get; }
         public IList<PaymentModel>? Payments { get; }
 

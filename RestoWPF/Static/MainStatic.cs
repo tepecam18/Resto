@@ -15,11 +15,17 @@ namespace RestoWPF.Static
         public static DailyModel Today;
         public static OrderModel Order;
         internal static UsersModel User { get; set; }
+        internal static DeviceModel Device { get; set; }
 
         #region Ctor
         static St()
         {
             realm = Realm.GetInstance(new ConstantRealmConfig());
+            //todo Device Kaydedici
+            if (realm.All<DeviceModel>().Count() > 0)
+            {
+                Device = realm.All<DeviceModel>().First();
+            }
             //todo if ana makine mi
             realm.Write(() =>
             {

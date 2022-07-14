@@ -13,9 +13,9 @@ namespace RestoWPF.MVVM.Model
         [PrimaryKey]
         public ObjectId ID { get; set; } = ObjectId.GenerateNewId();
         public string? TableName { get; set; }
+        public string Floor { get; set; }
         public int Top { get; set; }
         public int Left { get; set; }
-        public int Floor { get; set; }
 
         #region Property
         [Ignored]

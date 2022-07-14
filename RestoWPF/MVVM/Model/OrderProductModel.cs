@@ -15,8 +15,8 @@ namespace RestoWPF.MVVM.Model
         public decimal Piece { get; set; }
         public bool IsPrinted { get; set; }
         public ProductModel? Product { get; set; }
-        public IList<OrderOptionModel>? OrderOptions { get; set; }
-        public IList<StockUsageModel>? StockUsages { get; set; }
+        public IList<OrderOptionModel>? OrderOptions { get; }
+        public IList<StockUsageModel>? StockUsages { get;}
 
         [BsonIgnore]
         public Decimal128 TotalPrice { get; set; }

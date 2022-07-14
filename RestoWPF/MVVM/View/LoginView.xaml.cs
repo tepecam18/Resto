@@ -93,9 +93,9 @@ namespace RestoWPF.MVVM.View
 
                         for (int i = 0; i < 4; i++)
                         {
-                            var TL = realm.Add(new TablesLayerModel()
+                            var TL = realm.Add(new TableFloorModel()
                             {
-                                LayerName = $"Kat: {i}",
+                                FloorName = $"Kat: {i}",
                             });
 
                             for (int j = 0; j < 5*i; j++)

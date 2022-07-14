@@ -19,7 +19,7 @@ namespace RestoWPF.MVVM.Model
         public bool IsActive { get; set; }
         public bool IsShow { get; set; }
         public CostumeThemeModel? CostumeTheme { get; set; }
-        public IList<ProductOptionModel>? ProductOptions { get; set; }
-        public IList<StockUseModel>? stockUses { get; set; }
+        public IList<ProductOptionModel>? ProductOptions { get;}
+        public IList<StockUseModel>? stockUses { get;}
     }
 }

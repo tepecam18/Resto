@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace RestoWPF.MVVM.Model
 {
-    public class ProductOptionModel : RealmObject
+    public class TableFloorModel : RealmObject
     {
         [PrimaryKey]
         public ObjectId ID { get; set; } = ObjectId.GenerateNewId();
-        public string? OptionName { get; set; }
-        public IList<ProductModel>? Products { get;}
+        public string? FloorName { get; set; }
+        public IList<TableModel>? Tables { get;}
+
     }
 }
-    

@@ -76,12 +76,12 @@ namespace RestoWPF.MVVM.ViewModel
                 if (value != null)
                 {
                     //Ürün önceden eklendiyse adet arttır
-                    int a = Order.Products.Where(i => i.Product.Id == value.Id).Count();
+                    int a = Order.Products.Where(i => i.Product.ID == value.ID).Count();
                     realm.Write(() =>
                     {
                         if (a > 0)
                         {
-                            SelectedOrderProduct = Order.Products.Where(i => i.Product.Id == value.Id).First();
+                            SelectedOrderProduct = Order.Products.Where(i => i.Product.ID == value.ID).First();
                             SelectedOrderProduct.Piece++;
                         }
                         else

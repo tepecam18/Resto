@@ -50,7 +50,7 @@
         <pan:Panorama Grid.Row="1">
             <ListBox Width="{Binding ElementName=OrderList, Path=ActualWidth, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
                     ItemsSource="{Binding Today.Orders}"
-                    SelectedItem="{Binding SelectedOrderTab}"
+                    SelectedItem="{Binding SelectedOrder}"
                     Style="{DynamicResource MaterialDesignListBox}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>

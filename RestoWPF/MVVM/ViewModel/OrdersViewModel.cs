@@ -1,6 +1,7 @@
 ﻿using Realms;
 using RestoWPF.Core;
 using RestoWPF.MVVM.Model;
+using RestoWPF.Static;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,11 +13,20 @@ namespace RestoWPF.MVVM.ViewModel
 {
     internal class OrdersViewModel : ViewModelBase
     {
-        Realm realm = Realm.GetInstance(new ConstantRealmConfig());
+        #region Data
+        Realm realm = St.realm;
         public DateTime _Date { get; set; } = DateTime.Now.Date;
+        public DailyModel Today { get; set; } = St.Today;
+        #endregion
 
-        public DailyModel Today { get; set; }
+        #region Ctor
+        public OrdersViewModel()
+        {
 
+        }
+        #endregion
+
+        #region Properties
         public DateTime Date
         {
             get
@@ -42,5 +52,17 @@ namespace RestoWPF.MVVM.ViewModel
                 OnPropertyChanged("Today");
             }
         }
+        public OrderModel SelectedOrder
+        {
+            set
+            {
+                if (value is not null)
+                {
+                    St.Order = value;
+                    Nv.GetBack(false);
+                }
+            }
+        }
+        #endregion
     }
 }

@@ -44,6 +44,6 @@ namespace RestoWPF.MVVM.View
         #endregion
 
         private void BillsButton_Click(object sender, RoutedEventArgs e)=>
-            Nv.SetContent(Nv.Orders);
+            Nv.SetContent(Nv.Orders, false);
     }
 }

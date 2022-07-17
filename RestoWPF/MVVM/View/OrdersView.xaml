@@ -24,14 +24,8 @@
             <ListView.View>
 
                 <GridView>
-                    <GridViewColumn Width="90">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <Button Content="Göster"/>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=DateT}" Header="Süre" Width="60"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=ID}" Header="Süre"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=DateT}" Header="Süre"/>
                     <!--todo Canceled or ordernote -->
                     <GridViewColumn DisplayMemberBinding="{Binding Path=OrderNote}" Header="Açıklama"/>
                     <GridViewColumn DisplayMemberBinding="{Binding Path=Tables.TableName}" Header="Masa"/>

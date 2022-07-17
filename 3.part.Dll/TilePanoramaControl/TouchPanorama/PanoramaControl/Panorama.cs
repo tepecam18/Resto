@@ -358,13 +358,13 @@ namespace PanoramaControl
                 // JH End - Update the cursor to scrolling if it's moved and release the pressed state
 
 
-                //scrollTarget.X = scrollStartOffset.X + delta.X;
+                scrollTarget.X = scrollStartOffset.X + delta.X;
                 // JH Start - Don't want vertical scrolling
                 scrollTarget.Y = scrollStartOffset.Y + delta.Y;
                 // JH End - Don't want vertical scrolling
 
                 // Scroll to the new position.
-                //sv.ScrollToHorizontalOffset(scrollTarget.X);
+                sv.ScrollToHorizontalOffset(scrollTarget.X);
                 // JH Start - Don't want vertical scrolling
                 sv.ScrollToVerticalOffset(scrollTarget.Y);
                 // JH End - Don't want vertical scrolling
@@ -502,13 +502,13 @@ namespace PanoramaControl
             // JH End - Update the cursor to scrolling if it's moved and release the pressed state
 
 
-            //scrollTarget.X = scrollStartOffset.X + delta.X;
+            scrollTarget.X = scrollStartOffset.X + delta.X;
             // JH Start - Don't want vertical scrolling
             scrollTarget.Y = scrollStartOffset.Y + delta.Y;
             // JH End - Don't want vertical scrolling
 
             // Scroll to the new position.
-            //sv.ScrollToHorizontalOffset(scrollTarget.X);
+            sv.ScrollToHorizontalOffset(scrollTarget.X);
             // JH Start - Don't want vertical scrolling
             sv.ScrollToVerticalOffset(scrollTarget.Y);
             // JH End - Don't want vertical scrolling

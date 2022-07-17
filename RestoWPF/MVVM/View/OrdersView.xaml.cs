@@ -24,5 +24,10 @@ namespace RestoWPF.MVVM.View
         {
             InitializeComponent();
         }
+
+        private void OrderNoteCM_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

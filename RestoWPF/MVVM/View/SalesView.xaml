@@ -496,7 +496,7 @@
                             Click="PaymentButton_Click"
                             Style="{StaticResource MaterialDesignRaisedSecondaryButton}"
                             Height="70" Cursor="Hand">
-                            <TextBlock Text="Ödeme Yap"
+                            <TextBlock Text="Kapat"
                                    TextAlignment="Center"
 
                                    TextWrapping="WrapWithOverflow"

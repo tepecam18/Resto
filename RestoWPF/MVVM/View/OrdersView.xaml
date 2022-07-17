@@ -14,30 +14,30 @@
     </UserControl.DataContext>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition/>
+            <RowDefinition Height="60"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-
-        <ListView ItemsSource="{Binding Today.Orders}">
+        <pan:Panorama Grid.Row="1">
+            <ListView ItemsSource="{Binding Today.Orders}"
+                  SelectedItem="{Binding SelectedOrder}">
 
             <ListView.View>
 
-                <GridView AllowsColumnReorder="true" ColumnHeaderToolTip="Employee Information">
-
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=DateT}" Header="Saat"/>
-
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=OrderNote}">
-                        <GridViewColumnHeader>Şipariş notu
-                            <GridViewColumnHeader.ContextMenu>
-                                <ContextMenu MenuItem.Click="OrderNoteCM_Click" Name="OrderNoteCM">
-                                    <MenuItem Header="Ascending" />
-                                    <MenuItem Header="Descending" />
-                                </ContextMenu>
-                            </GridViewColumnHeader.ContextMenu>
-                        </GridViewColumnHeader>
+                <GridView>
+                    <GridViewColumn Width="90">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content="Göster"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=EmployeeNumber}" Header="Employee No." Width="100"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=DateT}" Header="Süre" Width="60"/>
+                    <!--todo Canceled or ordernote -->
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=OrderNote}" Header="Açıklama"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Tables.TableName}" Header="Masa"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Payments}" Header="Ödeme"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=SalesPerson.UserName}" Header="Ekleyen"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=CourierPerson.UserName}" Header="Kurye"/>
                 </GridView>
 
             </ListView.View>
@@ -56,54 +56,6 @@
                 </Style>
             </ListView.ItemContainerStyle>
         </ListView>
-
-        <pan:Panorama Grid.Row="1">
-            <ListBox Width="{Binding ElementName=OrderList, Path=ActualWidth, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
-                    ItemsSource="{Binding Today.Orders}"
-                    SelectedItem="{Binding SelectedOrder}"
-                    Style="{DynamicResource MaterialDesignListBox}">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <Grid MaxHeight="50"
-                                           MinHeight="40">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="{Binding ElementName=OrderTextName, Path=ActualWidth, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
-                                <ColumnDefinition Width="50"/>
-                                <ColumnDefinition Width="50"/>
-                                <ColumnDefinition Width="50"/>
-                            </Grid.ColumnDefinitions>
-                            <TextBlock Text="{Binding Product.Name}"
-                                           VerticalAlignment="Center"
-                                           TextWrapping="WrapWithOverflow"/>
-                            <TextBlock Text="{Binding Price}" 
-                                           Grid.Column="1"
-                                           VerticalAlignment="Center"
-                                           TextTrimming="CharacterEllipsis"
-                                           MaxHeight="50"
-                                           HorizontalAlignment="Center"/>
-                            <TextBlock Text="{Binding Piece}" 
-                                           VerticalAlignment="Center"
-                                           Grid.Column="2"
-                                           HorizontalAlignment="Center"/>
-                            <TextBlock Text="{Binding TotalPrice}"
-                                           VerticalAlignment="Center"
-                                           Grid.Column="3"
-                                           TextTrimming="CharacterEllipsis"
-                                           HorizontalAlignment="Center"/>
-                        </Grid>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-                <ListBox.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <StackPanel/>
-                    </ItemsPanelTemplate>
-                </ListBox.ItemsPanel>
-                <ListBox.ItemContainerStyle>
-                    <Style TargetType="ListBoxItem">
-                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                    </Style>
-                </ListBox.ItemContainerStyle>
-            </ListBox>
         </pan:Panorama>
     </Grid>
 </UserControl>

@@ -24,8 +24,14 @@
             <ListView.View>
 
                 <GridView>
+                        <GridView.ColumnHeaderContainerStyle>
+                            <Style TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource MaterialDesignFlatButton}">
+                                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                            </Style>
+                        </GridView.ColumnHeaderContainerStyle>
                     <GridViewColumn DisplayMemberBinding="{Binding Path=ID}" Header="Süre"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=DateT}" Header="Süre"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=DateT, StringFormat={}{0:hh:mm}}" Header="Süre"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=DateT}" Header="Tarih"/>
                     <!--todo Canceled or ordernote -->
                     <GridViewColumn DisplayMemberBinding="{Binding Path=OrderNote}" Header="Açıklama"/>
                     <GridViewColumn DisplayMemberBinding="{Binding Path=Tables.TableName}" Header="Masa"/>
@@ -35,21 +41,21 @@
                 </GridView>
 
             </ListView.View>
-            <ListView.ItemContainerStyle>
-                <Style TargetType="{x:Type ListViewItem}" BasedOn="{StaticResource MaterialDesignGridViewItem}">
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding IsCanceled}" Value="true">
-                            <Setter Property="Background" 
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="{x:Type ListViewItem}" BasedOn="{StaticResource MaterialDesignGridViewItem}">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsCanceled}" Value="true">
+                                <Setter Property="Background" 
               Value="Red"/>
-                        </DataTrigger>
-                        <DataTrigger Binding="{Binding IsClosed}" Value="true">
-                            <Setter Property="Background" 
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding IsClosed}" Value="true">
+                                <Setter Property="Background" 
               Value="Green"/>
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </ListView.ItemContainerStyle>
-        </ListView>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </ListView.ItemContainerStyle>
+            </ListView>
         </pan:Panorama>
     </Grid>
 </UserControl>

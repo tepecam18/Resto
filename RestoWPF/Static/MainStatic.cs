@@ -29,6 +29,7 @@ namespace RestoWPF.Static
             //todo if ana makine mi
             realm.Write(() =>
             {
+                //Bugünün verisini al yoksa oluştur
                 if (realm.All<DailyModel>().Where(i => i.Date == DateTime.Now.Date).Count() > 1)
                 {
                     Today = realm.All<DailyModel>().Where(i => i.Date == DateTime.Now.Date).First();

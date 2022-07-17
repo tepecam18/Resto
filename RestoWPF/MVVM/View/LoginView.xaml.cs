@@ -315,7 +315,7 @@ namespace RestoWPF.MVVM.View
                             Price = 90.99M,
                         });
 
-                        var today = realm.Add(new DailyModel());
+                        var today = St.Today;
 
                         for (int j = 0; j < 1000; j++)
                         {

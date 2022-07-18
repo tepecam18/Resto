@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="RestoWPF.MVVM.View.OrdersView"
+﻿<UserControl
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -6,6 +6,8 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:pan="clr-namespace:PanoramaControl;assembly=PanoramaControl" 
              xmlns:viewModel="clr-namespace:RestoWPF.MVVM.ViewModel"
+             xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls" 
+             x:Class="RestoWPF.MVVM.View.OrdersView"
              mc:Ignorable="d" 
              d:Background="White"
              d:DesignHeight="450" d:DesignWidth="800">
@@ -17,30 +19,98 @@
             <RowDefinition Height="60"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+                <StackPanel
+                        Orientation="Horizontal">
+                    <TextBlock
+                        Text="{Binding Date, StringFormat=d}"
+                        VerticalAlignment="Center"
+                        FontSize="24" />
+                    <Button
+                        Margin="8 0 0 0"
+                        Content="..."
+                        Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
+                        materialDesign:DialogHost.DialogOpenedAttached="CalendarDialogOpenedEventHandler"
+                        materialDesign:DialogHost.DialogClosingAttached="CalendarDialogClosingEventHandler">
+                        <Button.CommandParameter>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition
+                                        Height="Auto" />
+                                    <RowDefinition
+                                        Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Viewbox
+                                      Stretch="Uniform"
+                                      Width="300">
+                                    <Calendar
+                                    x:Name="Calendar"
+                                    Margin="-1 -4 -1 0" />
+                                </Viewbox>
+                                <StackPanel
+                                  Grid.Row="1"
+                                  Margin="8"
+                                  HorizontalAlignment="Right"
+                                  Orientation="Horizontal">
+                                    <Button
+                                        Style="{StaticResource MaterialDesignFlatButton}"
+                                        Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"
+                                        CommandParameter="0"
+                                        Content="CANCEL" />
+                                    <Button
+                                        Style="{StaticResource MaterialDesignFlatButton}"
+                                        Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"
+                                        CommandParameter="1"
+                                        Content="OK" />
+                                </StackPanel>
+                            </Grid>
+                        </Button.CommandParameter>
+                    </Button>
+                </StackPanel>
+            <StackPanel Orientation="Horizontal" Grid.Column="1">
+                <StackPanel.Resources>
+                    <Style TargetType="{x:Type Button}" BasedOn="{StaticResource MaterialDesignPaperButton}">
+                        <Setter Property="Margin" Value="0 0 10 0"/>
+                        <Setter Property="FontSize" Value="16"/>
+                        <Setter Property="Width" Value="100"/>
+                        <Setter Property="Height" Value="50"/>
+                    </Style>
+                </StackPanel.Resources>
+                <Button Content="Göster"/>
+                <Button Content="Sil" BorderBrush="red"/>
+                <Button Content="Detay" BorderBrush="Green"/>
+            </StackPanel>
+        </Grid>
+
         <pan:Panorama Grid.Row="1">
             <ListView ItemsSource="{Binding Today.Orders}"
                   SelectedItem="{Binding SelectedOrder}">
 
-            <ListView.View>
+                <ListView.View>
 
-                <GridView>
+                    <GridView>
                         <GridView.ColumnHeaderContainerStyle>
                             <Style TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource MaterialDesignFlatButton}">
                                 <Setter Property="HorizontalContentAlignment" Value="Center"/>
                             </Style>
                         </GridView.ColumnHeaderContainerStyle>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=ID}" Header="Süre"/>
-                        <GridViewColumn DisplayMemberBinding="{Binding Path=DateT, StringFormat={}{0:hh:mm}}" Header="Süre"/>
-                        <GridViewColumn DisplayMemberBinding="{Binding Path=DateT}" Header="Tarih"/>
-                    <!--todo Canceled or ordernote -->
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=OrderNote}" Header="Açıklama"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=Tables.TableName}" Header="Masa"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=Payments}" Header="Ödeme"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=SalesPerson.UserName}" Header="Ekleyen"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=CourierPerson.UserName}" Header="Kurye"/>
-                </GridView>
+                        <GridViewColumn DisplayMemberBinding="{Binding ID}" Header="Süre"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding DateT, StringFormat=\{0:hh:mm\}}" Header="Süre"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding DateT}" Header="Tarih"/>
+                        <!--todo Canceled or ordernote -->
+                        <GridViewColumn DisplayMemberBinding="{Binding OrderNote}" Header="Açıklama"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Tables.TableName}" Header="Masa"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Payments}" Header="Ödeme"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding SalesPerson.UserName}" Header="Ekleyen"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding CourierPerson.UserName}" Header="Kurye"/>
+                    </GridView>
 
-            </ListView.View>
+                </ListView.View>
                 <ListView.ItemContainerStyle>
                     <Style TargetType="{x:Type ListViewItem}" BasedOn="{StaticResource MaterialDesignGridViewItem}">
                         <Style.Triggers>

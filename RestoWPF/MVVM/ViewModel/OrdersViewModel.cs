@@ -17,12 +17,18 @@ namespace RestoWPF.MVVM.ViewModel
         Realm realm = St.realm;
         public DateTime _Date { get; set; } = DateTime.Now.Date;
         public DailyModel Today { get; set; } = St.Today;
+
+        private DateTime _date;
+        private DateTime _time;
+        private string? _validatingTime;
+        private DateTime? _futureValidatingDate;
         #endregion
 
         #region Ctor
         public OrdersViewModel()
         {
-
+            Date = DateTime.Now;
+            Time = DateTime.Now;
         }
         #endregion
 
@@ -59,10 +65,41 @@ namespace RestoWPF.MVVM.ViewModel
                 if (value is not null)
                 {
                     St.Order = value;
-                    Nv.GetBack(false);
+                    //Nv.GetBack(false);
                 }
             }
         }
+        #endregion
+
+
+        #region picker
+
+
+
+        public DateTime Date
+        {
+            get => _date;
+            set => SetProperty(ref _date, value);
+        }
+
+        public DateTime Time
+        {
+            get => _time;
+            set => SetProperty(ref _time, value);
+        }
+
+        public string? ValidatingTime
+        {
+            get => _validatingTime;
+            set => SetProperty(ref _validatingTime, value);
+        }
+
+        public DateTime? FutureValidatingDate
+        {
+            get => _futureValidatingDate;
+            set => SetProperty(ref _futureValidatingDate, value);
+        }
+
         #endregion
     }
 }

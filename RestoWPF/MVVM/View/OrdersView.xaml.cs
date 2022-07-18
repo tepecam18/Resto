@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MaterialDesignThemes.Wpf;
+using RestoWPF.MVVM.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -25,9 +27,20 @@ namespace RestoWPF.MVVM.View
             InitializeComponent();
         }
 
-        private void OrderNoteCM_Click(object sender, RoutedEventArgs e)
-        {
+        public void CalendarDialogOpenedEventHandler(object sender, DialogOpenedEventArgs eventArgs)
+       => Calendar.SelectedDate = ((PickersViewModel)DataContext).Date;
 
+        public void CalendarDialogClosingEventHandler(object sender, DialogClosingEventArgs eventArgs)
+        {
+            if (!Equals(eventArgs.Parameter, "1")) return;
+
+            if (!Calendar.SelectedDate.HasValue)
+            {
+                eventArgs.Cancel();
+                return;
+            }
+
+            ((PickersViewModel)DataContext).Date = Calendar.SelectedDate.Value;
         }
     }
 }

@@ -15,20 +15,21 @@ namespace RestoWPF.MVVM.ViewModel
     {
         #region Data
         Realm realm = St.realm;
-        public DateTime _Date { get; set; } = DateTime.Now.Date;
+        private DateTime _Date { get; set; } = DateTime.Now.Date;
+        public OrderModel SelectedOrder { get; set; }
         public DailyModel Today { get; set; } = St.Today;
 
-        private DateTime _date;
-        private DateTime _time;
-        private string? _validatingTime;
-        private DateTime? _futureValidatingDate;
+        public AnotherCommandImplementation ShowSalesCommand { get; }
+        public AnotherCommandImplementation CanceledSalesCommand { get; }
+        public AnotherCommandImplementation DetailSalesCommand { get; }
         #endregion
 
         #region Ctor
         public OrdersViewModel()
         {
-            Date = DateTime.Now;
-            Time = DateTime.Now;
+            ShowSalesCommand = new AnotherCommandImplementation(ShowSales);
+            CanceledSalesCommand = new AnotherCommandImplementation(CanceledSales);
+            DetailSalesCommand = new AnotherCommandImplementation(DetailSales);
         }
         #endregion
 
@@ -46,60 +47,41 @@ namespace RestoWPF.MVVM.ViewModel
                 {
                     Today = realm.All<DailyModel>().Where(i => i.Date == _Date).First();
                 }
-                else if (realm.All<DailyModel>().Where(i => i.Date == _Date).Count() > 0)
-                {
-                    Today = realm.All<DailyModel>().Single(i => i.Date == _Date);
-                }
                 else
                 {
-                    MessageBox.Show("Geçersiz Tarih");
+                    MessageBox.Show("Geçerli Güne Ait veriler bulunamadı");
                 }
                 OnPropertyChanged();
                 OnPropertyChanged("Today");
             }
         }
-        public OrderModel SelectedOrder
-        {
-            set
-            {
-                if (value is not null)
-                {
-                    St.Order = value;
-                    //Nv.GetBack(false);
-                }
-            }
-        }
         #endregion
 
-
-        #region picker
-
-
-
-        public DateTime Date
+        #region Command
+        private void ShowSales(object obj)
         {
-            get => _date;
-            set => SetProperty(ref _date, value);
+            if (SelectedOrder is not null)
+            {
+                St.Order = SelectedOrder;
+                Nv.GetBack(false);
+            }
+            else
+            {
+                MessageBox.Show("Neyi", "Uyarı");
+            }
         }
-
-        public DateTime Time
+        private void CanceledSales(object obj)
         {
-            get => _time;
-            set => SetProperty(ref _time, value);
+            realm.Write(() =>
+            {
+                //todo Canceled note ekle
+                SelectedOrder.IsCanceled = true;
+            });
         }
-
-        public string? ValidatingTime
+        private void DetailSales(object obj)
         {
-            get => _validatingTime;
-            set => SetProperty(ref _validatingTime, value);
+            //todo detay göster
         }
-
-        public DateTime? FutureValidatingDate
-        {
-            get => _futureValidatingDate;
-            set => SetProperty(ref _futureValidatingDate, value);
-        }
-
         #endregion
     }
 }

@@ -25,53 +25,20 @@
                 <ColumnDefinition/>
                 <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
-                <StackPanel
+            <StackPanel Margin="20 0 0 0"
                         Orientation="Horizontal">
-                    <TextBlock
-                        Text="{Binding Date, StringFormat=d}"
+                <TextBlock
+                        Text="{Binding Date, StringFormat=dd/MM/yyyy}"
                         VerticalAlignment="Center"
                         FontSize="24" />
-                    <Button
-                        Margin="8 0 0 0"
-                        Content="..."
-                        Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
-                        materialDesign:DialogHost.DialogOpenedAttached="CalendarDialogOpenedEventHandler"
-                        materialDesign:DialogHost.DialogClosingAttached="CalendarDialogClosingEventHandler">
-                        <Button.CommandParameter>
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition
-                                        Height="Auto" />
-                                    <RowDefinition
-                                        Height="Auto" />
-                                </Grid.RowDefinitions>
-                                <Viewbox
-                                      Stretch="Uniform"
-                                      Width="300">
-                                    <Calendar
-                                    x:Name="Calendar"
-                                    Margin="-1 -4 -1 0" />
-                                </Viewbox>
-                                <StackPanel
-                                  Grid.Row="1"
-                                  Margin="8"
-                                  HorizontalAlignment="Right"
-                                  Orientation="Horizontal">
-                                    <Button
-                                        Style="{StaticResource MaterialDesignFlatButton}"
-                                        Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"
-                                        CommandParameter="0"
-                                        Content="CANCEL" />
-                                    <Button
-                                        Style="{StaticResource MaterialDesignFlatButton}"
-                                        Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"
-                                        CommandParameter="1"
-                                        Content="OK" />
-                                </StackPanel>
-                            </Grid>
-                        </Button.CommandParameter>
-                    </Button>
-                </StackPanel>
+                <Button Content="tarih"
+                        Margin="5 0 0 0"
+                        Click="DateButton_Click"/>
+                <DatePicker Name="DpDate" 
+                            Height="0"
+                            Width="0"
+                            SelectedDate="{Binding Date, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            </StackPanel>
             <StackPanel Orientation="Horizontal" Grid.Column="1">
                 <StackPanel.Resources>
                     <Style TargetType="{x:Type Button}" BasedOn="{StaticResource MaterialDesignPaperButton}">

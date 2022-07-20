@@ -21,7 +21,7 @@ namespace RestoWPF.MVVM.Model
         public DeviceModel? Device { get; set; } = St.Device;
         public UsersModel? CourierPerson { get; set; }
         public UsersModel SalesPerson { get; set; } = St.User;
-        public IList<OrderProductModel>? Products { get; }
+        public IList<OrderProductModel> Products { get; }
         public IList<PaymentModel>? Payments { get; }
 
 

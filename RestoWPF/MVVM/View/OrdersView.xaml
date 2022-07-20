@@ -14,85 +14,88 @@
     <UserControl.DataContext>
         <viewModel:OrdersViewModel/>
     </UserControl.DataContext>
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="60"/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
-
         <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition Width="auto"/>
-            </Grid.ColumnDefinitions>
-            <StackPanel Margin="20 0 0 0"
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Margin="20 0 0 0"
                         Orientation="Horizontal">
-                <TextBlock
+                    <TextBlock
                         Text="{Binding Date, StringFormat=dd/MM/yyyy}"
                         VerticalAlignment="Center"
                         FontSize="24" />
-                <Button Content="tarih"
+                    <Button Content="tarih"
                         Margin="5 0 0 0"
                         Click="DateButton_Click"/>
-                <DatePicker Name="DpDate" 
+                    <DatePicker Name="DpDate" 
                             Height="0"
                             Width="0"
                             SelectedDate="{Binding Date, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" Grid.Column="1">
-                <StackPanel.Resources>
-                    <Style TargetType="{x:Type Button}" BasedOn="{StaticResource MaterialDesignPaperButton}">
-                        <Setter Property="Margin" Value="0 0 10 0"/>
-                        <Setter Property="FontSize" Value="16"/>
-                        <Setter Property="Width" Value="100"/>
-                        <Setter Property="Height" Value="50"/>
-                    </Style>
-                </StackPanel.Resources>
-                <Button Content="Göster"/>
-                <Button Content="Sil" BorderBrush="red"/>
-                <Button Content="Detay" BorderBrush="Green"/>
-            </StackPanel>
-        </Grid>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Grid.Column="1">
+                    <StackPanel.Resources>
+                        <Style TargetType="{x:Type Button}" BasedOn="{StaticResource MaterialDesignPaperButton}">
+                            <Setter Property="Margin" Value="0 0 10 0"/>
+                            <Setter Property="FontSize" Value="16"/>
+                            <Setter Property="Width" Value="100"/>
+                            <Setter Property="Height" Value="50"/>
+                        </Style>
+                    </StackPanel.Resources>
+                    <Button Content="Göster"
+                        Command="{Binding ShowSalesCommand}"/>
+                    <Button Content="Sil" BorderBrush="red"
+                        Command="{Binding CanceledSalesCommand}"/>
+                    <Button Content="Detay" BorderBrush="Green"
+                        Command="{Binding DetailSalesCommand}"/>
+                </StackPanel>
+            </Grid>
 
-        <pan:Panorama Grid.Row="1">
-            <ListView ItemsSource="{Binding Today.Orders}"
+            <pan:Panorama Grid.Row="1">
+                <ListView ItemsSource="{Binding Today.Orders}"
                   SelectedItem="{Binding SelectedOrder}">
 
-                <ListView.View>
+                    <ListView.View>
 
-                    <GridView>
-                        <GridView.ColumnHeaderContainerStyle>
-                            <Style TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource MaterialDesignFlatButton}">
-                                <Setter Property="HorizontalContentAlignment" Value="Center"/>
-                            </Style>
-                        </GridView.ColumnHeaderContainerStyle>
-                        <GridViewColumn DisplayMemberBinding="{Binding ID}" Header="Süre"/>
-                        <GridViewColumn DisplayMemberBinding="{Binding DateT, StringFormat=\{0:hh:mm\}}" Header="Süre"/>
-                        <GridViewColumn DisplayMemberBinding="{Binding DateT}" Header="Tarih"/>
-                        <!--todo Canceled or ordernote -->
-                        <GridViewColumn DisplayMemberBinding="{Binding OrderNote}" Header="Açıklama"/>
-                        <GridViewColumn DisplayMemberBinding="{Binding Tables.TableName}" Header="Masa"/>
-                        <GridViewColumn DisplayMemberBinding="{Binding Payments}" Header="Ödeme"/>
-                        <GridViewColumn DisplayMemberBinding="{Binding SalesPerson.UserName}" Header="Ekleyen"/>
-                        <GridViewColumn DisplayMemberBinding="{Binding CourierPerson.UserName}" Header="Kurye"/>
-                    </GridView>
+                        <GridView>
+                            <GridView.ColumnHeaderContainerStyle>
+                                <Style TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource MaterialDesignFlatButton}">
+                                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                                </Style>
+                            </GridView.ColumnHeaderContainerStyle>
+                            <GridViewColumn DisplayMemberBinding="{Binding ID}" Header="Süre"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding DateT, StringFormat=\{0:hh:mm\}}" Header="Süre"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding DateT}" Header="Tarih"/>
+                            <!--todo Canceled or ordernote -->
+                            <GridViewColumn DisplayMemberBinding="{Binding OrderNote}" Header="Açıklama"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Tables.TableName}" Header="Masa"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Payments}" Header="Ödeme"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding SalesPerson.UserName}" Header="Ekleyen"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding CourierPerson.UserName}" Header="Kurye"/>
+                        </GridView>
 
-                </ListView.View>
-                <ListView.ItemContainerStyle>
-                    <Style TargetType="{x:Type ListViewItem}" BasedOn="{StaticResource MaterialDesignGridViewItem}">
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding IsCanceled}" Value="true">
-                                <Setter Property="Background" 
+                    </ListView.View>
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="{x:Type ListViewItem}" BasedOn="{StaticResource MaterialDesignGridViewItem}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsCanceled}" Value="true">
+                                    <Setter Property="Background" 
               Value="Red"/>
-                            </DataTrigger>
-                            <DataTrigger Binding="{Binding IsClosed}" Value="true">
-                                <Setter Property="Background" 
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding IsClosed}" Value="true">
+                                    <Setter Property="Background" 
               Value="Green"/>
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </ListView.ItemContainerStyle>
-            </ListView>
-        </pan:Panorama>
-    </Grid>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                </ListView>
+            </pan:Panorama>
+        </Grid>
 </UserControl>

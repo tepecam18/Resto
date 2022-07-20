@@ -1,6 +1,9 @@
-﻿using Realms;
+﻿using MaterialDesignThemes.Wpf;
+using Realms;
 using RestoWPF.Core;
 using RestoWPF.MVVM.Model;
+using RestoWPF.MVVM.View;
+using RestoWPF.MVVM.View.Dialog;
 using RestoWPF.Static;
 using System;
 using System.Collections.Generic;
@@ -55,6 +58,7 @@ namespace RestoWPF.MVVM.ViewModel
                 OnPropertyChanged("Today");
             }
         }
+
         #endregion
 
         #region Command
@@ -70,18 +74,68 @@ namespace RestoWPF.MVVM.ViewModel
                 MessageBox.Show("Neyi", "Uyarı");
             }
         }
-        private void CanceledSales(object obj)
+        private async void CanceledSales(object obj)
         {
-            realm.Write(() =>
+            //Ürün Seçili mi
+            if (SelectedOrder is not null)
             {
-                //todo Canceled note ekle
-                SelectedOrder.IsCanceled = true;
-            });
+                CanceledDialog view = new CanceledDialog()
+                {
+                    DataContext = new CanceledDialogModel()
+                };
+
+                var result = await DialogHost.Show(view, "RootDialog", ClosingEventHandler);
+                if (result is bool)
+                {
+                    //Onaylandı mı
+                    if (Convert.ToBoolean(result))
+                    {
+                        CanceledModel canceled = ((CanceledDialogModel)view.DataContext).SelectedCanceled;
+
+                        string canceledstr = ((CanceledDialogModel)view.DataContext).SelectedText;
+
+                        bool canceledIsFavorite = ((CanceledDialogModel)view.DataContext).SelectedIsFavorite;
+
+                        realm.Write(() =>
+                        {
+                            //Veri Kayıtlı değilse
+                            if (canceled is null && canceledstr is not null)
+                            {
+                                canceled = new CanceledModel()
+                                {
+                                    Note= canceledstr,
+                                    IsFavorite = canceledIsFavorite
+                                };
+                            }
+                            else
+                            {
+                                return;
+                            }
+                            SelectedOrder.Canceled = canceled;
+                            SelectedOrder.IsCanceled = true;
+                        });
+
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Hatalı veya Eksik Veri Girişi Yapıldı", "Hata");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Neyi", "Uyarı");
+            }
+            OnPropertyChanged("Today");
         }
+        private void ClosingEventHandler(object sender, DialogClosingEventArgs eventArgs) { }
+
         private void DetailSales(object obj)
         {
-            //todo detay göster
         }
+
+
+
         #endregion
     }
 }

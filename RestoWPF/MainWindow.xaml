@@ -20,7 +20,6 @@
     ShowMinButton="False"
     TextElement.Foreground="{DynamicResource MaterialDesignBody}"
     TitleBarHeight="50"
-    d:ViewModel="clr-namespace:RestoWPF.MVVM.ViewModel" 
     WindowStartupLocation="CenterScreen"
     WindowTitleBrush="{StaticResource PrimaryHueMidBrush}">
 
@@ -84,17 +83,19 @@
 
 
         <!--<view:MainMenuView Grid.Row="1"/>-->
-        <ScrollViewer
+        <materialDesign:DialogHost Identifier="RootDialog">
+            <ScrollViewer
             x:Name="MainScrollViewer"
             Grid.ColumnSpan="2"
             HorizontalScrollBarVisibility="{Binding SelectedItem.HorizontalScrollBarVisibilityRequirement, FallbackValue=Disabled}"
             materialDesign:ScrollViewerAssist.IsAutoHideEnabled="True"
             VerticalScrollBarVisibility="{Binding SelectedItem.VerticalScrollBarVisibilityRequirement, FallbackValue=Disabled}">
-            <ContentControl
+                <ContentControl
                 Margin="{Binding MarginRequirement, FallbackValue=7}"
                 Content="{Binding Content, UpdateSourceTrigger=PropertyChanged, FallbackValue={x:Null}}"
                 DataContext="{Binding SelectedItem}"
                 DataContextChanged="OnSelectedItemChanged" />
-        </ScrollViewer>
+            </ScrollViewer>
+        </materialDesign:DialogHost>
     </Grid>
 </mah:MetroWindow>

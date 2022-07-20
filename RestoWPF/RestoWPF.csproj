@@ -36,6 +36,12 @@
     <ProjectReference Include="..\3.part.Dll\TilePanoramaControl\TouchPanorama\PanoramaControl\PanoramaControl.csproj" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="MVVM\View\Dialog\OrderDetailDialog.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="MVVM\View\Dialog\CanceledDialog.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Static\Settings.Designer.cs">
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <AutoGen>True</AutoGen>
@@ -47,6 +53,16 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="MVVM\View\Dialog\OrderDetailDialog.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="MVVM\View\Dialog\CanceledDialog.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
 
 </Project>

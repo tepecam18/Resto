@@ -279,7 +279,7 @@
                                         <RowDefinition />
                                         <RowDefinition Height="auto"/>
                                     </Grid.RowDefinitions>
-                                    
+
                                     <Grid Grid.Row="0">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition/>
@@ -325,48 +325,12 @@
                                         </Button>
                                     </Grid>
                                     <materialDesign:Card
-                                    Grid.Row="1"
-                                    d:Background="Gray"
-                                    materialDesign:ShadowAssist.ShadowDepth="Depth3"
-                                    materialDesign:ShadowAssist.ShadowEdges="Top"
-                                    Padding="8"
-                                    Margin="16 2">
-                                        <Grid DockPanel.Dock="Top"
-                                            Grid.Row="1">
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition/>
-                                                <RowDefinition/>
-                                            </Grid.RowDefinitions>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition/>
-                                                <ColumnDefinition Width="50"/>
-                                                <ColumnDefinition Width="50"/>
-                                                <ColumnDefinition Width="10"/>
-                                            </Grid.ColumnDefinitions>
-                                            <Label Grid.Column="0"
-                                                   VerticalContentAlignment="Center"
-                                                   HorizontalContentAlignment="Center">
-                                                <TextBlock Text="Ürün Adı"
-                                                   FontWeight="Medium"
-                                                    TextWrapping="WrapWithOverflow"/>
-                                            </Label>
-                                            <TextBlock Grid.Column="1"
-                                                   Text="Fiyat"
-                                                   HorizontalAlignment="Center"
-                                                   VerticalAlignment="Center"/>
-                                            <TextBlock Grid.Column="2"
-                                                Text="Tutar"
-                                                HorizontalAlignment="Center"
-                                                VerticalAlignment="Center"/>
-                                        </Grid>
-                                    </materialDesign:Card>
-                                    <materialDesign:Card
                                     Grid.Row="2"
                                     d:Background="Gray"
                                     materialDesign:ShadowAssist.ShadowDepth="Depth3"
                                     materialDesign:ShadowAssist.ShadowEdges="Top"
                                     Padding="8"
-                                    Margin="16 2">
+                                    Margin="16 10 16 0">
                                         <Grid>
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="auto"/>

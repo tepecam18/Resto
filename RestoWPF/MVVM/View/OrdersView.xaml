@@ -59,8 +59,8 @@
 
         <pan:Panorama Grid.Row="1">
             <ListView ItemsSource="{Binding Today.Orders}"
-                  SelectedItem="{Binding SelectedOrder, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-
+                          SelectedItem="{Binding SelectedOrder}"
+                          SelectionMode="Single">
                 <ListView.View>
 
                     <GridView>
@@ -83,23 +83,50 @@
                 </ListView.View>
                 <ListView.ItemContainerStyle>
                     <Style TargetType="{x:Type ListViewItem}" BasedOn="{StaticResource MaterialDesignGridViewItem}">
-                        <Setter Property="VerticalContentAlignment" Value="Center"/>
-                        <Setter Property="Height" Value="50"/>
                         <Style.Triggers>
-                            <Trigger Property="IsSelected" Value="True">
-                                <Setter Property="Background" Value="Pink"/>
-                            </Trigger>
                             <DataTrigger Binding="{Binding IsCanceled}" Value="true">
                                 <Setter Property="Background" 
-                                        Value="Red"/>
+              Value="Red"/>
                             </DataTrigger>
                             <DataTrigger Binding="{Binding IsClosed}" Value="true">
                                 <Setter Property="Background" 
-                                        Value="Green"/>
+              Value="Green"/>
                             </DataTrigger>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="ListBoxItem">
+                                            <Border 
+                                                    SnapsToDevicePixels="true"
+                                                    Background="{TemplateBinding Background}">
+                                                <Border x:Name="Border"
+                                                        Padding="{Binding RelativeSource={RelativeSource Self}, Path=(materialDesign:ListViewAssist.ListViewItemPadding)}"
+                                                        BorderBrush="{DynamicResource MaterialDesignDivider}"
+                                                        BorderThickness="0,0,0,1"
+                                                        SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
+                                                    <Border.Background>
+                                                        <SolidColorBrush Color="#90a4ae" Opacity="0.7"/>
+                                                    </Border.Background>
+                                                    <GridViewRowPresenter VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                                                </Border>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
                         </Style.Triggers>
                     </Style>
                 </ListView.ItemContainerStyle>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+
+                        <Border Name="_Border"
+                                Padding="2"
+                                SnapsToDevicePixels="true">
+                            <ContentPresenter />
+                        </Border>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
             </ListView>
         </pan:Panorama>
     </Grid>

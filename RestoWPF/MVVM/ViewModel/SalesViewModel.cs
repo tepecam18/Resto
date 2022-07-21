@@ -39,7 +39,7 @@ namespace RestoWPF.MVVM.ViewModel
             realm.Write(() =>
             {
                 ProductList = ProductGroupList[0].Products;
-                
+
                 //Order = new OrderModel();
 
             });
@@ -73,12 +73,20 @@ namespace RestoWPF.MVVM.ViewModel
         {
             set
             {
-                if (value != null)
+                if (value is not null)
                 {
-                    //Ürün önceden eklendiyse adet arttır
+
+
                     int a = Order.Products.Where(i => i.Product.ID == value.ID).Count();
                     realm.Write(() =>
                     {
+                        if (Order.Products.Count == 0)
+                        {
+                            Today.Orders.Add(Order);
+                            OnPropertyChanged("Today");
+                        }
+
+                        //Aynı üründen Sepette var mı
                         if (a > 0)
                         {
                             SelectedOrderProduct = Order.Products.Where(i => i.Product.ID == value.ID).First();
@@ -192,12 +200,8 @@ namespace RestoWPF.MVVM.ViewModel
 
         private void NewOrder(object obj)
         {
-            realm.Write(() =>
-            {
-                Order = new OrderModel();
-                Today.Orders.Add(Order);
-                OnPropertyChanged("Order");
-            });
+            Order = new OrderModel();
+            OnPropertyChanged("Order");
         }
 
         private void ChangeOrderTab(object obj)

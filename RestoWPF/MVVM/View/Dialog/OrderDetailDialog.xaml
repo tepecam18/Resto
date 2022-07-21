@@ -22,7 +22,7 @@
             <StackPanel>
                 <Grid Margin="10">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto" />
                         <RowDefinition Height="auto"/>
                         <RowDefinition Height="auto"/>
                     </Grid.RowDefinitions>
@@ -35,53 +35,108 @@
                         <Style TargetType="TextBlock">
                             <Setter Property="FontWeight" Value="Bold"/>
                         </Style>
+                        <Style TargetType="Border" BasedOn="{StaticResource MaterialDesignToolBarMainPanelBorderStyle}">
+                            <Setter Property="BorderThickness" Value="1"/>
+                        </Style>
                     </Grid.Resources>
-                    <StackPanel Grid.Row="0"
+                    <Border Grid.Row="0"
                             Grid.Column="0">
-                        <TextBlock Text="Order Id"/>
-                        <Label Content="Order Id"/>
-                    </StackPanel>
-                    <StackPanel Grid.Row="0"
+                        <StackPanel>
+                            <TextBlock Text="Order Id"/>
+                            <Label Content="Order Id"/>
+                        </StackPanel>
+                    </Border>
+                    <Border Grid.Row="0"
                             Grid.Column="1">
-                        <TextBlock Text="Oluşturma Tarihi:"/>
-                        <Label Content="Oluşturma Tarihi"/>
-                    </StackPanel>
-                    <StackPanel Grid.Row="0"
+                        <StackPanel>
+                            <TextBlock Text="Oluşturma Tarihi:"/>
+                            <Label Content="Oluşturma Tarihi"/>
+                        </StackPanel>
+                    </Border>
+                    <Border Grid.Row="0"
                             Grid.Column="2">
-                        <TextBlock Text="Kapandı Mı:"/>
-                        <Label Content="Kapandı Mı"/>
-                    </StackPanel>
-                    <StackPanel Grid.Row="1"
+                        <StackPanel>
+                            <TextBlock Text="Kapandı Mı:"/>
+                            <Label Content="Kapandı Mı"/>
+                        </StackPanel>
+                    </Border>
+                    <Border Grid.Row="1"
                             Grid.Column="0">
-                        <TextBlock Text="Sipariş Notu:"/>
-                        <Label Content="Sipariş Notu"/>
-                    </StackPanel>
-                    <StackPanel Grid.Row="1"
+                        <StackPanel>
+                            <TextBlock Text="Sipariş Notu:"/>
+                            <Label Content="Sipariş Notu"/>
+                        </StackPanel>
+                    </Border>
+                    <Border Grid.Row="1"
                             Grid.Column="1">
-                        <TextBlock Text="İptal Notu:"/>
-                        <Label Content="İptal Notu"/>
-                    </StackPanel>
-                    <StackPanel Grid.Row="1"
+                        <StackPanel>
+                            <TextBlock Text="İptal Notu:"/>
+                            <Label Content="İptal Notu"/>
+                        </StackPanel>
+                    </Border>
+                    <Border Grid.Row="1"
                             Grid.Column="2">
-                        <TextBlock Text="Masa No:"/>
-                        <Label Content="Masa No"/>
-                    </StackPanel>
-                    <StackPanel Grid.Row="2"
+                        <StackPanel>
+                            <TextBlock Text="Masa No:"/>
+                            <Label Content="Masa No"/>
+                        </StackPanel>
+                    </Border>
+                    <Border Grid.Row="2"
                             Grid.Column="0">
-                        <TextBlock Text="Kullanılan Cihaz:"/>
-                        <Label Content="Kullanılan Cihaz"/>
-                    </StackPanel>
-                    <StackPanel Grid.Row="2"
+                        <StackPanel>
+                            <TextBlock Text="Kullanılan Cihaz:"/>
+                            <Label Content="Kullanılan Cihaz"/>
+                        </StackPanel>
+                    </Border>
+                    <Border Grid.Row="2"
                             Grid.Column="1">
-                        <TextBlock Text="Oluşturan Personel:"/>
-                        <Label Content="Oluşturan Personel"/>
-                    </StackPanel>
-                    <StackPanel Grid.Row="2"
+                        <StackPanel>
+                            <TextBlock Text="Oluşturan Personel:"/>
+                            <Label Content="Oluşturan Personel"/>
+                        </StackPanel>
+                    </Border>
+                    <Border Grid.Row="2"
                             Grid.Column="2">
-                        <TextBlock Text="Kurye:"/>
-                        <Label Content="Kurye"/>
-                    </StackPanel>
+                        <StackPanel>
+                            <TextBlock Text="Kurye:"/>
+                            <Label Content="Kurye"/>
+                        </StackPanel>
+                    </Border>
                 </Grid>
+                <materialDesign:Card Padding="8">
+                    <ListView
+  ItemsSource="{Binding Items1}">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn
+        DisplayMemberBinding="{Binding Code}"
+        Header="Code" />
+                                <GridViewColumn
+        DisplayMemberBinding="{Binding Name}"
+        Header="Name" />
+                                <GridViewColumn
+        DisplayMemberBinding="{Binding Description}"
+        Header="Description" />
+                                <GridViewColumn
+        Header="Options">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <ComboBox
+              Width="100">
+                                                <ComboBoxItem
+                Content="Test" />
+                                                <ComboBoxItem
+                Content="Test2" />
+                                                <ComboBoxItem
+                Content="Test3" />
+                                            </ComboBox>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </materialDesign:Card>
             </StackPanel>
         </pan:Panorama>
     </Grid>

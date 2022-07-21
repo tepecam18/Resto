@@ -1,5 +1,4 @@
-﻿using Realms;
-using RestoWPF.Core;
+﻿using RestoWPF.Core;
 using RestoWPF.MVVM.Model;
 using RestoWPF.Static;
 using System;
@@ -12,14 +11,13 @@ namespace RestoWPF.MVVM.View.Dialog
 {
     internal class CanceledDialogModel : ViewModelBase
     {
-        Realm realm = St.realm;
         public List<CanceledModel> Canceleds { get; set; }
         public CanceledModel SelectedCanceled { get; set; }
         public string SelectedText { get; set; }
         public bool SelectedIsFavorite { get; set; }
         public CanceledDialogModel()
         {
-            Canceleds = realm.All<CanceledModel>().Where(i=> i.IsFavorite).ToList();
+            Canceleds = St.realm.All<CanceledModel>().Where(i=> i.IsFavorite).ToList();
         }
     }
 }

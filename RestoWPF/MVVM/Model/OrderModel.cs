@@ -11,6 +11,7 @@ namespace RestoWPF.MVVM.Model
 {
     public class OrderModel : EmbeddedObject
     {
+
         public ObjectId ID { get; set; } = ObjectId.GenerateNewId();
         public DateTimeOffset DateT { get; set; } = DateTime.Now;
         public string OrderNote { get; set; } = "";

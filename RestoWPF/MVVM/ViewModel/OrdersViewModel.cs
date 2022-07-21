@@ -19,7 +19,7 @@ namespace RestoWPF.MVVM.ViewModel
         #region Data
         Realm realm = St.realm;
         private DateTime _Date { get; set; } = DateTime.Now.Date;
-        public OrderModel SelectedOrder { get; set; }
+        public OrderModel _SelectedOrder { get; set; }
         public DailyModel Today { get; set; } = St.Today;
 
         public AnotherCommandImplementation ShowSalesCommand { get; }
@@ -58,7 +58,41 @@ namespace RestoWPF.MVVM.ViewModel
                 OnPropertyChanged("Today");
             }
         }
-
+        public OrderModel SelectedOrder
+        {
+            get => _SelectedOrder;
+            set{
+                if (value is not null)
+                {
+                    _SelectedOrder = value;
+                    OnPropertyChanged();
+                    OnPropertyChanged("SelectedOrderIsCanceled");
+                    OnPropertyChanged("SelectedOrderIsClosed");
+                }
+            }
+        }
+        public bool SelectedOrderIsCanceled
+        {
+            get
+            {
+                if (_SelectedOrder is not null)
+                {
+                    return !_SelectedOrder.IsCanceled;
+                }
+                return true;
+            }
+        }
+        public bool SelectedOrderIsClosed
+        {
+            get
+            {
+                if (_SelectedOrder is not null)
+                {
+                    return !(_SelectedOrder.IsCanceled || _SelectedOrder.IsClosed);
+                }
+                return true;
+            }
+        }
         #endregion
 
         #region Command
@@ -135,6 +169,19 @@ namespace RestoWPF.MVVM.ViewModel
 
         private void DetailSales(object obj)
         {
+            if (SelectedOrder is not null)
+            {
+                OrderDetailDialog view = new OrderDetailDialog()
+                {
+                    DataContext = new OrderDetailDialogModel()
+                };
+
+                DialogHost.Show(view, "RootDialog", ClosingEventHandler);
+            }
+            else
+            {
+                MessageBox.Show("Neyi", "Uyarı");
+            }
         }
 
 

@@ -23,23 +23,9 @@ namespace RestoWPF.MVVM.View
     /// </summary>
     public partial class OrderDetailDialog : UserControl
     {
-        public decimal Piece { get; set; }
         public OrderDetailDialog()
         {
             InitializeComponent();
-        }
-
-        private void SimpleButton_Click(object sender, RoutedEventArgs e)
-        {
-            txNumber.Text += ((Button)sender).Content;
-            txNumber.Text = Convert.ToDecimal(txNumber.Text).ToString("0.##");
-            Piece = Convert.ToDecimal(txNumber.Text);
-        }
-
-        private void ClearButton_Click(object sender, RoutedEventArgs e)
-        {
-            txNumber.Text = "0";
-            Piece = Convert.ToDecimal(txNumber.Text);
         }
 
     }

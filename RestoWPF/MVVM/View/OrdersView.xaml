@@ -49,8 +49,10 @@
                     </Style>
                 </StackPanel.Resources>
                 <Button Content="Göster"
+                        IsEnabled="{Binding SelectedOrderIsClosed}"
                         Command="{Binding ShowSalesCommand}"/>
-                <Button Content="Sil" BorderBrush="red"
+                <Button Content="İptal Et" BorderBrush="red"
+                        IsEnabled="{Binding SelectedOrderIsCanceled}"
                         Command="{Binding CanceledSalesCommand}"/>
                 <Button Content="Detay" BorderBrush="Green"
                         Command="{Binding DetailSalesCommand}"/>

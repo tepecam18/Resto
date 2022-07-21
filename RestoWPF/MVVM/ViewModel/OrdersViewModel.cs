@@ -98,8 +98,9 @@ namespace RestoWPF.MVVM.ViewModel
 
                         realm.Write(() =>
                         {
-                            //Veri Kayıtlı değilse
-                            if (canceled is null && canceledstr is not null)
+                            //Veri Kayıtlı  değilse kaydet
+                            if (canceled is not null) { }
+                            else if (canceledstr is not null)
                             {
                                 canceled = new CanceledModel()
                                 {
@@ -111,8 +112,10 @@ namespace RestoWPF.MVVM.ViewModel
                             {
                                 return;
                             }
+
                             SelectedOrder.Canceled = canceled;
                             SelectedOrder.IsCanceled = true;
+
                         });
 
                     }

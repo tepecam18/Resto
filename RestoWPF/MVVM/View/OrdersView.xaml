@@ -86,11 +86,11 @@
                         <Style.Triggers>
                             <DataTrigger Binding="{Binding IsCanceled}" Value="true">
                                 <Setter Property="Background" 
-              Value="Red"/>
+                                    Value="Red"/>
                             </DataTrigger>
                             <DataTrigger Binding="{Binding IsClosed}" Value="true">
                                 <Setter Property="Background" 
-              Value="Green"/>
+                                    Value="Green"/>
                             </DataTrigger>
                             <Trigger Property="IsSelected" Value="True">
                                 <Setter Property="Template">

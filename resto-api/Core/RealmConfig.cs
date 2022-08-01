@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace RestoWPF.Core
 {
-    internal class ConstantRealmConfig : RealmConfiguration
+    internal class RealmConfig : RealmConfiguration
     {
-        public ConstantRealmConfig()
+        public RealmConfig()
         {
             //string data = "\"TPCM+PTTS+BJIbyI9LSGWZYY928E+lPJ4szM9bA+EdWHsi6wbWAjn+73F9TxKvTzItUx8ctjqYRHSCmAuKC1UA==\"";
             //MainWindow.encrypt = JsonSerializer.Deserialize<byte[]>(data);

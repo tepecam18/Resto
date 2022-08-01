@@ -29,8 +29,7 @@
     <PackageReference Include="MahApps.Metro" Version="2.4.9" />
     <PackageReference Include="MahApps.Metro.IconPacks" Version="4.11.0" />
     <PackageReference Include="MaterialDesignExtensions" Version="4.0.0-a02" />
-    <PackageReference Include="MaterialDesignThemes" Version="4.6.0-ci244" />
-    <PackageReference Include="Realm" Version="10.14.0" />
+    <PackageReference Include="MaterialDesignThemes" Version="4.6.0-ci255" />
     <PackageReference Include="ResponsiveGrid" Version="0.3.3" />
   </ItemGroup>
   <ItemGroup>

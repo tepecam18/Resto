@@ -17,7 +17,7 @@ namespace RestoWPF.MVVM.View.Dialog
         public bool SelectedIsFavorite { get; set; }
         public CanceledDialogModel()
         {
-            Canceleds = St.realm.All<CanceledModel>().Where(i=> i.IsFavorite).ToList();
+            //Canceleds = St.realm.All<CanceledModel>().Where(i=> i.IsFavorite).ToList();
         }
     }
 }

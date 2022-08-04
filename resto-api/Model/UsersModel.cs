@@ -1,8 +1,17 @@
-﻿namespace RestoWPF.MVVM.Model
+﻿using MongoDB.Bson;
+using Realms;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace RestoWPF.MVVM.Model
 {
-    public class UsersModel
+    public class UsersModel : RealmObject
     {
-        public string ID { get; set; }
+        [PrimaryKey]
+        public ObjectId ID { get; set; } = ObjectId.GenerateNewId();
         public string? UserName { get; set; }
         public string? Password { get; set; }
         public int Auth { get; set; }

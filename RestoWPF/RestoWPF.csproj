@@ -5,7 +5,6 @@
     <TargetFrameworks>net48;net6.0-windows</TargetFrameworks>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
-    <OutputType>Exe</OutputType>
     <LangVersion>10.0</LangVersion>
     <UserSecretsId>16755c14-df17-4056-b6de-1d15572ccdb5</UserSecretsId>
     <DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
@@ -31,8 +30,7 @@
     <PackageReference Include="MahApps.Metro" Version="2.4.9" />
     <PackageReference Include="MahApps.Metro.IconPacks" Version="4.11.0" />
     <PackageReference Include="MaterialDesignExtensions" Version="4.0.0-a02" />
-    <PackageReference Include="MaterialDesignThemes" Version="4.6.0-ci244" />
-    <PackageReference Include="Realm" Version="10.14.0" />
+    <PackageReference Include="MaterialDesignThemes" Version="4.6.0-ci259" />
     <PackageReference Include="ResponsiveGrid" Version="0.3.3" />
   </ItemGroup>
   <ItemGroup>

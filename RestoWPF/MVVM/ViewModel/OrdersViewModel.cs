@@ -1,15 +1,11 @@
 ﻿using MaterialDesignThemes.Wpf;
-using Realms;
 using RestoWPF.Core;
 using RestoWPF.MVVM.Model;
 using RestoWPF.MVVM.View;
 using RestoWPF.MVVM.View.Dialog;
 using RestoWPF.Static;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace RestoWPF.MVVM.ViewModel
@@ -17,7 +13,6 @@ namespace RestoWPF.MVVM.ViewModel
     internal class OrdersViewModel : ViewModelBase
     {
         #region Data
-        Realm realm = St.realm;
         private DateTime _Date { get; set; } = DateTime.Now.Date;
         public OrderModel _SelectedOrder { get; set; }
         public DailyModel Today { get; set; } = St.Today;
@@ -45,23 +40,24 @@ namespace RestoWPF.MVVM.ViewModel
             }
             set
             {
-                _Date = value.Date;
-                if (realm.All<DailyModel>().Where(i => i.Date == _Date).Count() > 1) //bugünü başlat
-                {
-                    Today = realm.All<DailyModel>().Where(i => i.Date == _Date).First();
-                }
-                else
-                {
-                    MessageBox.Show("Geçerli Güne Ait veriler bulunamadı");
-                }
-                OnPropertyChanged();
-                OnPropertyChanged("Today");
+                //_Date = value.Date;
+                //if (realm.All<DailyModel>().Where(i => i.Date == _Date).Count() > 1) //bugünü başlat
+                //{
+                //    Today = realm.All<DailyModel>().Where(i => i.Date == _Date).First();
+                //}
+                //else
+                //{
+                //    MessageBox.Show("Geçerli Güne Ait veriler bulunamadı");
+                //}
+                //OnPropertyChanged();
+                //OnPropertyChanged("Today");
             }
         }
         public OrderModel SelectedOrder
         {
             get => _SelectedOrder;
-            set{
+            set
+            {
                 if (value is not null)
                 {
                     _SelectedOrder = value;
@@ -130,27 +126,23 @@ namespace RestoWPF.MVVM.ViewModel
 
                         bool canceledIsFavorite = ((CanceledDialogModel)view.DataContext).SelectedIsFavorite;
 
-                        realm.Write(() =>
+                        //Veri Kayıtlı  değilse kaydet
+                        if (canceled is not null) { }
+                        else if (canceledstr is not null)
                         {
-                            //Veri Kayıtlı  değilse kaydet
-                            if (canceled is not null) { }
-                            else if (canceledstr is not null)
+                            canceled = new CanceledModel()
                             {
-                                canceled = new CanceledModel()
-                                {
-                                    Note= canceledstr,
-                                    IsFavorite = canceledIsFavorite
-                                };
-                            }
-                            else
-                            {
-                                return;
-                            }
+                                Note= canceledstr,
+                                IsFavorite = canceledIsFavorite
+                            };
+                        }
+                        else
+                        {
+                            return;
+                        }
 
-                            SelectedOrder.Canceled = canceled;
-                            SelectedOrder.IsCanceled = true;
-
-                        });
+                        SelectedOrder.Canceled = canceled;
+                        SelectedOrder.IsCanceled = true;
 
                     }
                 }

@@ -1,12 +1,10 @@
-﻿using Realms;
-using RestoWPF.Core;
+﻿using RestoWPF.Core;
 using RestoWPF.MVVM.Model;
 using RestoWPF.MVVM.View;
 using RestoWPF.Static;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Windows;
 
 namespace RestoWPF.MVVM.ViewModel
 {
@@ -14,7 +12,6 @@ namespace RestoWPF.MVVM.ViewModel
     public class SalesViewModel : ViewModelBase
     {
         #region Data
-        Realm realm = St.realm;
 
         public DailyModel Today { get => St.Today; }
         public IList<ProductGroupModel> ProductGroupList { get; set; }
@@ -35,14 +32,8 @@ namespace RestoWPF.MVVM.ViewModel
         #region Ctor
         public SalesViewModel()
         {
-            ProductGroupList = realm.All<ProductGroupModel>().OrderBy(i => i.Location).ToList();
-            realm.Write(() =>
-            {
-                ProductList = ProductGroupList[0].Products;
-
-                //Order = new OrderModel();
-
-            });
+            //ProductGroupList = realm.All<ProductGroupModel>().OrderBy(i => i.Location).ToList();
+            ProductList = ProductGroupList[0].Products;
 
             OrderCancelCommand = new AnotherCommandImplementation(OrderCancel);
             SendOrderCommand = new AnotherCommandImplementation(SendOrder);
@@ -78,35 +69,32 @@ namespace RestoWPF.MVVM.ViewModel
 
 
                     int a = Order.Products.Where(i => i.Product.ID == value.ID).Count();
-                    realm.Write(() =>
+                    if (Order.Products.Count == 0)
                     {
-                        if (Order.Products.Count == 0)
-                        {
-                            Today.Orders.Add(Order);
-                            OnPropertyChanged("Today");
-                        }
+                        Today.Orders.Add(Order);
+                        OnPropertyChanged("Today");
+                    }
 
-                        //Aynı üründen Sepette var mı
-                        if (a > 0)
+                    //Aynı üründen Sepette var mı
+                    if (a > 0)
+                    {
+                        SelectedOrderProduct = Order.Products.Where(i => i.Product.ID == value.ID).First();
+                        SelectedOrderProduct.Piece++;
+                    }
+                    else
+                    {
+                        SelectedOrderProduct = new OrderProductModel()
                         {
-                            SelectedOrderProduct = Order.Products.Where(i => i.Product.ID == value.ID).First();
-                            SelectedOrderProduct.Piece++;
-                        }
-                        else
-                        {
-                            SelectedOrderProduct = new OrderProductModel()
-                            {
-                                Product = value,
-                                Piece = 1,
-                                Price = value.Price,
-                            };
+                            Product = value,
+                            Piece = 1,
+                            Price = value.Price,
+                        };
 
-                            Order.Products.Add(SelectedOrderProduct);
-                        }
+                        Order.Products.Add(SelectedOrderProduct);
+                    }
 
-                        //totalPrice calculation and Trimming 0's
-                        SelectedOrderProduct.TotalPrice = Convert.ToDecimal((Convert.ToDecimal(SelectedOrderProduct.Price) * SelectedOrderProduct.Piece).ToString("0.##"));
-                    });
+                    //totalPrice calculation and Trimming 0's
+                    SelectedOrderProduct.TotalPrice = Convert.ToDecimal((Convert.ToDecimal(SelectedOrderProduct.Price) * SelectedOrderProduct.Piece).ToString("0.##"));
                 }
 
                 OnPropertyChanged("Order");
@@ -122,10 +110,7 @@ namespace RestoWPF.MVVM.ViewModel
                 if (value != null)
                 {
                     OrderTabIndex = (OrderTabIndex == 0) ? 1 : 0;
-                    realm.Write(() =>
-                    {
-                        SelectedOrderProduct = value;
-                    });
+                    SelectedOrderProduct = value;
                 }
 
                 OnPropertyChanged("OrderTabIndex");
@@ -147,12 +132,9 @@ namespace RestoWPF.MVVM.ViewModel
             {
                 if (value > 0)
                 {
-                    realm.Write(() =>
-                    {
-                        SelectedOrderProduct.Piece = value;
-                        //totalPrice calculation and Trimming 0's
-                        SelectedOrderProduct.TotalPrice = Convert.ToDecimal((Convert.ToDecimal(SelectedOrderProduct.Price) * SelectedOrderProduct.Piece).ToString("0.##"));
-                    });
+                    SelectedOrderProduct.Piece = value;
+                    //totalPrice calculation and Trimming 0's
+                    SelectedOrderProduct.TotalPrice = Convert.ToDecimal((Convert.ToDecimal(SelectedOrderProduct.Price) * SelectedOrderProduct.Piece).ToString("0.##"));
 
                     OnPropertyChanged("SelectedOrderProduct");
                     OnPropertyChanged("Order");

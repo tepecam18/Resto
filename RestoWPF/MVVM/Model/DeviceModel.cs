@@ -1,12 +1,8 @@
-﻿using MongoDB.Bson;
-using Realms;
-
-namespace RestoWPF.MVVM.Model
+﻿namespace RestoWPF.MVVM.Model
 {
-    public class DeviceModel : RealmObject
+    public class DeviceModel
     {
-        [PrimaryKey]
-        public ObjectId ID { get; set; } = ObjectId.GenerateNewId();
+        public string ID { get; set; }
         public string? MachineGuid { get; set; }
         public string? MachineName { get; set; }
         public bool IsMain { get; set; }

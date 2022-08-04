@@ -1,0 +1,13 @@
+{
+  "profiles": {
+    "Docker Compose": {
+      "commandName": "DockerCompose",
+      "composeLaunchAction": "LaunchBrowser",
+      "composeLaunchServiceName": "restowpf",
+      "commandVersion": "1.0",
+      "serviceActions": {
+        "restowpf": "StartDebugging"
+      }
+    }
+  }
+}

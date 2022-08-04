@@ -1,4 +1,4 @@
-﻿
+﻿using Realms;
 using RestoWPF.Core;
 using RestoWPF.MVVM.Model;
 using System;
@@ -12,6 +12,8 @@ namespace RestoWPF.MVVM.ViewModel
     public class TablesViewModel : ViewModelBase
     {
         #region parameter
+        Realm realm = Realm.GetInstance(new ConstantRealmConfig());
+
         public List<TableModel> TablesLayer { get; set; }
         private TableModel _SelectedTablesLayer { get; set; }
         #endregion
@@ -19,8 +21,7 @@ namespace RestoWPF.MVVM.ViewModel
         #region methods
         public TablesViewModel()
         {
-            TablesLayer = new List<TableModel>();
-            //TablesLayer = realm.All<TableModel>().OrderBy(i => i.ID).ToList(); todo
+            TablesLayer = realm.All<TableModel>().OrderBy(i => i.ID).ToList();
             _SelectedTablesLayer = TablesLayer[0];
         }
         #endregion

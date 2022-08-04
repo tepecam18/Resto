@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MongoDB.Bson;
+using Realms;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace RestoWPF.MVVM.Model
 {
-    public class StockModel
+    public class StockModel : EmbeddedObject
     {
-        public string ID { get; set; }
-        public decimal Price{ get; set; }
-        public decimal Amount { get; set; }
+        public ObjectId ID { get; set; } = ObjectId.GenerateNewId();
+        public Decimal128 Price{ get; set; }
+        public Decimal128 Amount { get; set; }
     }
 }

@@ -1,4 +1,6 @@
-﻿using RestoWPF.Static;
+﻿using MongoDB.Bson;
+using Realms;
+using RestoWPF.Static;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,10 +9,10 @@ using System.Threading.Tasks;
 
 namespace RestoWPF.MVVM.Model
 {
-    public class OrderModel
+    public class OrderModel : EmbeddedObject
     {
 
-        public string ID { get; set; }
+        public ObjectId ID { get; set; } = ObjectId.GenerateNewId();
         public DateTimeOffset DateT { get; set; } = DateTime.Now;
         public string OrderNote { get; set; } = "";
         public bool IsClosed { get; set; }

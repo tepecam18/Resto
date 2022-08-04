@@ -1,4 +1,4 @@
-﻿
+﻿using Realms;
 using RestoWPF.Core;
 using RestoWPF.MVVM.ViewModel;
 using System;
@@ -27,6 +27,7 @@ namespace RestoWPF.MVVM.View
         double left, top;
         FrameworkElement? root;
 
+        Realm realm = Realm.GetInstance(new ConstantRealmConfig());
         TablesViewModel ViewModel = new TablesViewModel();
 
         public TablesView()
@@ -53,14 +54,17 @@ namespace RestoWPF.MVVM.View
 
         private void Thumb_DragCompleted(object sender, DragCompletedEventArgs e)
         {
-            if (left < 0)
+            realm.Write(() =>
             {
-                Canvas.SetLeft(root, 0);
-            }
-            if (top < 0)
-            {
-                Canvas.SetTop(root, 0);
-            }
+                if (left < 0)
+                {
+                    Canvas.SetLeft(root, 0);
+                }
+                if (top < 0)
+                {
+                    Canvas.SetTop(root, 0);
+                }
+            });
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MongoDB.Bson;
+using Realms;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,11 +8,13 @@ using System.Threading.Tasks;
 
 namespace RestoWPF.MVVM.Model
 {
-    public class ProductModel
+    public class ProductModel : RealmObject
     {
-        public string ID { get; set; }
+        [PrimaryKey]
+        public ObjectId ID { get; set; } = ObjectId.GenerateNewId();
         public string? Name { get; set; }
-        public decimal Price { get; set; }
+        [MapTo("Price")]
+        public Decimal128 Price { get; set; }
         public int Location { get; set; }
         public bool IsActive { get; set; }
         public bool IsShow { get; set; }

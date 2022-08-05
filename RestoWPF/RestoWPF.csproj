@@ -8,6 +8,8 @@
     <LangVersion>10.0</LangVersion>
     <UserSecretsId>16755c14-df17-4056-b6de-1d15572ccdb5</UserSecretsId>
     <DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
   </PropertyGroup>
   <ItemGroup Condition="'$(TargetFramework)'=='net472'">
     <Reference Include="PresentationFramework.Aero2" />

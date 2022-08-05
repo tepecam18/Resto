@@ -1,8 +1,5 @@
-﻿using Microsoft.Win32;
-using RestoWPF.MVVM.Model;
+﻿using RestoWPF.MVVM.Model;
 using RestoWPF.Static;
-using System;
-using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;

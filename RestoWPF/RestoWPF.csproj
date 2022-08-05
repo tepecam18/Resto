@@ -10,7 +10,6 @@
     <DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
     <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
-  </PropertyGroup>
   <ItemGroup Condition="'$(TargetFramework)'=='net472'">
     <Reference Include="PresentationFramework.Aero2" />
     <Reference Include="System" />
@@ -31,9 +30,7 @@
   <ItemGroup>
     <PackageReference Include="MahApps.Metro" Version="2.4.9" />
     <PackageReference Include="MahApps.Metro.IconPacks" Version="4.11.0" />
-    <PackageReference Include="MaterialDesignExtensions" Version="4.0.0-a02" />
     <PackageReference Include="MaterialDesignThemes" Version="4.6.0-ci259" />
-    <PackageReference Include="ResponsiveGrid" Version="0.3.3" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\3.part.Dll\TilePanoramaControl\TouchPanorama\PanoramaControl\PanoramaControl.csproj" />

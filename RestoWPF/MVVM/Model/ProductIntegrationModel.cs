@@ -6,4 +6,3 @@
         public ProductModel? Product { get; set; }
     }
 }
-    

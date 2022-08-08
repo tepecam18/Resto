@@ -11,8 +11,8 @@ namespace RestoWPF.MVVM.Model
         public DateTimeOffset DateT { get; set; } = DateTime.Now;
         public string OrderNote { get; set; } = "";
         public bool IsClosed { get; set; }
-        public bool IsCanceled{ get; set; }
-        public CanceledModel? Canceled{ get; set; }
+        public bool IsCanceled { get; set; }
+        public CanceledModel? Canceled { get; set; }
         public TableModel? Tables { get; set; }
         public DeviceModel? Device { get; set; } = St.Device;
         public UsersModel? CourierPerson { get; set; }

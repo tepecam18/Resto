@@ -1,10 +1,5 @@
 ﻿using MongoDB.Bson;
 using Realms;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RestoWPF.MVVM.Model
 {
@@ -19,7 +14,7 @@ namespace RestoWPF.MVVM.Model
         public bool IsActive { get; set; }
         public bool IsShow { get; set; }
         public CostumeThemeModel? CostumeTheme { get; set; }
-        public IList<ProductOptionModel>? ProductOptions { get;}
-        public IList<StockUseModel>? stockUses { get;}
+        public IList<ProductOptionModel>? ProductOptions { get; }
+        public IList<StockUseModel>? stockUses { get; }
     }
 }

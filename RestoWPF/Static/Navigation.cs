@@ -1,12 +1,8 @@
 ﻿using RestoWPF.Core;
-using RestoWPF.MVVM.Model;
 using RestoWPF.MVVM.View;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RestoWPF.Static
 {

@@ -5,7 +5,6 @@ using RestoWPF.MVVM.View;
 using RestoWPF.MVVM.View.Dialog;
 using RestoWPF.Static;
 using System;
-using System.Linq;
 using System.Windows;
 
 namespace RestoWPF.MVVM.ViewModel

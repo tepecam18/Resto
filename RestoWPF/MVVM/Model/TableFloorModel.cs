@@ -6,7 +6,7 @@ namespace RestoWPF.MVVM.Model
     {
         public string ID { get; set; }
         public string? FloorName { get; set; }
-        public IList<TableModel>? Tables { get;}
+        public IList<TableModel>? Tables { get; }
 
     }
 }

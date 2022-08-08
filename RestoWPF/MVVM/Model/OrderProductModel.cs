@@ -10,7 +10,7 @@ namespace RestoWPF.MVVM.Model
         public bool IsPrinted { get; set; }
         public ProductModel Product { get; set; }
         public IList<OrderOptionModel> OrderOptions { get; }
-        public IList<StockUsageModel> StockUsages { get;}
+        public IList<StockUsageModel> StockUsages { get; }
 
         public Decimal TotalPrice { get; set; }
 

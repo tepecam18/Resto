@@ -1,7 +1,6 @@
 ﻿using RestoWPF.Core;
 using RestoWPF.MVVM.Model;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace RestoWPF.MVVM.ViewModel
 {

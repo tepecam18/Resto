@@ -6,7 +6,6 @@ namespace RestoWPF.MVVM.Model
     {
         public string ID { get; set; }
         public string? OptionName { get; set; }
-        public IList<ProductModel>? Products { get;}
+        public IList<ProductModel>? Products { get; }
     }
 }
-    

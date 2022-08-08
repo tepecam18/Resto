@@ -7,6 +7,6 @@ namespace RestoWPF.MVVM.Model
         public string ID { get; set; }
         public string Name { get; set; } = "";
         public string Unit { get; set; }
-        public IList<StockModel> Stocks { get;}
+        public IList<StockModel> Stocks { get; }
     }
 }

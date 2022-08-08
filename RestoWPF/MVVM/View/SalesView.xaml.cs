@@ -1,20 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
+/* Unmerged change from project 'RestoWPF (net6.0-windows)'
+Before:
+using System;
+After:
+using MahApps.Metro.Controls;
+using RestoWPF.Static;
+using System;
+*/
+using RestoWPF.Static;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using System.Windows.
+/* Unmerged change from project 'RestoWPF (net6.0-windows)'
+Before:
 using System.Windows.Threading;
 using MahApps.Metro.Controls;
 using RestoWPF.Static;
+After:
+using System.Windows.Threading;
+*/
+Controls;
 
 namespace RestoWPF.MVVM.View
 {
@@ -37,13 +41,13 @@ namespace RestoWPF.MVVM.View
         #region NUDSelectedOrderProductPiece Change
         private void CeyrekButton_Click(object sender, RoutedEventArgs e) =>
             NUDSelectedOrderProductPiece.Value = 0.25;
-        private void YarımButton_Click(object sender, RoutedEventArgs e)=>
+        private void YarımButton_Click(object sender, RoutedEventArgs e) =>
             NUDSelectedOrderProductPiece.Value = 0.5;
         private void DoubleButton_Click(object sender, RoutedEventArgs e) =>
             NUDSelectedOrderProductPiece.Value = 2;
         #endregion
 
-        private void BillsButton_Click(object sender, RoutedEventArgs e)=>
+        private void BillsButton_Click(object sender, RoutedEventArgs e) =>
             Nv.SetContent(Nv.Orders, false);
     }
 }

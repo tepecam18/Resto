@@ -1,11 +1,6 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using Realms;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RestoWPF.MVVM.Model
 {
@@ -16,7 +11,7 @@ namespace RestoWPF.MVVM.Model
         public bool IsPrinted { get; set; }
         public ProductModel Product { get; set; }
         public IList<OrderOptionModel> OrderOptions { get; }
-        public IList<StockUsageModel> StockUsages { get;}
+        public IList<StockUsageModel> StockUsages { get; }
 
         [BsonIgnore]
         public Decimal128 TotalPrice { get; set; }

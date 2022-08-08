@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.ComponentModel;
-using System.Windows;
+﻿using System.ComponentModel;
 
 namespace PanoramaControl
 {
@@ -20,5 +15,5 @@ namespace PanoramaControl
 
         public string Header { get; private set; }
         public ICollectionView Tiles { get; private set; }
-	}
+    }
 }

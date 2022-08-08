@@ -1,6 +1,4 @@
 ﻿using RestoWPF.MVVM.Model;
-using System;
-using System.Linq;
 
 namespace RestoWPF.Static
 {

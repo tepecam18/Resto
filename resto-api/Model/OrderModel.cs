@@ -1,11 +1,5 @@
 ﻿using MongoDB.Bson;
 using Realms;
-using RestoWPF.Static;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RestoWPF.MVVM.Model
 {
@@ -16,12 +10,12 @@ namespace RestoWPF.MVVM.Model
         public DateTimeOffset DateT { get; set; } = DateTime.Now;
         public string OrderNote { get; set; } = "";
         public bool IsClosed { get; set; }
-        public bool IsCanceled{ get; set; }
-        public CanceledModel? Canceled{ get; set; }
+        public bool IsCanceled { get; set; }
+        public CanceledModel? Canceled { get; set; }
         public TableModel? Tables { get; set; }
-        public DeviceModel? Device { get; set; } = St.Device;
+        public DeviceModel? Device { get; set; }
         public UsersModel? CourierPerson { get; set; }
-        public UsersModel SalesPerson { get; set; } = St.User;
+        public UsersModel SalesPerson { get; set; }
         public IList<OrderProductModel> Products { get; }
         public IList<PaymentModel>? Payments { get; }
 

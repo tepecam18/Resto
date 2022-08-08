@@ -1,12 +1,8 @@
 ﻿using MaterialDesignColors;
 using MaterialDesignThemes.Wpf;
 using RestoWPF.Core;
-using RestoWPF.MVVM.View;
 using RestoWPF.Static;
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
 using System.Windows.Media;
 
 namespace RestoWPF.MVVM.ViewModel
@@ -176,7 +172,7 @@ namespace RestoWPF.MVVM.ViewModel
 
             paletteHelper.SetTheme(theme);
         }
-        
+
         private void ChangeCustomColor(object obj)
         {
             var color = (Color)obj;

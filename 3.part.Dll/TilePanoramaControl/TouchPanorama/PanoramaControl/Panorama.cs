@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows.Controls;
-using System.Windows;
-using System.Windows.Threading;
 using System.ComponentModel;
+using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Threading;
 
 namespace PanoramaControl
 {
@@ -111,7 +109,7 @@ namespace PanoramaControl
         #region DPs
 
 
-            #region ItemBox
+        #region ItemBox
 
         public static readonly DependencyProperty ItemBoxProperty =
             DependencyProperty.Register("ItemBox", typeof(double), typeof(Panorama),
@@ -259,13 +257,13 @@ namespace PanoramaControl
             if (IsMouseCaptured)
             {
                 Point currentPoint = Mouse.GetPosition(this);
-            velocity = previousPoint - currentPoint;
-            previousPoint = currentPoint;
-        }
+                velocity = previousPoint - currentPoint;
+                previousPoint = currentPoint;
+            }
             else if (AreAnyTouchesOver)
             {
                 Point currentPoint = new Point(currentTouchPoint.Position.X, currentTouchPoint.Position.Y);
-        velocity = previousPoint - currentPoint;
+                velocity = previousPoint - currentPoint;
                 previousPoint = currentPoint;
             }
             else

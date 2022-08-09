@@ -83,19 +83,17 @@
 
 
         <!--<view:MainMenuView Grid.Row="1"/>-->
-        <materialDesign:DialogHost Identifier="RootDialog">
-            <ScrollViewer
+        <ScrollViewer
             x:Name="MainScrollViewer"
             Grid.ColumnSpan="2"
             HorizontalScrollBarVisibility="{Binding SelectedItem.HorizontalScrollBarVisibilityRequirement, FallbackValue=Disabled}"
             materialDesign:ScrollViewerAssist.IsAutoHideEnabled="True"
             VerticalScrollBarVisibility="{Binding SelectedItem.VerticalScrollBarVisibilityRequirement, FallbackValue=Disabled}">
-                <ContentControl
+            <ContentControl
                 Margin="{Binding MarginRequirement, FallbackValue=7}"
                 Content="{Binding Content, UpdateSourceTrigger=PropertyChanged, FallbackValue={x:Null}}"
                 DataContext="{Binding SelectedItem}"
                 DataContextChanged="OnSelectedItemChanged" />
-            </ScrollViewer>
-        </materialDesign:DialogHost>
+        </ScrollViewer>
     </Grid>
 </mah:MetroWindow>

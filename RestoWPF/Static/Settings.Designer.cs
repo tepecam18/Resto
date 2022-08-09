@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace RestoWPF.Static {
+namespace RestoWPF2.Static {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

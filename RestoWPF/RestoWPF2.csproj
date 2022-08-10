@@ -64,5 +64,12 @@
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="src\Core\" />
+    <Folder Include="src\Model\" />
+    <Folder Include="src\Static\" />
+    <Folder Include="src\ViewModel\" />
+    <Folder Include="src\View\" />
+  </ItemGroup>
 
 </Project>

@@ -3,7 +3,7 @@ using restocentr.Static;
 using System.Windows;
 using System.Windows.Input;
 
-namespace restocentr
+namespace restocentr.View
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -49,8 +49,8 @@ namespace restocentr
 
         //#endregion
 
-        private void OnSelectedItemChanged(object sender, DependencyPropertyChangedEventArgs e)
-            => MainScrollViewer.ScrollToHome();
+        //private void OnSelectedItemChanged(object sender, DependencyPropertyChangedEventArgs e)
+        //    => MainScrollViewer.ScrollToHome();
 
 
         private void BackNavButton_Click(object sender, RoutedEventArgs e)

@@ -25,33 +25,33 @@ namespace restocentr.Static
         static Nv()
         {
             RestoItems = new ObservableCollection<RestoItem>();
-            //foreach (var item in GenerateRestoItem())
-            //{
-            //    RestoItems.Add(item);
-            //}
+            foreach (var item in GenerateRestoItem())
+            {
+                RestoItems.Add(item);
+            }
         }
         #endregion
 
         #region Properties
-        //private static IEnumerable<RestoItem> GenerateRestoItem()
-        //{
-        //    int i = 0;
+        private static IEnumerable<RestoItem> GenerateRestoItem()
+        {
+            int i = 0;
 
-        //    Nv.Login = i++;
-        //    yield return new RestoItem(typeof(LoginView));
+            Nv.Login = i++;
+            yield return new RestoItem(typeof(MainView));
 
-        //    Nv.MainMenu = i++;
-        //    yield return new RestoItem(typeof(MainMenuView));
+            //Nv.MainMenu = i++;
+            //yield return new RestoItem(typeof(MainMenuView));
 
-        //    Nv.Sales = i++;
-        //    yield return new RestoItem(typeof(SalesView));
+            //Nv.Sales = i++;
+            //yield return new RestoItem(typeof(SalesView));
 
-        //    Nv.Tables = i++;
-        //    yield return new RestoItem(typeof(TablesView));
+            //Nv.Tables = i++;
+            //yield return new RestoItem(typeof(TablesView));
 
-        //    Nv.Orders = i++;
-        //    yield return new RestoItem(typeof(OrdersView));
-        //}
+            //Nv.Orders = i++;
+            //yield return new RestoItem(typeof(OrdersView));
+        }
 
         private static void ClearBack()
         {
@@ -59,10 +59,10 @@ namespace restocentr.Static
             BackList.Add(0);
 
             RestoItems.Clear();
-            //foreach (var item in GenerateRestoItem())
-            //{
-            //    RestoItems.Add(item);
-            //}
+            foreach (var item in GenerateRestoItem())
+            {
+                RestoItems.Add(item);
+            }
         }
         #endregion
 
@@ -75,8 +75,8 @@ namespace restocentr.Static
         {
             BackList.Add(index);
             RestoItems[index].IsCache = IsCache;
-            //MainWindow.viewModel.SelectedItem = RestoItems[index];
-            //MainWindow.viewModel.SelectedIndex=1;
+            MainWindow.viewModel.SelectedItem = RestoItems[index];
+            MainWindow.viewModel.SelectedIndex=1;
         }
 
         internal static void GetBack(bool IsCache = true)
@@ -86,13 +86,13 @@ namespace restocentr.Static
             if (BackList.Last() > 0)
             {
                 RestoItems[BackList.Last()].IsCache = IsCache;
-                //MainWindow.viewModel.SelectedItem = RestoItems[BackList.Last()];
-                //MainWindow.viewModel.SelectedIndex=1;
+                MainWindow.viewModel.SelectedItem = RestoItems[BackList.Last()];
+                MainWindow.viewModel.SelectedIndex=1;
             }
             else
             {
-                //MainWindow.viewModel.SelectedItem = RestoItems[0];
-                //MainWindow.viewModel.SelectedIndex=0;
+                MainWindow.viewModel.SelectedItem = RestoItems[0];
+                MainWindow.viewModel.SelectedIndex=0;
                 ClearBack();
             }
         }

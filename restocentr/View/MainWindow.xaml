@@ -77,10 +77,10 @@
         </mah:WindowCommands>
     </mah:MetroWindow.LeftWindowCommands>
 
-    <Grid>
+    <materialDesign:DialogHost Identifier="RootDialog">
         <ContentControl
                 Margin="{Binding MarginRequirement, FallbackValue=7}"
                 Content="{Binding Content, UpdateSourceTrigger=PropertyChanged, FallbackValue={x:Null}}"
                 DataContext="{Binding SelectedItem}"/>
-    </Grid>
+    </materialDesign:DialogHost>
 </mah:MetroWindow>

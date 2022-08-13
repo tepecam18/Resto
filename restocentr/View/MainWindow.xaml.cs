@@ -1,5 +1,6 @@
 ﻿using MahApps.Metro.Controls;
 using restocentr.Static;
+using restocentr.ViewModel;
 using System.Windows;
 using System.Windows.Input;
 
@@ -10,18 +11,15 @@ namespace restocentr.View
     /// </summary>
     public partial class MainWindow : MetroWindow
     {
+        internal static MainWindowViewModel viewModel = new MainWindowViewModel();
         public MainWindow()
         {
             InitializeComponent();
+            DataContext = viewModel;
         }
-        //internal static MainViewModel viewModel = new MainViewModel();
-        //public MainWindow()
-        //{
-        //    InitializeComponent();
-        //    DataContext = viewModel;
-        //}
 
-        //#region windows border
+
+        #region windows border
 
         private void Border_MouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -47,7 +45,7 @@ namespace restocentr.View
         }
 
 
-        //#endregion
+        #endregion
 
         //private void OnSelectedItemChanged(object sender, DependencyPropertyChangedEventArgs e)
         //    => MainScrollViewer.ScrollToHome();

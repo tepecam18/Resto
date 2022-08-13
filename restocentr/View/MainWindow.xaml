@@ -67,12 +67,9 @@
                 </TabItem>
                 <TabItem>
                     <Button Click="BackNavButton_Click">
-                        <TextBlock  VerticalAlignment="Center"
-                                FontSize="32"
-                                FontWeight="Bold"
-                                Text="RESTO" />
+                        <materialDesign:PackIcon Kind="ArrowLeftCircleOutline" Height="32" Width="32"/>
                     </Button>
-                </TabItem>
+                </TabItem> 
             </TabControl>
         </mah:WindowCommands>
     </mah:MetroWindow.LeftWindowCommands>

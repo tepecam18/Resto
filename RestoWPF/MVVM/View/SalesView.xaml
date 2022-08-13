@@ -5,9 +5,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
     xmlns:local="clr-namespace:RestoWPF.MVVM.View"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-    xmlns:ViewModel="clr-namespace:RestoWPF.MVVM.ViewModel" 
     xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls" 
-    xmlns:pan="clr-namespace:PanoramaControl;assembly=PanoramaControl"
+    xmlns:pan="clr-namespace:PanoramaControl;assembly=PanoramaControl" xmlns:ViewModel="clr-namespace:RestoWPF.MVVM.ViewModel"
     x:Class="RestoWPF.MVVM.View.SalesView"
     mc:Ignorable="d"
     d:DesignHeight="768" d:DesignWidth="1024">

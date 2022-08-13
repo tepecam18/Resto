@@ -2,6 +2,7 @@
 using MaterialDesignThemes.Wpf;
 using RestoWPF.Core;
 using RestoWPF.Static;
+using RestoWPF2.Static;
 using System;
 using System.Windows.Media;
 

@@ -43,8 +43,8 @@ namespace restocentr.Static
             Nv.MainMenu = i++;
             yield return new RestoItem(typeof(MainView));
 
-            //Nv.Sales = i++;
-            //yield return new RestoItem(typeof(SalesView));
+            Nv.Sales = i++;
+            yield return new RestoItem(typeof(SalesView));
 
             //Nv.Tables = i++;
             //yield return new RestoItem(typeof(TablesView));

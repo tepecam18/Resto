@@ -73,8 +73,8 @@
 
             </ListBox.ItemContainerStyle>
         </ListBox>
-
-        <pan:Panorama Grid.Column="0"
+        <!--#region tets -->
+        <!--<pan:Panorama Grid.Column="0"
                       Grid.Row="1"
                      Background="Transparent">
 
@@ -323,7 +323,7 @@
                                             <ColumnDefinition Width="auto"/>
                                             <ColumnDefinition Width="auto"/>
                                         </Grid.ColumnDefinitions>
-                                        <!--header-->
+                                        header
                                         <StackPanel Grid.Column="0">
                                             <TextBlock Text="Ürün Adı :"
                                                        Grid.Row="0"/>
@@ -332,7 +332,7 @@
                                             <TextBlock Text="Toplam Tutar :"
                                                        Grid.Row="1"/>
                                         </StackPanel>
-                                        <!--body-->
+                                        body
                                         <StackPanel Grid.Column="1">
                                             <TextBlock Text="{Binding SelectedOrderProduct.Product.Name}"/>
                                             <StackPanel Orientation="Horizontal">
@@ -455,6 +455,8 @@
                     </Button>
                 </Grid>
             </Grid>
-        </materialDesign:Card>
+        </materialDesign:Card>-->
+        <!--#endregion-->
+        
     </Grid>
 </UserControl>

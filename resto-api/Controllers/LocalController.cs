@@ -285,10 +285,15 @@ namespace resto_api.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> PostTodoItem()
+        public async Task<ActionResult<UsersModel>> PostTodoItem(string passwd)
         {
-
-            return Ok();
+            UsersModel usersModel = realm.All<UsersModel>().Where(i => i.IsActive == true && i.Password == passwd).FirstOrDefault().NonManagedCopy<UsersModel>();
+            if (usersModel is not null)
+            {
+                usersModel.Password = "*******************************";
+                return Ok(usersModel);
+            }
+            return BadRequest("Hatalı Sözdizilimi");
         }
     }
 }

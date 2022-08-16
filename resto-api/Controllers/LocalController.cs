@@ -290,21 +290,5 @@ namespace resto_api.Controllers
 
             return Ok();
         }
-
-        public class UsersModel2
-        {
-            public UsersModel3 user { get; set; }
-        }
-        public class UsersModel3 : RealmObject
-        {
-            [PrimaryKey]
-            public ObjectId ID { get; set; } = ObjectId.GenerateNewId();
-            public string? UserName { get; set; }
-            public string? Password { get; set; }
-            public int Auth { get; set; }
-            public bool IsActive { get; set; }
-
-        }
-
     }
 }

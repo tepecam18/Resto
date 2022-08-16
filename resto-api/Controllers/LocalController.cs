@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
-using MongoDB.Bson;
 using Realms;
 using RestoWPF.Core;
 using resto_api.Model;
+using SushiHangover.RealmJson;
+using resto_api.Static;
 
 namespace resto_api.Controllers
 {
@@ -13,7 +13,7 @@ namespace resto_api.Controllers
     {
         Realm realm = Realm.GetInstance(new RealmConfig());
 
-        [HttpGet(Name = "SaveSeed")]
+        [HttpGet("SaveSeed")]
         public void Get()
         {
 
@@ -284,8 +284,19 @@ namespace resto_api.Controllers
             });
         }
 
+        [HttpPost("Create")]
+        public async Task<ActionResult<string>> Create(string guid)
+        {
+            DeviceModel? device = realm.All<DeviceModel>().Where(i => i.IsActive == true && i.MachineGuid == guid).FirstOrDefault();
+            //if (device is not null)
+            //{
+                return Ok(Ss.CreateDevice(device)); 
+            //}
+            //return BadRequest("Hatalı Sözdizilimi");
+        }
+
         [HttpPost]
-        public async Task<ActionResult<UsersModel>> PostTodoItem(string passwd)
+        public async Task<ActionResult<string>> PostTodoItem(string passwd)
         {
             UsersModel usersModel = realm.All<UsersModel>().Where(i => i.IsActive == true && i.Password == passwd).FirstOrDefault().NonManagedCopy<UsersModel>();
             if (usersModel is not null)

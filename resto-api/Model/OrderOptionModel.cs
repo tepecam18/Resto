@@ -1,6 +1,6 @@
 ﻿using Realms;
 
-namespace RestoWPF.MVVM.Model
+namespace resto_api.Model
 {
     public class OrderOptionModel : RealmObject
     {

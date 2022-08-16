@@ -3,8 +3,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using MongoDB.Bson;
 using Realms;
 using RestoWPF.Core;
-using RestoWPF.MVVM.Model;
-using SushiHangover.RealmJson;
+using resto_api.Model;
 
 namespace resto_api.Controllers
 {

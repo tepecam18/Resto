@@ -1,7 +1,7 @@
 ﻿using MongoDB.Bson;
 using Realms;
 
-namespace RestoWPF.MVVM.Model
+namespace resto_api.Model
 {
     public class PaymentModel : EmbeddedObject
     {

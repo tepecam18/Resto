@@ -4,6 +4,7 @@ using RestoWPF.Core;
 using resto_api.Model;
 using SushiHangover.RealmJson;
 using resto_api.Static;
+using System.Security.Cryptography;
 
 namespace resto_api.Controllers
 {
@@ -40,6 +41,13 @@ namespace resto_api.Controllers
                     UserName = "tpcm",
                     Password = "1",
                     IsActive = true,
+                });
+
+                realm.Add(new DeviceModel()
+                {
+                    MachineGuid = "1",
+                    MachineName = "1",
+                    IsActive = true
                 });
 
 
@@ -285,14 +293,15 @@ namespace resto_api.Controllers
         }
 
         [HttpPost("Create")]
-        public async Task<ActionResult<string>> Create(string guid)
+        public async Task<ActionResult<RSAParameters>> Create(string guid)
         {
-            DeviceModel? device = realm.All<DeviceModel>().Where(i => i.IsActive == true && i.MachineGuid == guid).FirstOrDefault();
-            //if (device is not null)
-            //{
-                return Ok(Ss.CreateDevice(device)); 
-            //}
-            //return BadRequest("Hatalı Sözdizilimi");
+            DeviceModel? device = realm.All<DeviceModel>().Where(i => i.IsActive == true && i.MachineGuid == guid).First();
+            if (device is not null)
+            {
+                RSAParameters rSAParameters = Ss.CreateDevice(device);
+                return Ok(rSAParameters);
+            }
+            return BadRequest("Hatalı Sözdizilimi");
         }
 
         [HttpPost]

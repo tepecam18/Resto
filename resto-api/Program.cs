@@ -1,5 +1,7 @@
 using Microsoft.Extensions.Options;
+using Realms;
 using resto_api.Hubs;
+using RestoWPF.Core;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -32,10 +34,10 @@ if (app.Environment.IsDevelopment())
     });
 
     //signlr
-    app.UseEndpoints(endPoint =>
-    {
-        endPoint.MapHub<MyHub>("/myhub");
-    });
+    //app.UseEndpoints(endPoint =>
+    //{
+    //    endPoint.MapHub<MyHub>("/myhub");
+    //});
 }
 
 app.UseHttpsRedirection();

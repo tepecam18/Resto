@@ -1,17 +1,18 @@
 ﻿using MongoDB.Bson;
 using Realms;
+using resto_api.Abstract;
 using resto_api.Model;
-using System.ComponentModel;
+using RestoWPF.Core;
 using System.Security.Cryptography;
-using System.Security.Cryptography.Xml;
-using System.Text;
 
 namespace resto_api.Static
 {
     //todo https://docs.microsoft.com/tr-tr/dotnet/api/system.security.cryptography.rsacryptoserviceprovider?view=net-7.0
-    public static class Ss
+    public static class Ss 
     {
         #region Data
+        static Realm realm = Realm.GetInstance(new RealmConfig());
+
         public static List<DeviceModel> Devices { get; set; }
         #endregion
 
@@ -23,19 +24,26 @@ namespace resto_api.Static
         #endregion
 
         #region Properties
-        /// <summary>
-        /// Device Token for Create Sessions
-        /// </summary>
-        /// <param name="Device"></param>
-        /// <returns></returns>
-        public static RSAParameters CreateDevice(DeviceModel Device)
+
+        public static string LoginDevice(DeviceModel device)
         {
-            Devices.Add(Device);
+            Devices.Add(CreateDevice(device));
+            return device.Token;
+        }
+
+        public static DeviceModel CreateDevice(DeviceModel device)
+        {
             using (RSACryptoServiceProvider RSA = new RSACryptoServiceProvider())
             {
-                RSAParameters rSAParameters = RSA.ExportParameters(false);
-                string str = rSAParameters.ToString();
-                return rSAParameters;
+                RSAParameters rSAParametersPublic = RSA.ExportParameters(false);
+                RSAParameters rSAParametersPrivete = RSA.ExportParameters(true);
+
+                realm.Write(() =>
+                {
+                    device.Token = rSAParametersPublic.ToJson();
+                    device.PrivateKey = rSAParametersPrivete.ToJson();
+                });
+                return device;
             }
         }
 
@@ -53,11 +61,16 @@ namespace resto_api.Static
     }
 
     #region Model
-    public class DeviceList
+    public class TokenModel
     {
-        public DeviceModel Device { get; set; }
-        public RSAParameters Token { get; set; }
-        public UsersModel User { get; set; }
+        public object D { get; set; }
+        public object DP { get; set; }
+        public object DQ { get; set; }
+        public object Exponent { get; set; }
+        public object InverseQ { get; set; }
+        public object Modulus { get; set; }
+        public object P { get; set; }
+        public object Q { get; set; }
     }
     #endregion
 }

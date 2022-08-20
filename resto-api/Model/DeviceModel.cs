@@ -1,6 +1,7 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using Realms;
+using resto_api.Static;
 
 namespace resto_api.Model
 {
@@ -15,6 +16,8 @@ namespace resto_api.Model
 
         [BsonIgnore]
         public string? Token { get; set; }
+        [BsonIgnore]
+        public string? PrivateKey { get; set; }
 
         [BsonIgnore]
         public UsersModel? User { get; set; }

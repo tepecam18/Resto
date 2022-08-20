@@ -1,16 +1,17 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using Realms;
-using RestoWPF.Core;
 using resto_api.Model;
-using SushiHangover.RealmJson;
 using resto_api.Static;
+using RestoWPF.Core;
+using SushiHangover.RealmJson;
 using System.Security.Cryptography;
 
 namespace resto_api.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
-    public class LocalController : ControllerBase
+    public class CenterController : ControllerBase
     {
         Realm realm = Realm.GetInstance(new RealmConfig());
 
@@ -292,19 +293,22 @@ namespace resto_api.Controllers
             });
         }
 
-        [HttpPost("Create")]
-        public async Task<ActionResult<RSAParameters>> Create(string guid)
+        [HttpPost]
+        public async Task<ActionResult<string>> Login(string guid)
         {
             DeviceModel? device = realm.All<DeviceModel>().Where(i => i.IsActive == true && i.MachineGuid == guid).First();
             if (device is not null)
             {
-                RSAParameters rSAParameters = Ss.CreateDevice(device);
-                return Ok(rSAParameters);
+                if (Ss.Devices.Where(i => i == device).First() is not null)
+                    return Ok(Ss.CreateDevice(device));
+                else
+                    return Ok(Ss.LoginDevice(device));
             }
-            return BadRequest("Hatalı Sözdizilimi");
+            else
+                return BadRequest("Hatalı Sözdizilimi");
         }
 
-        [HttpPost]
+        [HttpPost("Login")]
         public async Task<ActionResult<string>> PostTodoItem(string passwd)
         {
             UsersModel usersModel = realm.All<UsersModel>().Where(i => i.IsActive == true && i.Password == passwd).FirstOrDefault().NonManagedCopy<UsersModel>();

@@ -17,5 +17,10 @@
     <PackageReference Include="RealmJson.Extensions" Version="2.1.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Abstract\" />
+    <Folder Include="Static\" />
+  </ItemGroup>
   
 </Project>

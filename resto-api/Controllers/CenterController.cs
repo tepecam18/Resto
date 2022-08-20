@@ -1,8 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MongoDB.Bson;
 using Newtonsoft.Json;
 using Realms;
+using resto_api.Abstract;
 using resto_api.Model;
-using resto_api.Static;
 using RestoWPF.Core;
 using SushiHangover.RealmJson;
 using System.Security.Cryptography;
@@ -11,7 +12,7 @@ namespace resto_api.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    public class CenterController : ControllerBase
+    public class CenterController : ControllerBase, ICenterController
     {
         Realm realm = Realm.GetInstance(new RealmConfig());
 
@@ -299,10 +300,18 @@ namespace resto_api.Controllers
             DeviceModel? device = realm.All<DeviceModel>().Where(i => i.IsActive == true && i.MachineGuid == guid).First();
             if (device is not null)
             {
-                if (Ss.Devices.Where(i => i == device).First() is not null)
-                    return Ok(Ss.CreateDevice(device));
-                else
-                    return Ok(Ss.LoginDevice(device));
+
+                using (RSACryptoServiceProvider RSA = new RSACryptoServiceProvider())
+                {
+                    realm.Write(() =>
+                    {
+                        device.Token = RSA.ExportParameters(false).ToJson();
+                        device.PrivateKey = RSA.ExportParameters(true).ToJson();
+                    });
+
+                    return Ok(device.Token);
+                }
+
             }
             else
                 return BadRequest("Hatalı Sözdizilimi");
@@ -320,4 +329,16 @@ namespace resto_api.Controllers
             return BadRequest("Hatalı Sözdizilimi");
         }
     }
+
+    //public class TokenModel
+    //{
+    //    public object D { get; set; }
+    //    public object DP { get; set; }
+    //    public object DQ { get; set; }
+    //    public object Exponent { get; set; }
+    //    public object InverseQ { get; set; }
+    //    public object Modulus { get; set; }
+    //    public object P { get; set; }
+    //    public object Q { get; set; }
+    //}
 }

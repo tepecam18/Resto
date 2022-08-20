@@ -1,7 +1,6 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using Realms;
-using resto_api.Static;
 
 namespace resto_api.Model
 {

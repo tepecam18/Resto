@@ -1,22 +1,40 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using Realms;
-using resto_api.Abstract;
 using resto_api.Model;
 using RestoWPF.Core;
 using SushiHangover.RealmJson;
+using System.Reflection;
 using System.Security.Cryptography;
 
 namespace resto_api.Controllers
 {
-    [Route("[controller]")]
+    [Route("[controller]/[action]")]
     [ApiController]
-    public class CenterController : ControllerBase, ICenterController
+    public class CenterController : ControllerBase
     {
         Realm realm = Realm.GetInstance(new RealmConfig());
 
-        [HttpGet("SaveSeed")]
+        [HttpGet]
+        public void GetTest()
+        {
+            using (RSACryptoServiceProvider RSA = new RSACryptoServiceProvider())
+            {
+                RSAParameters Rpublic = RSA.ExportParameters(false);
+                RSAParameters Rprivate = RSA.ExportParameters(true);
+
+                string parameters = JsonConvert.SerializeObject(Rpublic);
+                RSAParameters parameters2 = JsonConvert.DeserializeObject<RSAParameters>(parameters);
+                //RSAParameters sAParameters = JsonConvert.DeserializeObject<RSAParameters>(Rpublic);
+            }
+            //encryptedData = RSAEncrypt(dataToEncrypt, Rpublic, false);
+
+            //decryptedData = RSADecrypt(encryptedData, Rprivate, false);
+        }
+
+        [HttpGet]
         public void Get()
         {
 
@@ -295,18 +313,22 @@ namespace resto_api.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<string>> Login(string guid)
+        public async Task<ActionResult<string>> Token(string apiKey, string deviceid)
         {
-            DeviceModel? device = realm.All<DeviceModel>().Where(i => i.IsActive == true && i.MachineGuid == guid).First();
+            DeviceModel? device = realm.All<DeviceModel>().Where(i => i.IsActive == true && i.MachineGuid == deviceid).First();
             if (device is not null)
             {
 
                 using (RSACryptoServiceProvider RSA = new RSACryptoServiceProvider())
                 {
+                    RSAParameters Rpublic = RSA.ExportParameters(false);
+                    RSAParameters Rprivate = RSA.ExportParameters(true);
+
+
                     realm.Write(() =>
                     {
-                        device.Token = RSA.ExportParameters(false).ToJson();
-                        device.PrivateKey = RSA.ExportParameters(true).ToJson();
+                        device.Token = JsonConvert.SerializeObject(Rpublic);
+                        device.PrivateKey = JsonConvert.SerializeObject(Rprivate);
                     });
 
                     return Ok(device.Token);
@@ -317,7 +339,34 @@ namespace resto_api.Controllers
                 return BadRequest("Hatalı Sözdizilimi");
         }
 
-        [HttpPost("Login")]
+        [HttpPost]
+        public async Task<ActionResult<string>> Login(string guid)
+        {
+            DeviceModel? device = realm.All<DeviceModel>().Where(i => i.IsActive == true && i.MachineGuid == guid).First();
+            if (device is not null)
+            {
+
+                using (RSACryptoServiceProvider RSA = new RSACryptoServiceProvider())
+                {
+                    RSAParameters Rpublic = RSA.ExportParameters(false);
+                    RSAParameters Rprivate = RSA.ExportParameters(true);
+
+                   
+                    realm.Write(() =>
+                    {
+                        device.Token = JsonConvert.SerializeObject(Rpublic);
+                        device.PrivateKey = JsonConvert.SerializeObject(Rprivate);
+                    });
+
+                    return Ok(device.Token);
+                }
+
+            }
+            else
+                return BadRequest("Hatalı Sözdizilimi");
+        }
+
+        [HttpPost]
         public async Task<ActionResult<string>> PostTodoItem(string passwd)
         {
             UsersModel usersModel = realm.All<UsersModel>().Where(i => i.IsActive == true && i.Password == passwd).FirstOrDefault().NonManagedCopy<UsersModel>();
@@ -330,15 +379,15 @@ namespace resto_api.Controllers
         }
     }
 
-    //public class TokenModel
-    //{
-    //    public object D { get; set; }
-    //    public object DP { get; set; }
-    //    public object DQ { get; set; }
-    //    public object Exponent { get; set; }
-    //    public object InverseQ { get; set; }
-    //    public object Modulus { get; set; }
-    //    public object P { get; set; }
-    //    public object Q { get; set; }
-    //}
+    public class TokenModel
+    {
+        public object D { get; set; }
+        public object DP { get; set; }
+        public object DQ { get; set; }
+        public object Exponent { get; set; }
+        public object InverseQ { get; set; }
+        public object Modulus { get; set; }
+        public object P { get; set; }
+        public object Q { get; set; }
+    }
 }

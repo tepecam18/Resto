@@ -17,6 +17,8 @@ namespace resto_api.Controllers
     {
         Realm realm = Realm.GetInstance(new RealmConfig());
 
+        #region Test
+
         [HttpGet]
         public void GetTest()
         {
@@ -377,17 +379,6 @@ namespace resto_api.Controllers
             }
             return BadRequest("Hatalı Sözdizilimi");
         }
-    }
-
-    public class TokenModel
-    {
-        public object D { get; set; }
-        public object DP { get; set; }
-        public object DQ { get; set; }
-        public object Exponent { get; set; }
-        public object InverseQ { get; set; }
-        public object Modulus { get; set; }
-        public object P { get; set; }
-        public object Q { get; set; }
+        #endregion
     }
 }

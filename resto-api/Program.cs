@@ -1,8 +1,3 @@
-using Microsoft.Extensions.Options;
-using Realms;
-using resto_api.Hubs;
-using RestoWPF.Core;
-
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -17,6 +12,14 @@ builder.Services.AddSignalR();
 //{
 //    c.CustomSchemaIds(type => $"{type.Name}_{System.Guid.NewGuid()}");
 //});
+
+builder.Services.AddCors(options =>
+    options.AddDefaultPolicy(policy =>
+        policy.AllowAnyMethod()
+        .AllowAnyHeader()
+        .AllowCredentials()
+        .SetIsOriginAllowed(origin => true)
+));
 
 var app = builder.Build();
 
@@ -33,11 +36,12 @@ if (app.Environment.IsDevelopment())
         c.RoutePrefix = "api/restocentr/v1";
     });
 
+    app.UseCors();
+
+    app.UseRouting();
+
     //signlr
-    //app.UseEndpoints(endPoint =>
-    //{
-    //    endPoint.MapHub<MyHub>("/myhub");
-    //});
+    app.MapHub<MyHub>("/myhub");
 }
 
 app.UseHttpsRedirection();

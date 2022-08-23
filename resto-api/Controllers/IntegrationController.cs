@@ -2,8 +2,6 @@
 
 namespace resto_api.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
     public class IntegrationController : ControllerBase
     {
     }

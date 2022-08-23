@@ -3,7 +3,6 @@ using MongoDB.Bson;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using Realms;
-using resto_api.Model;
 using RestoWPF.Core;
 using SushiHangover.RealmJson;
 using System.Reflection;
@@ -11,8 +10,6 @@ using System.Security.Cryptography;
 
 namespace resto_api.Controllers
 {
-    [Route("[controller]/[action]")]
-    [ApiController]
     public class CenterController : ControllerBase
     {
         Realm realm = Realm.GetInstance(new RealmConfig());

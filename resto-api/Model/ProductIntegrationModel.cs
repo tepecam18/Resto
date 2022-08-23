@@ -1,12 +1,9 @@
 ﻿using MongoDB.Bson;
 using Realms;
 
-namespace resto_api.Model
+public class ProductIntegrationModel : RealmObject
 {
-    public class ProductIntegrationModel : RealmObject
-    {
-        [PrimaryKey]
-        public ObjectId ID { get; set; } = ObjectId.GenerateNewId();
-        public ProductModel? Product { get; set; }
-    }
+    [PrimaryKey]
+    public ObjectId ID { get; set; } = ObjectId.GenerateNewId();
+    public ProductModel? Product { get; set; }
 }

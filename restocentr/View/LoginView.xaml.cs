@@ -49,12 +49,12 @@ namespace restocentr.View
                 {
                     if (St.User == user)
                     {
-                        Nv.GetBack();
+                        //Nv.GetBack();
                     }
                     else
                     {
-                        St.User = user;
-                        Nv.SetContent(Nv.MainMenu);
+                        //St.User = user;
+                        //Nv.SetContent(Nv.MainMenu);
                     }
                 }
                 else

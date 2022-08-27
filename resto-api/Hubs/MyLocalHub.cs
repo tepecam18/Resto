@@ -9,6 +9,8 @@ namespace resto_api.Hubs
     {
         #region Data
         static Realm realm = Realm.GetInstance(new RealmConfig());
+        IQueryable<DeviceModel> devices = realm.All<DeviceModel>();
+        IQueryable<UsersModel> users = realm.All<UsersModel>();
         ILog log;
         #endregion
 

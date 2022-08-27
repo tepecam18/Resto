@@ -1,4 +1,5 @@
 
+using resto_api.Core;
 using resto_api.Hubs;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,6 +17,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddSignalR();
 
+builder.Services.AddSingleton<ILog, Log>();
 
 builder.Services.AddCors(options =>
     options.AddDefaultPolicy(policy =>

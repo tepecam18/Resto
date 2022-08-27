@@ -1,13 +1,10 @@
-﻿using System;
-using System.IO;
-
-namespace restocentr.Static
+﻿namespace resto_api.Core
 {
-    internal static class Log
+    public class Log : ILog
     {
-        private static string pathlog;
+        private string pathlog;
 
-        static Log()
+        public Log()
         {
             string path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             pathlog = $"{path}\\MyLog.txt";
@@ -24,13 +21,12 @@ namespace restocentr.Static
             }
         }
 
-        public static void Write(string msg)
+        public void Write(string msg)
         {
             using (StreamWriter sw = File.AppendText(pathlog))
             {
-                sw.WriteLine($"wfp:{DateTime.Now}: {msg}");
+                sw.WriteLine($"api:{DateTime.Now}: {msg}");
             }
         }
-
     }
 }

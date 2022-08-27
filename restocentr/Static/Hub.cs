@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace restocentr.Static
 {
@@ -29,21 +30,46 @@ namespace restocentr.Static
                 await connection.StartAsync();
             };
 
-            try
-            {
-                RegistryKey key = Registry.LocalMachine.OpenSubKey("SOFTWARE\\Microsoft\\Cryptography");
-                string guid = key.GetValue("MachineGUID").ToString();
-
-                connection.InvokeAsync("DeviceLoginAsync", guid);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Sunucu Cihaz Kaydı Başarısız: {ex.Message}");
-            }
-
             #region OnHub
             LoginStatu();
             #endregion
+        }
+        #endregion
+
+        #region OnHub
+        public static async void LoginStatu()
+        {
+            connection.On<string>("deviceLogin", (message) =>
+            {
+                string newMessage = $"{message}";
+                Log.Write(newMessage);
+                if (message == "mustafa")
+                {
+                    Nv.SetContent(Nv.MainMenu);
+                }
+            });
+
+            try
+            {
+                await connection.StartAsync();
+                Log.Write("Connection started");
+            }
+            catch (Exception ex)
+            {
+                Log.Write(ex.Message);
+            }
+        }
+        #endregion
+
+        #region InvokeHub
+        public static async Task DeviceLogin(string deviceID)
+        {
+            await connection.InvokeAsync("DeviceLoginAsync", deviceID);
+        }
+
+        public static async Task UserLogin(string pin)
+        {
+            await connection.InvokeAsync("UserLoginAsync", pin);
         }
         #endregion
     }

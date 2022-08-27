@@ -1,8 +1,16 @@
-﻿namespace resto_api.Interfaces
+﻿public interface IMessageClient
 {
-    public interface IMessageClient
-    {
-        Task userLogin(string message);
-        Task deviceLogin(string message);
-    }
+
+    #region Securty
+    Task deviceLogin(string message);
+
+    Task userLogin(string message);
+    #endregion
+
+    #region Orders
+    Task addOrder(OrderModel order);
+
+    Task addOrderProduct(OrderProductModel orderproduct);
+    #endregion
+
 }

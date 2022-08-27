@@ -8,13 +8,13 @@ public class DeviceModel : RealmObject
     public string? MachineGuid { get; set; }
     public string? MachineName { get; set; }
     public bool IsActive { get; set; }
-
-
-    [Ignored]
     public string? Token { get; set; }
-    [Ignored]
     public string? PrivateKey { get; set; }
+    public string? ConnectionId { get; set; }
 
     [Ignored]
     public UsersModel? User { get; set; }
+
+    [Ignored]
+    public int WarningCount { get; set; } = 0;
 }

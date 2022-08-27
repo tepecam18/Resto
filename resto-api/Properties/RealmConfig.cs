@@ -21,7 +21,7 @@ namespace RestoWPF.Core
             IsReadOnly = false;
             //EncryptionKey = MainWindow.encrypt;
             var path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            DatabasePath = $"{path}\\RestWPF.realm";
+            DatabasePath = $"{path}\\Resto.json";
             //todo realm dosyalarını sili kapat
             ShouldDeleteIfMigrationNeeded = true;
         }

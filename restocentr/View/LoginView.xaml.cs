@@ -39,34 +39,23 @@ namespace restocentr.View
             txPassword.Password = "";
         }
 
-        private void LoginButton_Click(object sender, RoutedEventArgs? e)
+        private async void LoginButton_Click(object sender, RoutedEventArgs? e)
         {
             if (txPassword.Password != "")
             {
-                //UsersModel user = (UsersModel)realm.All<UsersModel>().Where(i => i.Password == txPassword.Password && i.IsActive).FirstOrDefault();
-                UsersModel user = new UsersModel();
-                if (user != null)
-                {
-                    if (St.User == user)
-                    {
-                        //Nv.GetBack();
-                    }
-                    else
-                    {
-                        //St.User = user;
-                        //Nv.SetContent(Nv.MainMenu);
-                    }
-                }
-                else
-                {
-                    //todo bottom bildirim
-                }
-                if (txPassword.Password == "ptts1")
-                {
-                    //Hile kodları
-                }
-                txPassword.Password = "";
+                await Hub.UserLogin(txPassword.Password);
             }
+            else
+            {
+                //todo bottom bildirim
+            }
+
+            if (txPassword.Password == "ptts1")
+            {
+                //Hile kodları
+            }
+
+            txPassword.Password = "";
         }
 
         private void txPassword_KeyDown(object sender, KeyEventArgs e)

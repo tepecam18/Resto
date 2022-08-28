@@ -8,15 +8,39 @@ namespace resto_api.Hubs
     public class MyLocalHub : Hub<IMessageClient>
     {
         #region Data
-        static Realm realm = Realm.GetInstance(new RealmConfig());
-        IQueryable<DeviceModel> devices = realm.All<DeviceModel>();
-        IQueryable<UsersModel> users = realm.All<UsersModel>();
+        static Realm realm;
+        static IQueryable<DeviceModel> devices;
+        static IQueryable<UsersModel> users;
         ILog log;
         #endregion
 
         public MyLocalHub(ILog _Ilog)
         {
+            //todo realm dosyası açık kontrollü ekle
             log = _Ilog;
+            realm = Realm.GetInstance(new RealmConfig());
+            devices = realm.All<DeviceModel>();
+            users = realm.All<UsersModel>();
+
+            if (devices.Count() == 0)
+            {
+                realm.Write(() =>
+                {
+                    realm.Add<DeviceModel>(new DeviceModel
+                    {
+                        MachineGuid ="87b4d63e-f0c6-41d5-b483-d5b023026c1b",
+                        IsActive = true,
+                        MachineName = "ptts"
+                    });
+
+                    realm.Add<UsersModel>(new UsersModel
+                    {
+                        Password ="1",
+                        IsActive = true,
+                        UserName = "tpcm"
+                    });
+                });
+            }
         }
 
         #region Securty
@@ -24,7 +48,7 @@ namespace resto_api.Hubs
         {
             try
             {
-                DeviceModel? device = realm.All<DeviceModel>().Where(i => i.MachineGuid == deviceID && i.IsActive).FirstOrDefault();
+                DeviceModel? device = devices.Where(i => i.MachineGuid == deviceID && i.IsActive).FirstOrDefault();
                 if (device is not null)
                 {
                     realm.Write(() =>
@@ -40,7 +64,7 @@ namespace resto_api.Hubs
             }
             catch (Exception ex)
             {
-                log.Write($"sunucu cihazi kontrolü devredışı: {ex.Message}");
+                log.Write($"sunucu cihaz kontrolü devredışı: {ex.Message}");
                 await Clients.Caller.deviceLogin("Warning");
             }
         }
@@ -49,11 +73,10 @@ namespace resto_api.Hubs
         {
             try
             {
-                //'Realm accessed from incorrect thread.'
-                DeviceModel? device = realm.All<DeviceModel>().Where(i => i.ConnectionId == Context.ConnectionId).FirstOrDefault();
+                DeviceModel? device = devices.Where(i => i.ConnectionId == Context.ConnectionId).FirstOrDefault();
                 if (device is not null)
                 {
-                    UsersModel? user = realm.All<UsersModel>().Where(i => i.Password == userPin).FirstOrDefault();
+                    UsersModel? user = users.Where(i => i.Password == userPin).FirstOrDefault();
                     if (user is not null)
                     {
                         realm.Write(() =>
@@ -67,14 +90,12 @@ namespace resto_api.Hubs
                     {
                         realm.Write(() =>
                         {
-                            //sürekli 0 geliyor
-                            device.WarningCount+=1;
-                            if (device.WarningCount < 7)
+                            if (++device.WarningCount > 7)
                             {
+                                device.WarningCount = 0;
                                 //todo anamakina ve bilgi işleme mesaj at, haber ver
                             }
                         });
-
                         log.Write($"{device.MachineName}: Geçersiz User Bilgisi");
                         await Clients.Caller.userLogin("NotUser");
                     }
@@ -92,6 +113,7 @@ namespace resto_api.Hubs
         #region Method
         private async Task<bool> DeviceControl()
         {
+            DeviceModel? device = devices.Where(i => i.ConnectionId == Context.ConnectionId).FirstOrDefault();
             return false;
         }
         #endregion

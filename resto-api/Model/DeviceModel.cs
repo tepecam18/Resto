@@ -1,4 +1,5 @@
 ﻿using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 using Realms;
 
 public class DeviceModel : RealmObject
@@ -12,9 +13,9 @@ public class DeviceModel : RealmObject
     public string? PrivateKey { get; set; }
     public string? ConnectionId { get; set; }
 
-    [Ignored]
+    [BsonIgnore]
     public UsersModel? User { get; set; }
 
-    [Ignored]
+    [BsonIgnore]
     public int WarningCount { get; set; } = 0;
 }

@@ -13,7 +13,7 @@ namespace restocentr.View
     public partial class MainWindow : MetroWindow
     {
         internal static MainWindowViewModel viewModel = new MainWindowViewModel();
-        internal static Snackbar snackbar;
+        public static Snackbar snackbar;
 
         public MainWindow()
         {

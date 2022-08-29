@@ -2,6 +2,7 @@
 using System;
 using System.IO;
 using System.Threading.Tasks;
+using System.Windows.Documents;
 
 namespace restocentr.Static
 {
@@ -32,6 +33,7 @@ namespace restocentr.Static
             {
                 sw.WriteLine($"wpf:{DateTime.Now}: {msg}");
             }
+            Show(msg);
         }
 
         public static bool Show(string msg, string btn = "Kapat", int time = 3)

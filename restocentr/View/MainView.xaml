@@ -3,15 +3,56 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:restocentr.View" xmlns:template="clr-namespace:restocentr.Component.Template"
+             xmlns:local="clr-namespace:restocentr.View" 
+             xmlns:template="clr-namespace:restocentr.Component.Template"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
 
         <template:PanningTemplate>
-            <template:PanningTemplate.AdditionalContent>
-                <TextBlock Text="naber"/>
-            </template:PanningTemplate.AdditionalContent>
+                <StackPanel>
+                    <Button Click="Button_Click">
+                        <TextBlock Text="naber"/>
+                    </Button><Button Click="Button_Click">
+                        <TextBlock Text="naber"/>
+                    </Button><Button Click="Button_Click">
+                        <TextBlock Text="naber"/>
+                    </Button><Button Click="Button_Click">
+                        <TextBlock Text="naber"/>
+                    </Button><Button Click="Button_Click">
+                        <TextBlock Text="naber"/>
+                    </Button><Button Click="Button_Click">
+                        <TextBlock Text="naber"/>
+                    </Button><Button Click="Button_Click">
+                        <TextBlock Text="naber"/>
+                    </Button><Button Click="Button_Click">
+                        <TextBlock Text="naber"/>
+                    </Button><Button Click="Button_Click">
+                        <TextBlock Text="naber"/>
+                    </Button><Button Click="Button_Click">
+                        <TextBlock Text="naber"/>
+                    </Button><Button Click="Button_Click">
+                        <TextBlock Text="naber"/>
+                    </Button><Button Click="Button_Click">
+                        <TextBlock Text="naber"/>
+                    </Button><Button Click="Button_Click">
+                        <TextBlock Text="naber"/>
+                    </Button><Button Click="Button_Click">
+                        <TextBlock Text="naber"/>
+                    </Button><Button Click="Button_Click">
+                        <TextBlock Text="naber"/>
+                    </Button><Button Click="Button_Click">
+                        <TextBlock Text="naber"/>
+                    </Button><Button Click="Button_Click">
+                        <TextBlock Text="naber"/>
+                    </Button><Button Click="Button_Click">
+                        <TextBlock Text="naber"/>
+                    </Button><Button Click="Button_Click">
+                        <TextBlock Text="naber"/>
+                    </Button><Button Click="Button_Click">
+                        <TextBlock Text="naber"/>
+                    </Button>
+                </StackPanel>
         </template:PanningTemplate>
     </Grid>
 </UserControl>

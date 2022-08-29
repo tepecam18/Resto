@@ -38,5 +38,24 @@ namespace restocentr.Component.Template
         public static readonly DependencyProperty AdditionalContentProperty =
             DependencyProperty.Register("AdditionalContent", typeof(object), typeof(PanningTemplate),
               new PropertyMetadata(null));
+
+
+        private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+
+        private void Grid_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (this.IsMouseCaptured)
+            {
+
+            }
+        }
+
+        private void Grid_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+
+        }
     }
 }

@@ -3,6 +3,7 @@ using System;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Documents;
+using System.Windows.Threading;
 
 namespace restocentr.Static
 {
@@ -33,7 +34,27 @@ namespace restocentr.Static
             {
                 sw.WriteLine($"wpf:{DateTime.Now}: {msg}");
             }
-            Show(msg);
+        }
+
+        public static bool ShowASync(string msg, string btn = "Kapat", int time = 3)
+        {
+            bool repos = false;
+            MainWindow.snackbar.Dispatcher.Invoke(DispatcherPriority.Send, new Action((delegate
+            {
+                if (MainWindow.snackbar.MessageQueue is { } messageQueue)
+                {
+                    MainWindow.snackbar.MessageQueue.DiscardDuplicates = true;
+                    messageQueue.Enqueue(
+                    msg,
+                    btn,
+                    action => repos = true,
+                    msg,
+                    false,
+                    true,
+                    new(0, 0, time));
+                }
+            })));
+            return repos;
         }
 
         public static bool Show(string msg, string btn = "Kapat", int time = 3)
@@ -49,8 +70,7 @@ namespace restocentr.Static
                 msg,
                 false,
                 true,
-                new(0,0,time));
-                return repos;
+                new(0, 0, time));
             }
             return repos;
         }

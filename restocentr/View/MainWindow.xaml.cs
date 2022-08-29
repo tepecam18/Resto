@@ -1,4 +1,5 @@
 ﻿using MahApps.Metro.Controls;
+using MaterialDesignThemes.Wpf;
 using restocentr.Static;
 using restocentr.ViewModel;
 using System.Windows;
@@ -12,12 +13,14 @@ namespace restocentr.View
     public partial class MainWindow : MetroWindow
     {
         internal static MainWindowViewModel viewModel = new MainWindowViewModel();
+        internal static Snackbar snackbar;
+
         public MainWindow()
         {
             InitializeComponent();
             DataContext = viewModel;
+            snackbar = RootSnackbar;
         }
-
 
         #region windows border
 
@@ -46,10 +49,6 @@ namespace restocentr.View
 
 
         #endregion
-
-        //private void OnSelectedItemChanged(object sender, DependencyPropertyChangedEventArgs e)
-        //    => MainScrollViewer.ScrollToHome();
-
 
         private void BackNavButton_Click(object sender, RoutedEventArgs e)
         {

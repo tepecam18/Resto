@@ -33,6 +33,13 @@ namespace resto_api.Hubs
                         MachineName = "ptts"
                     });
 
+                    realm.Add<DeviceModel>(new DeviceModel
+                    {
+                        MachineGuid ="9c8fdcf5-ddce-41af-bb2b-ddcfb67aa830",
+                        IsActive = true,
+                        MachineName = "ptts2"
+                    });
+
                     realm.Add<UsersModel>(new UsersModel
                     {
                         Password ="1",
@@ -100,7 +107,11 @@ namespace resto_api.Hubs
                         await Clients.Caller.userLogin("NotUser");
                     }
                 }
-                else await Clients.Caller.userLogin("NotDevice");
+                else
+                {
+                    log.Write("Geçersiz Device Bilgisi");
+                    await Clients.Caller.userLogin("NotDevice");
+                }
             }
             catch (Exception ex)
             {
@@ -114,12 +125,13 @@ namespace resto_api.Hubs
         private async Task<bool> DeviceControl()
         {
             DeviceModel? device = devices.Where(i => i.ConnectionId == Context.ConnectionId).FirstOrDefault();
-            return false;
+            return device is not null;
         }
         #endregion
 
         public override Task OnDisconnectedAsync(Exception? exception)
         {
+            //todo clear device
             return base.OnDisconnectedAsync(exception);
         }
     }

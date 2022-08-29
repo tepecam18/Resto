@@ -3,7 +3,6 @@
                  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-                 xmlns:local="clr-namespace:restocentr.View" 
                  xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
                  xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
                  mc:Ignorable="d"
@@ -69,15 +68,21 @@
                     <Button Click="BackNavButton_Click">
                         <materialDesign:PackIcon Kind="ArrowLeftCircleOutline" Height="32" Width="32"/>
                     </Button>
-                </TabItem> 
+                </TabItem>
             </TabControl>
         </mah:WindowCommands>
     </mah:MetroWindow.LeftWindowCommands>
 
-    <materialDesign:DialogHost Identifier="RootDialog">
-        <ContentControl
+    <Grid>
+        <materialDesign:DialogHost Identifier="RootDialog">
+            <ContentControl
                 Margin="{Binding MarginRequirement, FallbackValue=7}"
                 Content="{Binding Content, UpdateSourceTrigger=PropertyChanged, FallbackValue={x:Null}}"
                 DataContext="{Binding SelectedItem}"/>
-    </materialDesign:DialogHost>
+
+        </materialDesign:DialogHost>
+        <materialDesign:Snackbar 
+            x:Name="RootSnackbar"
+            MessageQueue="{materialDesign:MessageQueue}"/>
+    </Grid>
 </mah:MetroWindow>

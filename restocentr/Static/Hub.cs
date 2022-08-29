@@ -1,13 +1,6 @@
 ﻿using Microsoft.AspNetCore.SignalR.Client;
-using Microsoft.Win32;
-using restocentr.Model;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
 
 namespace restocentr.Static
 {
@@ -31,13 +24,8 @@ namespace restocentr.Static
             {
                 while (true)
                 {
-                    if (MessageBox.Show("Sunucuyla Bağlantı Koptu. Tekrar bağlanmaya çalışılsın mı", "Bağlantı Hatası", MessageBoxButton.YesNo) == MessageBoxResult.No)
+                    if (Log.Show("Sunucuyla Bağlantı Koptu.", "Tekrar Bağlan", 10))
                     {
-                        Environment.Exit(0);
-                    }
-                    else
-                    {
-
                         await Task.Delay(new Random().Next(0, 5) * 1000);
                         try
                         {
@@ -47,6 +35,10 @@ namespace restocentr.Static
                         {
                             Log.Write(ex.Message);
                         }
+                    }
+                    else
+                    {
+                        Environment.Exit(0);
                     }
                 }
             };
@@ -78,7 +70,7 @@ namespace restocentr.Static
             {
                 //todo tekrar denensin mi
                 //todo bulut sunucu üderinden ip adresini alarak bağlan
-                MessageBox.Show("Sunucuyla Bağlantı Kurulamadı");
+                Log.Show("Sunucuyla Bağlantı Kurulamadı");
                 Log.Write(ex.Message);
             }
         }

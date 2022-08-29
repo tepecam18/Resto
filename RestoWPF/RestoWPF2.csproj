@@ -33,9 +33,6 @@
     <PackageReference Include="MaterialDesignThemes" Version="4.6.0-ci259" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\3.part.Dll\TilePanoramaControl\TouchPanorama\PanoramaControl\PanoramaControl.csproj" />
-  </ItemGroup>
-  <ItemGroup>
     <Compile Update="MVVM\View\Dialog\OrderDetailDialog.xaml.cs">
       <SubType>Code</SubType>
     </Compile>

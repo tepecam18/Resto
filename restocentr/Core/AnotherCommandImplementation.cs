@@ -12,7 +12,7 @@ namespace restocentr.Core
             : this(execute, null)
         { }
 
-        public AnotherCommandImplementation(Action<object> execute, Func<object, bool>? canExecute)
+        public AnotherCommandImplementation(Action<object> execute, Func<object, bool> canExecute)
         {
             if (execute is null) throw new ArgumentNullException(nameof(execute));
 
@@ -24,7 +24,7 @@ namespace restocentr.Core
 
         public void Execute(object parameter) => _execute(parameter);
 
-        public event EventHandler? CanExecuteChanged
+        public event EventHandler CanExecuteChanged
         {
             add
             {

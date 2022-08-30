@@ -17,17 +17,7 @@ namespace restocentr
     {
         public App()
         {
-            try
-            {
-                RegistryKey key = Registry.LocalMachine.OpenSubKey("SOFTWARE\\Microsoft\\Cryptography");
-                string deviceID = key.GetValue("MachineGUID").ToString();
-
-                Hub.DeviceLogin(deviceID);
-            }
-            catch (Exception ex)
-            {
-                Log.Write($"Sunucu Cihaz Kaydı Başarısız: {ex.Message}");
-            }
+            Hub.DeviceLogin();
         }
     }
 }

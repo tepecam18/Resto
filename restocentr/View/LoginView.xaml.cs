@@ -39,15 +39,15 @@ namespace restocentr.View
             txPassword.Password = "";
         }
 
-        private async void LoginButton_Click(object sender, RoutedEventArgs? e)
+        private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
             if (txPassword.Password != "")
             {
-                await Hub.UserLogin(txPassword.Password);
+                Hub.UserLogin(txPassword.Password);
             }
             else
             {
-                //todo bottom bildirim
+                Log.Show("Şifre Boş olamaz");
             }
 
             if (txPassword.Password == "ptts1")

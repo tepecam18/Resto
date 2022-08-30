@@ -5,8 +5,6 @@ using restocentr.Static;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace restocentr.ViewModel
 {
@@ -26,7 +24,7 @@ namespace restocentr.ViewModel
         public AnotherCommandImplementation OpenDialogCommand { get; }
 
         public int OrderTabIndex { get; set; }
-        private NumberDialog? _Content;
+        private NumberDialog _Content;
         private bool _isDialogOpen;
         #endregion
 
@@ -163,7 +161,7 @@ namespace restocentr.ViewModel
                 }
             }
         }
-        public NumberDialog? Content
+        public NumberDialog Content
         {
             get => _Content;
             set => SetProperty(ref _Content, value);

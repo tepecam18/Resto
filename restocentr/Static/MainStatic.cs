@@ -11,14 +11,11 @@ namespace restocentr.Static
 {
     internal static class St
     {
-        public static DailyModel Today;
+        public static DailyModel Today = new DailyModel();
         public static OrderModel Order = new OrderModel();
         internal static UsersModel User { get; set; }
         internal static DeviceModel Device { get; set; }
 
-        #region Data
-        static HubConnection connection;
-        #endregion
 
         #region Ctor
         static St()

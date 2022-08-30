@@ -12,13 +12,13 @@ namespace restocentr.Model
         public string OrderNote { get; set; } = "";
         public bool IsClosed { get; set; }
         public bool IsCanceled { get; set; }
-        public CanceledModel? Canceled { get; set; }
-        public TableModel? Tables { get; set; }
-        public DeviceModel? Device { get; set; } = St.Device;
-        public UsersModel? CourierPerson { get; set; }
+        public CanceledModel Canceled { get; set; }
+        public TableModel Tables { get; set; }
+        public DeviceModel Device { get; set; } = St.Device;
+        public UsersModel CourierPerson { get; set; }
         public UsersModel SalesPerson { get; set; } = St.User;
         public IList<OrderProductModel> Products { get; }
-        public IList<PaymentModel>? Payments { get; }
+        public IList<PaymentModel> Payments { get; }
 
 
         public decimal TotalPrice

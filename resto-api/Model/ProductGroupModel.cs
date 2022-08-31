@@ -8,5 +8,6 @@ public class ProductGroupModel : RealmObject
     public string? GroupName { get; set; }
     public bool IsActive { get; set; }
     public int Location { get; set; }
+
     public IList<ProductModel> Products { get; }
 }

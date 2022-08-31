@@ -3,6 +3,7 @@
     public class Log : ILog
     {
         private string pathlog;
+        private string cache = "";
 
         public Log()
         {
@@ -23,9 +24,22 @@
 
         public void Write(string msg)
         {
-            using (StreamWriter sw = File.AppendText(pathlog))
+
+            try
             {
-                sw.WriteLine($"api:{DateTime.Now}: {msg}");
+                using (StreamWriter sw = File.AppendText(pathlog))
+                {
+                    if (cache != "")
+                    {
+                        sw.WriteLine(cache);
+                        cache = "";
+                    }
+                    sw.WriteLine($"api:{DateTime.Now}: {msg}");
+                }
+            }
+            catch (Exception)
+            {
+                cache += $"wpf:{DateTime.Now}: {msg} \n";
             }
         }
     }

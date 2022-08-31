@@ -10,4 +10,5 @@ public class UsersModel : RealmObject
     public int Auth { get; set; }
     public bool IsActive { get; set; }
 
+    public IList<ProductGroupModel> productGroups { get; } = new List<ProductGroupModel>();
 }

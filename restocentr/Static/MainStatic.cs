@@ -12,6 +12,7 @@ namespace restocentr.Static
     internal static class St
     {
         public static DailyModel Today = new DailyModel();
+        public static List<ProductGroupModel> ProductGroup = new();
         public static OrderModel Order = new OrderModel();
         internal static UsersModel User { get; set; }
         internal static DeviceModel Device { get; set; }

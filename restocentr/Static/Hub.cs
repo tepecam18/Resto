@@ -1,7 +1,10 @@
 ﻿using Microsoft.AspNetCore.SignalR.Client;
 using Microsoft.Win32;
+using restocentr.Model;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Windows.Documents;
 
 namespace restocentr.Static
 {
@@ -27,8 +30,19 @@ namespace restocentr.Static
             };
 
             #region OnHub
-            DeviceStatu();
+            getDaily();
+            getProduct();
             UserStatu();
+            HataMsg();
+
+            try
+            {
+                connection.StartAsync();
+            }
+            catch (Exception ex)
+            {
+                Log.Write(ex.Message);
+            }
             #endregion
         }
 
@@ -71,58 +85,45 @@ namespace restocentr.Static
         #endregion
 
         #region OnHub
-        public static async void DeviceStatu()
+        public static void UserStatu()
         {
-            connection.On<string>("deviceLogin", (message) =>
+            connection.On<int>("userLogin", message =>
             {
-                if (message == "Ok")
+                if (message == 200)
                 {
+                    Nv.SetContent(Nv.MainMenu);
                 }
-                //todo cihaz kaydedilsin
             });
-
-            try
-            {
-                await connection.StartAsync();
-            }
-            catch (Exception ex)
-            {
-                //todo tekrar denensin mi
-                //todo bulut sunucu üderinden ip adresini alarak bağlan
-                Log.ShowAsync("Sunucuyla Bağlantı Kurulamadı");
-                Log.Write(ex.Message);
-            }
         }
 
-        public static async void UserStatu()
+        public static void getDaily()
         {
-            connection.On<string>("userLogin", message =>
+            connection.On<DailyModel?>("getDaily", message =>
             {
-                switch (message)
+                if (message is not null)
                 {
-                    case "Ok":
-                        Nv.SetContent(Nv.MainMenu);
-                        break;
-                    case "NotUser":
-                        Log.ShowAsync("Girile pin hatalıdır");
-                        break;
-                    case "NotDevice":
-                        Log.ShowAsync("Bu cihaz kaydedilmemiş veya aktif değildir");
-                        break;
-                    default:
-                        Nv.SetContent(Nv.Login);
-                        break;
-                };
+                    St.Today = message;
+                }
             });
+        }
 
-            try
+        public static void getProduct()
+        {
+            connection.On<List<ProductGroupModel>>("getProduct", message =>
             {
-                await connection.StartAsync();
-            }
-            catch (Exception ex)
+                if (message is not null)
+                {
+                    St.ProductGroup = message;
+                }
+            });
+        }
+
+        public static void HataMsg()
+        {
+            connection.On<string>("hataMsg", message =>
             {
-                Log.Write(ex.Message);
-            }
+                Log.ShowAsync(message);
+            });
         }
         #endregion
 
@@ -136,6 +137,11 @@ namespace restocentr.Static
             catch (Exception ex)
             {
                 Log.Write(ex.Message);
+                if (gool == "UserLoginAsync")
+                {
+                    Log.ShowAsync("Sunucuya Bağlantı Başarısız");
+                    //todo buluttan ip adres sorgu
+                }
             }
         }
 

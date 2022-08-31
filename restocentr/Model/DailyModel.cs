@@ -9,10 +9,5 @@ namespace restocentr.Model
         public DateTimeOffset Date { get; set; }
         public IList<OrderModel> Orders { get; }
         public IList<StockModel> Stocks { get; }
-
-        public DailyModel()
-        {
-            Date = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Utc).Date;
-        }
     }
 }

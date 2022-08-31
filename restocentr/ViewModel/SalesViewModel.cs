@@ -13,7 +13,7 @@ namespace restocentr.ViewModel
         #region Data
 
         public DailyModel Today { get => St.Today; }
-        public IList<ProductGroupModel> ProductGroupList { get; set; }
+        public IList<ProductGroupModel> ProductGroupList { get => St.ProductGroup; }
         public IList<ProductModel> ProductList { get; set; }
         public OrderProductModel SelectedOrderProduct { get; set; }
 
@@ -33,7 +33,6 @@ namespace restocentr.ViewModel
         {
             if (ProductGroupList is not null)
             {
-                //ProductGroupList = realm.All<ProductGroupModel>().OrderBy(i => i.Location).ToList();
                 ProductList = ProductGroupList[0].Products;
 
                 OrderCancelCommand = new AnotherCommandImplementation(OrderCancel);

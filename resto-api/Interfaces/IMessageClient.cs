@@ -2,12 +2,18 @@
 {
 
     #region Securty
-    Task deviceLogin(string message);
+    Task userLogin(int message);
 
-    Task userLogin(string message);
+    Task hataMsg(string message);
     #endregion
 
-    #region Orders
+    #region Get
+    Task getDaily(DailyModel daily);
+
+    Task getProduct(IList<ProductGroupModel> productGroup);
+    #endregion
+    
+    #region Add
     Task addOrder(OrderModel order);
 
     Task addOrderProduct(OrderProductModel orderproduct);

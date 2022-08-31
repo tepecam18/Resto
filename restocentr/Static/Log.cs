@@ -10,6 +10,7 @@ namespace restocentr.Static
     internal static class Log
     {
         private static string pathlog;
+        private static string cache = "";
 
         static Log()
         {
@@ -31,10 +32,23 @@ namespace restocentr.Static
         #region SaveMsg
         public static void Write(string msg)
         {
-            using (StreamWriter sw = File.AppendText(pathlog))
+            try
             {
-                sw.WriteLine($"wpf:{DateTime.Now}: {msg}");
+                using (StreamWriter sw = File.AppendText(pathlog))
+                {
+                    if (cache != "")
+                    {
+                        sw.WriteLine(cache);
+                        cache = "";
+                    }
+                    sw.WriteLine($"wpf:{DateTime.Now}: {msg}");
+                }
             }
+            catch (Exception)
+            {
+                cache += $"wpf:{DateTime.Now}: {msg} \n";
+            }
+
         }
         #endregion
 

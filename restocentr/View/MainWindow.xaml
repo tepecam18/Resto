@@ -69,6 +69,11 @@
                         <materialDesign:PackIcon Kind="ArrowLeftCircleOutline" Height="32" Width="32"/>
                     </Button>
                 </TabItem>
+                <TabItem>
+                    <Button Click="BackNavButton_Click">
+                        <materialDesign:PackIcon Kind="ArrowLeftCircleOutline" Height="32" Width="32" Background="red"/>
+                    </Button>
+                </TabItem>
             </TabControl>
         </mah:WindowCommands>
     </mah:MetroWindow.LeftWindowCommands>

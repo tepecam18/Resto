@@ -1,4 +1,5 @@
-﻿using System;
+﻿using restocentr.View;
+using System;
 
 namespace restocentr.Core
 {
@@ -9,17 +10,21 @@ namespace restocentr.Core
 
         private object _content;
         public bool IsCache { get; set; }
+        public int SelectedIndex { get; set; }
 
 
-        public RestoItem(Type contentType)
+        public RestoItem(Type contentType, int _SelectedIndex = 0)
         {
             _contentType = contentType;
+            SelectedIndex = _SelectedIndex;
         }
 
         public object Content
         {
             get
             {
+                MainWindow.viewModel.SelectedIndex=SelectedIndex;
+
                 if (_content is not null && IsCache)
                 {
                     return _content;

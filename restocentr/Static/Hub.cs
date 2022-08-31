@@ -70,7 +70,7 @@ namespace restocentr.Static
             {
                 //todo tekrar denensin mi
                 //todo bulut sunucu üderinden ip adresini alarak bağlan
-                //Log.Show("Sunucuyla Bağlantı Kurulamadı");
+                Log.ShowASync("Sunucuyla Bağlantı Kurulamadı");
                 Log.Write(ex.Message);
             }
         }

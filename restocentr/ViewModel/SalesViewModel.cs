@@ -33,14 +33,17 @@ namespace restocentr.ViewModel
         #region Ctor
         public SalesViewModel()
         {
-            //ProductGroupList = realm.All<ProductGroupModel>().OrderBy(i => i.Location).ToList();
-            ProductList = ProductGroupList[0].Products;
+            if (ProductGroupList is not null)
+            {
+                //ProductGroupList = realm.All<ProductGroupModel>().OrderBy(i => i.Location).ToList();
+                ProductList = ProductGroupList[0].Products;
 
-            OrderCancelCommand = new AnotherCommandImplementation(OrderCancel);
-            SendOrderCommand = new AnotherCommandImplementation(SendOrder);
-            NewOrderCommand = new AnotherCommandImplementation(NewOrder);
-            ChangeOrderTabCommand = new AnotherCommandImplementation(ChangeOrderTab);
-            OpenDialogCommand = new AnotherCommandImplementation(OpenDialog);
+                OrderCancelCommand = new AnotherCommandImplementation(OrderCancel);
+                SendOrderCommand = new AnotherCommandImplementation(SendOrder);
+                NewOrderCommand = new AnotherCommandImplementation(NewOrder);
+                ChangeOrderTabCommand = new AnotherCommandImplementation(ChangeOrderTab);
+                OpenDialogCommand = new AnotherCommandImplementation(OpenDialog);
+            }
         }
         #endregion
 

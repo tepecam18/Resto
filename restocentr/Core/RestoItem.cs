@@ -7,7 +7,7 @@ namespace restocentr.Core
         private readonly Type _contentType;
         //private readonly object? _dataContext;
 
-        private object? _content;
+        private object _content;
         public bool IsCache { get; set; }
 
 
@@ -16,7 +16,7 @@ namespace restocentr.Core
             _contentType = contentType;
         }
 
-        public object? Content
+        public object Content
         {
             get
             {
@@ -28,7 +28,7 @@ namespace restocentr.Core
             }
         }
 
-        private object? CreateContent()
+        private object CreateContent()
         {
             var content = Activator.CreateInstance(_contentType);
             //if (_dataContext != null && content is FrameworkElement element)

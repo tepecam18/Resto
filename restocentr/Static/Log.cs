@@ -28,6 +28,7 @@ namespace restocentr.Static
             }
         }
 
+        #region SaveMsg
         public static void Write(string msg)
         {
             using (StreamWriter sw = File.AppendText(pathlog))
@@ -35,19 +36,22 @@ namespace restocentr.Static
                 sw.WriteLine($"wpf:{DateTime.Now}: {msg}");
             }
         }
+        #endregion
 
-        public static bool ShowASync(string msg, string btn = "Kapat", int time = 3)
+        #region ShowMsg
+        public static bool ShowAsync(string msg, Action<string> action, string btn = "Kapat", int time = 3)
         {
             bool repos = false;
             MainWindow.snackbar.Dispatcher.Invoke(DispatcherPriority.Send, new Action((delegate
             {
+                MainWindow.snackbar.MessageQueue.Clear();
+
                 if (MainWindow.snackbar.MessageQueue is { } messageQueue)
                 {
-                    MainWindow.snackbar.MessageQueue.DiscardDuplicates = true;
                     messageQueue.Enqueue(
                     msg,
                     btn,
-                    action => repos = true,
+                    action,
                     msg,
                     false,
                     true,
@@ -57,22 +61,44 @@ namespace restocentr.Static
             return repos;
         }
 
-        public static bool Show(string msg, string btn = "Kapat", int time = 3)
+        public static bool ShowAsync(string msg, string btn = "Kapat", int time = 3)
         {
             bool repos = false;
+            MainWindow.snackbar.Dispatcher.Invoke(DispatcherPriority.Send, new Action((delegate
+            {
+                MainWindow.snackbar.MessageQueue.Clear();
+
+                if (MainWindow.snackbar.MessageQueue is { } messageQueue)
+                {
+                    messageQueue.Enqueue(
+                    msg,
+                    btn,
+                    action => { },
+                    msg,
+                    false,
+                    true,
+                    new(0, 0, time));
+                }
+            })));
+            return repos;
+        }
+
+        public static void Show(string msg, string btn = "Kapat", int time = 3)
+        {
+            MainWindow.snackbar.MessageQueue.Clear();
+
             if (MainWindow.snackbar.MessageQueue is { } messageQueue)
             {
-                MainWindow.snackbar.MessageQueue.DiscardDuplicates = true;
                 messageQueue.Enqueue(
                 msg,
                 btn,
-                action => repos = true,
+                action => { },
                 msg,
                 false,
                 true,
                 new(0, 0, time));
             }
-            return repos;
         }
+        #endregion
     }
 }

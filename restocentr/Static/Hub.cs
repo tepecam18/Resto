@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.SignalR.Client;
+using Microsoft.Win32;
 using System;
 using System.Threading.Tasks;
 
@@ -6,9 +7,7 @@ namespace restocentr.Static
 {
     internal static class Hub
     {
-        //todo bütün loglar mesaj olarak sunucuya gönderilip silinsin
         #region Data
-        static public bool IsDeviceLogin = false;
         static HubConnection connection;
         #endregion
 
@@ -20,33 +19,54 @@ namespace restocentr.Static
                 .WithUrl("https://localhost:5001/mylocalhub")
                 .Build();
 
-            connection.Closed += async (error) =>
+            connection.Closed += (error) =>
             {
-                while (true)
-                {
-                    if (Log.Show("Sunucuyla Bağlantı Koptu.", "Tekrar Bağlan", 10))
-                    {
-                        await Task.Delay(new Random().Next(0, 5) * 1000);
-                        try
-                        {
-                            await connection.StartAsync();
-                        }
-                        catch (Exception ex)
-                        {
-                            Log.Write(ex.Message);
-                        }
-                    }
-                    else
-                    {
-                        Environment.Exit(0);
-                    }
-                }
+                Log.Write(error.Message);
+                HubClosed();
+                return Task.CompletedTask;
             };
 
             #region OnHub
             DeviceStatu();
             UserStatu();
             #endregion
+        }
+
+        public static void DeviceLogin()
+        {
+            try
+            {
+                RegistryKey key = Registry.LocalMachine.OpenSubKey("SOFTWARE\\Microsoft\\Cryptography");
+                string deviceID = key.GetValue("MachineGUID").ToString();
+
+                Hub.DeviceLogin(deviceID);
+            }
+            catch (Exception ex)
+            {
+                Log.Write($"Sunucu Cihaz Kaydı Başarısız: {ex.Message}");
+            }
+        }
+
+        public static void HubClosed()
+        {
+            Log.ShowAsync(
+                "Sunucuyla Bağlantı Koptu.",
+                sa =>
+                {
+                    Task.Delay(new Random().Next(0, 5) * 1000);
+                    try
+                    {
+                        connection.StartAsync();
+                        DeviceLogin();
+                    }
+                    catch (Exception ex)
+                    {
+                        Log.Write(ex.Message);
+                        HubClosed();
+                    }
+                },
+                "Tekrar Bağlan",
+                10);
         }
         #endregion
 
@@ -55,11 +75,10 @@ namespace restocentr.Static
         {
             connection.On<string>("deviceLogin", (message) =>
             {
-                string newMessage = $"{message}";
                 if (message == "Ok")
                 {
-                    IsDeviceLogin = true;
                 }
+                //todo cihaz kaydedilsin
             });
 
             try
@@ -70,24 +89,30 @@ namespace restocentr.Static
             {
                 //todo tekrar denensin mi
                 //todo bulut sunucu üderinden ip adresini alarak bağlan
-                Log.ShowASync("Sunucuyla Bağlantı Kurulamadı");
+                Log.ShowAsync("Sunucuyla Bağlantı Kurulamadı");
                 Log.Write(ex.Message);
             }
         }
 
         public static async void UserStatu()
         {
-            connection.On<string>("userLogin", (message) =>
+            connection.On<string>("userLogin", message =>
             {
-                string newMessage = $"{message}";
-                if (message == "Ok")
+                switch (message)
                 {
-                    Nv.SetContent(Nv.MainMenu);
-                }
-                else
-                {
-                    Nv.SetContent(Nv.Login);
-                }
+                    case "Ok":
+                        Nv.SetContent(Nv.MainMenu);
+                        break;
+                    case "NotUser":
+                        Log.ShowAsync("Girile pin hatalıdır");
+                        break;
+                    case "NotDevice":
+                        Log.ShowAsync("Bu cihaz kaydedilmemiş veya aktif değildir");
+                        break;
+                    default:
+                        Nv.SetContent(Nv.Login);
+                        break;
+                };
             });
 
             try
@@ -102,14 +127,26 @@ namespace restocentr.Static
         #endregion
 
         #region InvokeHub
-        public static async Task DeviceLogin(string deviceID)
+        private static async void Send(string gool, string param)
         {
-            await connection.InvokeAsync("DeviceLoginAsync", deviceID);
+            try
+            {
+                await connection.InvokeAsync(gool, param);
+            }
+            catch (Exception ex)
+            {
+                Log.Write(ex.Message);
+            }
         }
 
-        public static async Task UserLogin(string pin)
+        public static void DeviceLogin(string deviceID)
         {
-            await connection.InvokeAsync("UserLoginAsync", pin);
+            Send("DeviceLoginAsync", deviceID);
+        }
+
+        public static void UserLogin(string pin)
+        {
+            Send("UserLoginAsync", pin);
         }
         #endregion
     }

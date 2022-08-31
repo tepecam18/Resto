@@ -24,5 +24,35 @@ namespace restocentr.View
         {
             InitializeComponent();
         }
+
+        private void BillsButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void TablesButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void CeyrekButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void YarımButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void DoubleButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void PaymentButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

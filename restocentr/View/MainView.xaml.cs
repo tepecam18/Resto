@@ -18,5 +18,25 @@ namespace restocentr.View
         {
             Log.Show("sane");
         }
+
+        private void Satis_Button_Click(object sender, RoutedEventArgs e)
+        {
+            Nv.SetContent(Nv.Sales);
+        }
+
+        private void Ayarlar_Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Raporlar_Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Exit_Button_Click(object sender, RoutedEventArgs e)
+        {
+            Nv.SetContent(Nv.Login);
+        }
     }
 }

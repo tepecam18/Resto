@@ -4,7 +4,9 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:restocentr.View" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:ViewModel="clr-namespace:restocentr.ViewModel"
+             xmlns:template="clr-namespace:restocentr.Component.Template" xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.DataContext>
@@ -73,57 +75,58 @@
 
             </ListBox.ItemContainerStyle>
         </ListBox>
-        <!--#region tets -->
-        <!--<pan:Panorama Grid.Column="0"
+
+        <template:PanningTemplate Grid.Column="0"
                       Grid.Row="1"
                      Background="Transparent">
-
-            <ListBox SelectedItem="{Binding SelectedProductItem, UpdateSourceTrigger=PropertyChanged}"
+            <template:PanningTemplate.AdditionalContent>
+                <ListBox SelectedItem="{Binding SelectedProductItem, UpdateSourceTrigger=PropertyChanged}"
                          ItemsSource="{Binding ProductList}"
                          Style="{StaticResource MaterialDesignToolVerticalToggleListBox}"
                          Margin="0,4,0,0"
                          Width="{Binding ElementName=LBProductGroup, Path=ActualWidth, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
                          AutomationProperties.Name="ProductListBox"
                          BorderBrush="AliceBlue">
-                <ListBox.Resources>
-                    <Style TargetType="ScrollBar" BasedOn="{StaticResource MaterialDesignScrollBarMinimal}"/>
-                </ListBox.Resources>
-                <ListBox.ItemTemplate>
-                    <DataTemplate DataType="domain:Product">
-                        <TextBlock Text="{Binding Name}"
+                    <ListBox.Resources>
+                        <Style TargetType="ScrollBar" BasedOn="{StaticResource MaterialDesignScrollBarMinimal}"/>
+                    </ListBox.Resources>
+                    <ListBox.ItemTemplate>
+                        <DataTemplate DataType="domain:Product">
+                            <TextBlock Text="{Binding Name}"
                                    TextWrapping="WrapWithOverflow"
                                    VerticalAlignment="Center"
                                    HorizontalAlignment="Center"/>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-                <ListBox.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <WrapPanel/>
-                    </ItemsPanelTemplate>
-                </ListBox.ItemsPanel>
-                <ListBox.ItemContainerStyle>
-                    <Style TargetType="ListBoxItem" 
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                    <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel/>
+                        </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="ListBoxItem" 
                                BasedOn="{StaticResource MaterialDesignListBoxItem}">
-                        <Style.Triggers>
-                            <Trigger
+                            <Style.Triggers>
+                                <Trigger
                                     Property="IsSelected"
                                     Value="True">
-                                <Setter
+                                    <Setter
                                         Property="Background"
                                         Value="{Binding CostumeTheme.Color}" />
-                            </Trigger>
-                        </Style.Triggers>
-                        <Setter Property="Margin" Value="2" />
-                        <Setter Property="Foreground" Value="Black" />
-                        <Setter Property="Background" Value="{Binding CostumeTheme.Color}"/>
-                        <Setter Property="FontSize" Value="14"/>
-                        <Setter Property="FontWeight" Value="Medium"/>
-                        <Setter Property="Height" Value="71"/>
-                        <Setter Property="Width" Value="115"/>
-                    </Style>
-                </ListBox.ItemContainerStyle>
-            </ListBox>
-        </pan:Panorama>
+                                </Trigger>
+                            </Style.Triggers>
+                            <Setter Property="Margin" Value="2" />
+                            <Setter Property="Foreground" Value="Black" />
+                            <Setter Property="Background" Value="{Binding CostumeTheme.Color}"/>
+                            <Setter Property="FontSize" Value="14"/>
+                            <Setter Property="FontWeight" Value="Medium"/>
+                            <Setter Property="Height" Value="71"/>
+                            <Setter Property="Width" Value="115"/>
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+                </ListBox>
+            </template:PanningTemplate.AdditionalContent>
+        </template:PanningTemplate>
 
         <materialDesign:Card
                 Grid.Column="2"
@@ -204,8 +207,9 @@
                             </Style>
                         </TabControl.ItemContainerStyle>
                         <TabItem>
-                            <pan:Panorama>
-                                <ListBox Width="{Binding ElementName=OrderList, Path=ActualWidth, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                            <template:PanningTemplate>
+                                <template:PanningTemplate.AdditionalContent>
+                                    <ListBox Width="{Binding ElementName=OrderList, Path=ActualWidth, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
                                     ItemsSource="{Binding Order.Products}"
                                     SelectedItem="{Binding SelectedOrderTab}"
                                     Style="{DynamicResource MaterialDesignListBox}">
@@ -251,7 +255,8 @@
                                         </Style>
                                     </ListBox.ItemContainerStyle>
                                 </ListBox>
-                            </pan:Panorama>
+                                </template:PanningTemplate.AdditionalContent>
+                            </template:PanningTemplate>
                         </TabItem>
                         <TabItem>
                             <Grid>
@@ -323,7 +328,7 @@
                                             <ColumnDefinition Width="auto"/>
                                             <ColumnDefinition Width="auto"/>
                                         </Grid.ColumnDefinitions>
-                                        header
+                                        <!--header-->
                                         <StackPanel Grid.Column="0">
                                             <TextBlock Text="Ürün Adı :"
                                                        Grid.Row="0"/>
@@ -332,7 +337,7 @@
                                             <TextBlock Text="Toplam Tutar :"
                                                        Grid.Row="1"/>
                                         </StackPanel>
-                                        body
+                                        <!--body-->
                                         <StackPanel Grid.Column="1">
                                             <TextBlock Text="{Binding SelectedOrderProduct.Product.Name}"/>
                                             <StackPanel Orientation="Horizontal">
@@ -455,8 +460,6 @@
                     </Button>
                 </Grid>
             </Grid>
-        </materialDesign:Card>-->
-        <!--#endregion-->
-        
+        </materialDesign:Card>
     </Grid>
 </UserControl>

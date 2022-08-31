@@ -8,53 +8,62 @@ namespace resto_api.Hubs
     public class MyLocalHub : Hub<IMessageClient>
     {
         #region Data
-        static Realm realm;
-        static IQueryable<DeviceModel> devices;
-        static IQueryable<UsersModel> users;
+        private Realm realm { get; set; }
+        private IQueryable<DeviceModel> devices { get; set; }
+        private IQueryable<UsersModel> users { get; set; }
         ILog log;
         #endregion
 
         public MyLocalHub(ILog _Ilog)
         {
-            //todo realm dosyası açık kontrollü ekle
-            log = _Ilog;
             realm = Realm.GetInstance(new RealmConfig());
             devices = realm.All<DeviceModel>();
             users = realm.All<UsersModel>();
-
-            if (devices.Count() == 0)
-            {
-                realm.Write(() =>
-                {
-                    realm.Add<DeviceModel>(new DeviceModel
-                    {
-                        MachineGuid ="87b4d63e-f0c6-41d5-b483-d5b023026c1b",
-                        IsActive = true,
-                        MachineName = "ptts"
-                    });
-
-                    realm.Add<DeviceModel>(new DeviceModel
-                    {
-                        MachineGuid ="9c8fdcf5-ddce-41af-bb2b-ddcfb67aa830",
-                        IsActive = true,
-                        MachineName = "ptts2"
-                    });
-
-                    realm.Add<UsersModel>(new UsersModel
-                    {
-                        Password ="1",
-                        IsActive = true,
-                        UserName = "tpcm"
-                    });
-                });
-            }
+            //todo realm dosyası açık kontrollü ekle
+            log = _Ilog;
         }
+
+        #region Method
+        private bool DeviceControl()
+        {
+            DeviceModel? device = devices.Where(i => i.ConnectionId == Context.ConnectionId).FirstOrDefault();
+            return device is not null;
+        }
+        #endregion
 
         #region Securty
         public async Task DeviceLoginAsync(string deviceID)
         {
             try
             {
+
+                if (devices.Count() == 0)
+                {
+                    realm.Write(() =>
+                    {
+                        realm.Add<DeviceModel>(new DeviceModel
+                        {
+                            MachineGuid ="87b4d63e-f0c6-41d5-b483-d5b023026c1b",
+                            IsActive = true,
+                            MachineName = "ptts"
+                        });
+
+                        realm.Add<DeviceModel>(new DeviceModel
+                        {
+                            MachineGuid ="9c8fdcf5-ddce-41af-bb2b-ddcfb67aa830",
+                            IsActive = true,
+                            MachineName = "ptts2"
+                        });
+
+                        realm.Add<UsersModel>(new UsersModel
+                        {
+                            Password ="1",
+                            IsActive = true,
+                            UserName = "tpcm"
+                        });
+                    });
+                }
+
                 DeviceModel? device = devices.Where(i => i.MachineGuid == deviceID && i.IsActive).FirstOrDefault();
                 if (device is not null)
                 {
@@ -67,6 +76,7 @@ namespace resto_api.Hubs
                 else
                 {
                     await Clients.Caller.deviceLogin("NotDevice");
+                    log.Write($"Geçersiz Device Talepi: {deviceID}");
                 }
             }
             catch (Exception ex)
@@ -103,13 +113,13 @@ namespace resto_api.Hubs
                                 //todo anamakina ve bilgi işleme mesaj at, haber ver
                             }
                         });
-                        log.Write($"{device.MachineName}: Geçersiz User Bilgisi");
+                        log.Write($"{device.MachineName}: Geçersiz User Bilgisi.");
                         await Clients.Caller.userLogin("NotUser");
                     }
                 }
                 else
                 {
-                    log.Write("Geçersiz Device Bilgisi");
+                    log.Write("Geçersiz Device denemesi yapıldı");
                     await Clients.Caller.userLogin("NotDevice");
                 }
             }
@@ -121,14 +131,34 @@ namespace resto_api.Hubs
         }
         #endregion
 
-        #region Method
-        private async Task<bool> DeviceControl()
+        #region Daily
+
+        public async Task GetDailyAsync()
         {
-            DeviceModel? device = devices.Where(i => i.ConnectionId == Context.ConnectionId).FirstOrDefault();
-            return device is not null;
+            try
+            {
+                DeviceModel? device = devices.Where(i => i.ConnectionId == Context.ConnectionId).FirstOrDefault();
+                if (device is not null)
+                {
+
+                }
+                else
+                {
+                    log.Write("Geçersiz Device denemesi yapıldı");
+                }
+            }
+            catch (Exception ex)
+            {
+                log.Write($"sunucu kullanıcı kontrolü devredışı: {ex.Message}");
+            }
         }
+
         #endregion
 
+        public override Task OnConnectedAsync()
+        {
+            return base.OnConnectedAsync();
+        }
         public override Task OnDisconnectedAsync(Exception? exception)
         {
             //todo clear device

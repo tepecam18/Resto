@@ -69,6 +69,28 @@
                         <materialDesign:PackIcon Kind="ArrowLeftCircleOutline" Height="32" Width="32"/>
                     </Button>
                 </TabItem>
+                <TabItem>
+                    <StackPanel Orientation="Horizontal">
+                        <StackPanel.Resources>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="FontSize" Value="18"/>
+                                <Setter Property="FontWeight" Value="Bold"/>
+                            </Style>
+                        </StackPanel.Resources>
+                        <Button Click="BackNavButton_Click">
+                            <materialDesign:PackIcon Kind="ArrowLeftCircleOutline" Height="32" Width="32"/>
+                        </Button>
+                        <Button Click="AdisyonNavButton_Click">
+                            <TextBlock Text="Adisyonlar" />
+                        </Button>
+                        <Button Click="MasaNavButton_Click">
+                            <TextBlock Text="Masalar" />
+                        </Button>
+                        <Button Click="HesapButton_Click">
+                            <TextBlock Text="Hesap" />
+                        </Button>
+                    </StackPanel>
+                </TabItem>
             </TabControl>
         </mah:WindowCommands>
     </mah:MetroWindow.LeftWindowCommands>

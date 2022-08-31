@@ -41,10 +41,10 @@ namespace restocentr.Static
             yield return new RestoItem(typeof(LoginView));
 
             Nv.MainMenu = i++;
-            yield return new RestoItem(typeof(MainView));
+            yield return new RestoItem(typeof(MainView), 1);
 
             Nv.Sales = i++;
-            yield return new RestoItem(typeof(SalesView));
+            yield return new RestoItem(typeof(SalesView), 2);
 
             //Nv.Tables = i++;
             //yield return new RestoItem(typeof(TablesView));
@@ -76,7 +76,6 @@ namespace restocentr.Static
             BackList.Add(index);
             RestoItems[index].IsCache = IsCache;
             MainWindow.viewModel.SelectedItem = RestoItems[index];
-            MainWindow.viewModel.SelectedIndex=1;
         }
 
         internal static void GetBack(bool IsCache = true)

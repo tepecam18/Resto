@@ -54,5 +54,20 @@ namespace restocentr.View
         {
             Nv.GetBack();
         }
+
+        private void AdisyonNavButton_Click(object sender, RoutedEventArgs e)
+        {
+            Nv.SetContent(Nv.Orders);
+        }
+
+        private void MasaNavButton_Click(object sender, RoutedEventArgs e)
+        {
+            Nv.SetContent(Nv.Tables);
+        }
+
+        private void HesapButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

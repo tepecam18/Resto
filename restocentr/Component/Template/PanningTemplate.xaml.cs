@@ -125,7 +125,6 @@ namespace restocentr.Component.Template
         }
         #endregion
 
-
         #region Method
         private ListBoxItem listBoxItem
         {

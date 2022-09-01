@@ -4,7 +4,9 @@ using resto_api.Core;
 using RestoWPF.Core;
 using SushiHangover.RealmJson;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Text.Json;
+using static Realms.ThreadSafeReference;
 
 namespace resto_api.Hubs
 {
@@ -12,34 +14,23 @@ namespace resto_api.Hubs
     {
         #region Data
         private Realm realm { get; set; }
-        private IQueryable<DeviceModel> devices { get; set; }
-        private IQueryable<UsersModel> users { get; set; }
-        private DailyModel? daily { get; set; }
-        private IQueryable<ProductGroupModel> productGroups { get; set; }
+        private static IQueryable<DeviceModel> devices { get; set; }
+        private static IQueryable<UsersModel> users { get; set; }
+
         ILog log;
         #endregion
 
+        #region Ctor
         public MyLocalHub(ILog _Ilog)
         {
             realm = Realm.GetInstance(new RealmConfig());
             devices = realm.All<DeviceModel>();
             users = realm.All<UsersModel>();
-            //DateTime utc olarak kaydediliyor
-            DateTimeOffset Date = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Utc).Date;
-            daily = realm.All<DailyModel>().Where(i => i.Date == Date).FirstOrDefault();
 
-            if (daily is null)
-            {
-                realm.Write(() =>
-                {
-                    daily = realm.Add<DailyModel>(new DailyModel());
-                });
-            }
-
-            productGroups = realm.All<ProductGroupModel>().Where(i => i.IsActive);
             //todo realm dosyası açık kontrollü ekle
             log = _Ilog;
         }
+        #endregion
 
         #region Securty
         public async Task DeviceLoginAsync(string deviceID)
@@ -78,17 +69,6 @@ namespace resto_api.Hubs
                             IsActive = false,
                             UserName = "ptts"
                         });
-
-                        //DateTimeOffset Date = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Utc).Date;
-                        //Bugünün verisini al yoksa oluştur
-                        //if (realm.All<DailyModel>().Where(i => i.Date == Date).Count() >= 1)
-                        //{
-                        //    Today = realm.All<DailyModel>().Where(i => i.Date == Date).First();
-                        //}
-                        //else
-                        //{
-                        realm.Add(new DailyModel());
-                        //}
 
                         CostumeThemeModel costumeTheme = realm.Add(new CostumeThemeModel()
                         {
@@ -315,7 +295,9 @@ namespace resto_api.Hubs
                             Price = 90.99M,
                         });
 
-                        DailyModel today = new DailyModel();
+                        DateTimeOffset Date = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Utc).Date;
+
+                        DailyModel daily = realm.All<DailyModel>().Where(i => i.Date == Date).FirstOrDefault();
 
                         for (int j = 0; j < 1000; j++)
                         {
@@ -327,7 +309,7 @@ namespace resto_api.Hubs
                                     Product = item
                                 });
                             }
-                            today.Orders.Add(b);
+                            daily.Orders.Add(b);
                         }
                     });
                 }
@@ -371,15 +353,13 @@ namespace resto_api.Hubs
                         await Clients.Caller.userLogin(200);
 
                         //today send
-                        if (daily is not null)
-                            await Clients.Caller.getDaily(JsonSerializer.Serialize<DailyModel>(daily));
+                        await Clients.Caller.getDaily(JsonSerializer.Serialize<IList<OrderModel>>(OderesMask()));
 
                         //product list send
-                        
                         if (user.productGroups.Count > 0)
                             await Clients.Caller.getProduct(JsonSerializer.Serialize<IList<ProductGroupModel>>(user.productGroups));
                         else
-                            await Clients.Caller.getProduct(JsonSerializer.Serialize<IQueryable<ProductGroupModel>>(productGroups));
+                            await Clients.Caller.getProduct(JsonSerializer.Serialize<IQueryable<ProductGroupModel>>(realm.All<ProductGroupModel>().Where(i => i.IsActive)));
                     }
                     else
                     {
@@ -407,16 +387,60 @@ namespace resto_api.Hubs
                 await Clients.Caller.hataMsg("Bilgi İşlem İle Görüşün");
             }
         }
-        #endregion
 
-        public override Task OnConnectedAsync()
-        {
-            return base.OnConnectedAsync();
-        }
         public override Task OnDisconnectedAsync(Exception? exception)
         {
             //todo clear device
             return base.OnDisconnectedAsync(exception);
         }
+        #endregion
+
+        #region Method
+        public IList<OrderModel> OderesMask()
+        {
+            DateTimeOffset Date = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Utc).Date;
+
+            IList<OrderModel> model = realm.All<DailyModel>().Where(i => i.Date == Date).FirstOrDefault().NonManagedCopy<DailyModel>().Orders;
+
+            foreach (OrderModel order in model)
+            {
+                if (order.SalesPerson is not null)
+                {
+                    order.SalesPerson = new UsersModel()
+                    {
+                        UserName = order.SalesPerson.UserName,
+                        ID = order.SalesPerson.ID,
+                    };
+                }
+
+                if (order.PaymantPerson is not null)
+                {
+                    order.PaymantPerson = new UsersModel()
+                    {
+                        UserName = order.PaymantPerson.UserName,
+                        ID = order.PaymantPerson.ID,
+                    };
+                }
+
+                if (order.WaiterPerson is not null)
+                {
+                    order.WaiterPerson = new UsersModel()
+                    {
+                        UserName = order.WaiterPerson.UserName,
+                        ID = order.WaiterPerson.ID,
+                    };
+                }
+                if (order.Device is not null)
+                {
+                    order.Device = new DeviceModel()
+                    {
+                        MachineName = order.Device.MachineName,
+                        ID = order.Device.ID,
+                    };
+                }
+            }
+            return model;
+        }
+        #endregion
     }
 }

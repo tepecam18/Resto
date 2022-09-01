@@ -31,7 +31,7 @@ namespace restocentr.Static
             };
 
             #region OnHub
-            getDaily();
+            getOrders();
             getProduct();
             UserStatu();
             HataMsg();
@@ -97,11 +97,11 @@ namespace restocentr.Static
             });
         }
 
-        public static void getDaily()
+        public static void getOrders()
         {
             connection.On<string>("getDaily", message =>
             {
-                St.Today = JsonSerializer.Deserialize<DailyModel>(message);
+                St.Orders = JsonSerializer.Deserialize<List<OrderModel>>(message);
             });
         }
 

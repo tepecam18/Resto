@@ -12,7 +12,6 @@ namespace restocentr.ViewModel
     {
         #region Data
 
-        public DailyModel Today { get => St.Today; }
         public IList<ProductGroupModel> ProductGroupList { get => St.ProductGroup; }
         public IList<ProductModel> ProductList { get; set; }
         public OrderProductModel SelectedOrderProduct { get; set; }
@@ -67,15 +66,8 @@ namespace restocentr.ViewModel
             {
                 if (value is not null)
                 {
-
-
                     int a = Order.Products.Where(i => i.Product.ID == value.ID).Count();
-                    if (Order.Products.Count == 0)
-                    {
-                        Today.Orders.Add(Order);
-                        OnPropertyChanged("Today");
-                    }
-
+                    
                     //Aynı üründen Sepette var mı
                     if (a > 0)
                     {

@@ -15,9 +15,9 @@ namespace restocentr.Model
         public bool IsCanceled { get; set; }
         public CanceledModel Canceled { get; set; }
         public TableModel Tables { get; set; }
-        public DeviceModel Device { get; set; } = St.Device;
+        public DeviceModel Device { get; set; }
         public UsersModel CourierPerson { get; set; }
-        public UsersModel SalesPerson { get; set; } = St.User;
+        public UsersModel SalesPerson { get; set; }
         public IList<OrderProductModel> Products { get; }
         public IList<PaymentModel> Payments { get; }
 

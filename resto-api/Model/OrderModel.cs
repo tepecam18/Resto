@@ -15,7 +15,7 @@ public class OrderModel : EmbeddedObject
     public UsersModel? SalesPerson { get; set; }
     public UsersModel? WaiterPerson { get; set; }
     public UsersModel? PaymantPerson { get; set; }
-    public IList<OrderProductModel> Products { get; }
+    public IList<OrderProductModel>? Products { get; }
     public IList<PaymentModel>? Payments { get; }
 
 

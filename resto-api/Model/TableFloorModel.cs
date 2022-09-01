@@ -1,6 +1,7 @@
 ﻿using MongoDB.Bson;
 using Realms;
-
+namespace resto_api.Modal
+{
 public class TableFloorModel : RealmObject
 {
     [PrimaryKey]
@@ -8,4 +9,5 @@ public class TableFloorModel : RealmObject
     public string? FloorName { get; set; }
     public IList<TableModel>? Tables { get; }
 
+}
 }

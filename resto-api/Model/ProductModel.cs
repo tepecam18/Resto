@@ -1,7 +1,8 @@
 ﻿using MongoDB.Bson;
 using Realms;
-
-public class ProductModel : RealmObject
+namespace resto_api.Modal
+{
+    public class ProductModel : RealmObject
 {
     [PrimaryKey]
     public ObjectId ID { get; set; } = ObjectId.GenerateNewId();
@@ -14,4 +15,5 @@ public class ProductModel : RealmObject
     public CostumeThemeModel? CostumeTheme { get; set; }
     public IList<ProductOptionModel>? ProductOptions { get; }
     public IList<StockUseModel>? stockUses { get; }
+}
 }

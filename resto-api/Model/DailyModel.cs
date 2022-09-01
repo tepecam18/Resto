@@ -1,7 +1,8 @@
 ﻿using MongoDB.Bson;
 using Realms;
-
-public class DailyModel : RealmObject
+namespace resto_api.Modal
+{
+    public class DailyModel : RealmObject
 {
     [PrimaryKey]
     public ObjectId ID { get; set; } = ObjectId.GenerateNewId();
@@ -13,4 +14,5 @@ public class DailyModel : RealmObject
     {
         Date = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Utc).Date;
     }
+}
 }

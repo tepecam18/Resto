@@ -1,12 +1,10 @@
 ﻿using Microsoft.AspNetCore.SignalR;
 using Realms;
 using resto_api.Core;
-using RestoWPF.Core;
+using resto_api.Modal;
+using resto_api.Properties;
 using SushiHangover.RealmJson;
-using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Text.Json;
-using static Realms.ThreadSafeReference;
 
 namespace resto_api.Hubs
 {
@@ -26,7 +24,13 @@ namespace resto_api.Hubs
             realm = Realm.GetInstance(new RealmConfig());
             devices = realm.All<DeviceModel>();
             users = realm.All<UsersModel>();
+            DateTimeOffset Date = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Utc).Date;
 
+            if (realm.All<DailyModel>().Where(i => i.Date == Date).FirstOrDefault() is null)
+                realm.Write(() =>
+                {
+                    realm.Add<DailyModel>(new DailyModel());
+                });
             //todo realm dosyası açık kontrollü ekle
             log = _Ilog;
         }
@@ -69,7 +73,16 @@ namespace resto_api.Hubs
                             IsActive = false,
                             UserName = "ptts"
                         });
+                    });
+                }
+                DateTimeOffset Date = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Utc).Date;
 
+                DailyModel daily = realm.All<DailyModel>().Where(i => i.Date == Date).FirstOrDefault();
+
+                if (daily.Orders.Count() == 0)
+                {
+                    realm.Write(() =>
+                    {
                         CostumeThemeModel costumeTheme = realm.Add(new CostumeThemeModel()
                         {
                             Color = "#FFFF0000",
@@ -295,9 +308,6 @@ namespace resto_api.Hubs
                             Price = 90.99M,
                         });
 
-                        DateTimeOffset Date = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Utc).Date;
-
-                        DailyModel daily = realm.All<DailyModel>().Where(i => i.Date == Date).FirstOrDefault();
 
                         for (int j = 0; j < 1000; j++)
                         {
@@ -308,6 +318,21 @@ namespace resto_api.Hubs
                                 {
                                     Product = item
                                 });
+                                b.IsClosed = false;
+                            }
+                            daily.Orders.Add(b);
+                        }
+
+                        for (int j = 0; j < 1000; j++)
+                        {
+                            OrderModel b = new OrderModel();
+                            foreach (var item in PG.Products)
+                            {
+                                b.Products.Add(new OrderProductModel()
+                                {
+                                    Product = item
+                                });
+                                b.IsClosed = true;
                             }
                             daily.Orders.Add(b);
                         }
@@ -400,44 +425,14 @@ namespace resto_api.Hubs
         {
             DateTimeOffset Date = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Utc).Date;
 
-            IList<OrderModel> model = realm.All<DailyModel>().Where(i => i.Date == Date).FirstOrDefault().NonManagedCopy<DailyModel>().Orders;
+            IList<OrderModel> model = realm.All<DailyModel>().Where(i => i.Date == Date).FirstOrDefault().NonManagedCopy<DailyModel>().Orders.Where(j => j.IsClosed).ToList();
 
             foreach (OrderModel order in model)
             {
-                if (order.SalesPerson is not null)
-                {
-                    order.SalesPerson = new UsersModel()
-                    {
-                        UserName = order.SalesPerson.UserName,
-                        ID = order.SalesPerson.ID,
-                    };
-                }
-
-                if (order.PaymantPerson is not null)
-                {
-                    order.PaymantPerson = new UsersModel()
-                    {
-                        UserName = order.PaymantPerson.UserName,
-                        ID = order.PaymantPerson.ID,
-                    };
-                }
-
-                if (order.WaiterPerson is not null)
-                {
-                    order.WaiterPerson = new UsersModel()
-                    {
-                        UserName = order.WaiterPerson.UserName,
-                        ID = order.WaiterPerson.ID,
-                    };
-                }
-                if (order.Device is not null)
-                {
-                    order.Device = new DeviceModel()
-                    {
-                        MachineName = order.Device.MachineName,
-                        ID = order.Device.ID,
-                    };
-                }
+                order.SalesPerson = null;
+                order.PaymantPerson = null;
+                order.WaiterPerson = null;
+                order.Device = null;
             }
             return model;
         }

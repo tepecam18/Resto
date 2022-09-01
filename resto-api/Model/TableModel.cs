@@ -1,7 +1,8 @@
 ﻿using MongoDB.Bson;
 using Realms;
-
-public class TableModel : RealmObject
+namespace resto_api.Modal
+{
+    public class TableModel : RealmObject
 {
     [PrimaryKey]
     public ObjectId ID { get; set; } = ObjectId.GenerateNewId();
@@ -49,4 +50,5 @@ public class TableModel : RealmObject
     }
     #endregion
 
+}
 }

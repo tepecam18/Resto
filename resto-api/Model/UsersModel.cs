@@ -1,7 +1,8 @@
 ﻿using MongoDB.Bson;
 using Realms;
-
-public class UsersModel : RealmObject
+namespace resto_api.Modal
+{
+    public class UsersModel : RealmObject
 {
     [PrimaryKey]
     public ObjectId ID { get; set; } = ObjectId.GenerateNewId();
@@ -11,4 +12,5 @@ public class UsersModel : RealmObject
     public bool IsActive { get; set; }
 
     public IList<ProductGroupModel> productGroups { get; } = new List<ProductGroupModel>();
+}
 }

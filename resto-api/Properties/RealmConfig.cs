@@ -1,6 +1,6 @@
 ﻿using Realms;
 
-namespace RestoWPF.Core
+namespace resto_api.Properties
 {
     internal class RealmConfig : RealmConfiguration
     {

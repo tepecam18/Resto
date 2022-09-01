@@ -1,8 +1,9 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using Realms;
-
-public class OrderProductModel : EmbeddedObject
+namespace resto_api.Modal
+{
+    public class OrderProductModel : EmbeddedObject
 {
     public Decimal128 Price { get; set; }
     public decimal Piece { get; set; }
@@ -14,4 +15,5 @@ public class OrderProductModel : EmbeddedObject
     [BsonIgnore]
     public Decimal128 TotalPrice { get; set; }
 
+}
 }

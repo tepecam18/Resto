@@ -1,8 +1,9 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using Realms;
-
-public class DeviceModel : RealmObject
+namespace resto_api.Modal
+{
+    public class DeviceModel : RealmObject
 {
     [PrimaryKey]
     public ObjectId ID { get; set; } = ObjectId.GenerateNewId();
@@ -18,4 +19,5 @@ public class DeviceModel : RealmObject
 
     [BsonIgnore]
     public int WarningCount { get; set; } = 0;
+}
 }

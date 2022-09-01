@@ -1,4 +1,5 @@
-﻿using restocentr.Static;
+﻿using MongoDB.Bson;
+using restocentr.Static;
 using System;
 using System.Collections.Generic;
 
@@ -7,7 +8,7 @@ namespace restocentr.Model
     public class OrderModel
     {
 
-        public string ID { get; set; }
+        public ObjectId ID { get; set; }
         public DateTimeOffset DateT { get; set; } = DateTime.Now;
         public string OrderNote { get; set; } = "";
         public bool IsClosed { get; set; }

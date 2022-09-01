@@ -1,11 +1,12 @@
-﻿using System;
+﻿using MongoDB.Bson;
+using System;
 
 namespace restocentr.Model
 {
     public class StockUseModel
     {
-        public string ID { get; set; }
+        public string ObjectId { get; set; }
         public StockProductModel StockProduct { get; set; }
-        public Decimal Amount { get; set; }
+        public Decimal128 Amount { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MongoDB.Bson;
+using System;
 
 namespace restocentr.Model
 {
@@ -10,7 +11,7 @@ namespace restocentr.Model
 
     public class PaymentTypeModel
     {
-        public string ID { get; set; }
+        public ObjectId ID { get; set; }
         public string Name { get; set; }
     }
 }

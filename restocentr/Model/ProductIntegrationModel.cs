@@ -1,8 +1,10 @@
-﻿namespace restocentr.Model
+﻿using MongoDB.Bson;
+
+namespace restocentr.Model
 {
     public class ProductIntegrationModel
     {
-        public string ID { get; set; }
+        public ObjectId ID { get; set; }
         public ProductModel Product { get; set; }
     }
 }

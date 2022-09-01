@@ -8,9 +8,9 @@
     #endregion
 
     #region Get
-    Task getDaily(DailyModel daily);
+    Task getDaily(string daily);
 
-    Task getProduct(IList<ProductGroupModel> productGroup);
+    Task getProduct(string productGroup);
     #endregion
     
     #region Add

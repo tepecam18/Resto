@@ -3,6 +3,7 @@ using Microsoft.Win32;
 using restocentr.Model;
 using System;
 using System.Collections.Generic;
+using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows.Documents;
 
@@ -98,23 +99,17 @@ namespace restocentr.Static
 
         public static void getDaily()
         {
-            connection.On<DailyModel?>("getDaily", message =>
+            connection.On<string>("getDaily", message =>
             {
-                if (message is not null)
-                {
-                    St.Today = message;
-                }
+                St.Today = JsonSerializer.Deserialize<DailyModel>(message);
             });
         }
 
         public static void getProduct()
         {
-            connection.On<List<ProductGroupModel>>("getProduct", message =>
+            connection.On<string>("getProduct", message =>
             {
-                if (message is not null)
-                {
-                    St.ProductGroup = message;
-                }
+                    St.ProductGroup = JsonSerializer.Deserialize<List<ProductGroupModel>>(message);
             });
         }
 

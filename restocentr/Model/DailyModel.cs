@@ -1,11 +1,12 @@
-﻿using System;
+﻿using MongoDB.Bson;
+using System;
 using System.Collections.Generic;
 
 namespace restocentr.Model
 {
     public class DailyModel
     {
-        public string ID { get; set; }
+        public ObjectId ID { get; set; }
         public DateTimeOffset Date { get; set; }
         public IList<OrderModel> Orders { get; }
         public IList<StockModel> Stocks { get; }

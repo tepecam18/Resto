@@ -1,13 +1,14 @@
-﻿using System;
+﻿using MongoDB.Bson;
+using System;
 using System.Collections.Generic;
 
 namespace restocentr.Model
 {
     public class ProductModel
     {
-        public string ID { get; set; }
+        public ObjectId ID { get; set; }
         public string Name { get; set; }
-        public Decimal Price { get; set; }
+        public Decimal128 Price { get; set; }
         public int Location { get; set; }
         public bool IsActive { get; set; }
         public bool IsShow { get; set; }

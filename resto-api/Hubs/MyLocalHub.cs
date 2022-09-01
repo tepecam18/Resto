@@ -2,6 +2,9 @@
 using Realms;
 using resto_api.Core;
 using RestoWPF.Core;
+using SushiHangover.RealmJson;
+using System.Collections.Generic;
+using System.Text.Json;
 
 namespace resto_api.Hubs
 {
@@ -369,14 +372,14 @@ namespace resto_api.Hubs
 
                         //today send
                         if (daily is not null)
-                            await Clients.Caller.getDaily(daily);
+                            await Clients.Caller.getDaily(JsonSerializer.Serialize<DailyModel>(daily));
 
                         //product list send
                         
                         if (user.productGroups.Count > 0)
-                            await Clients.Caller.getProduct(user.productGroups);
+                            await Clients.Caller.getProduct(JsonSerializer.Serialize<IList<ProductGroupModel>>(user.productGroups));
                         else
-                            await Clients.Caller.getProduct(productGroups.ToList());
+                            await Clients.Caller.getProduct(JsonSerializer.Serialize<IQueryable<ProductGroupModel>>(productGroups));
                     }
                     else
                     {

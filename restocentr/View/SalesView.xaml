@@ -77,8 +77,10 @@
         </ListBox>
 
         <template:PanningTemplate Grid.Column="0"
-                      Grid.Row="1"
-                     Background="Transparent">
+                                  Grid.Row="1"
+                                  IsVertical="Disabled"
+                                  IsHorizontal="Hidden"
+                                  Background="Transparent">
             <template:PanningTemplate.AdditionalContent>
                 <ListBox SelectedItem="{Binding SelectedProductItem, UpdateSourceTrigger=PropertyChanged}"
                          ItemsSource="{Binding ProductList}"

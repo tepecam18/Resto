@@ -39,7 +39,7 @@ namespace restocentr.Component.Template
         }
         #endregion
 
-        #region ChildrenContent
+        #region param
         public object AdditionalContent
         {
             get { return (object)GetValue(AdditionalContentProperty); }
@@ -47,6 +47,16 @@ namespace restocentr.Component.Template
         }
         public static readonly DependencyProperty AdditionalContentProperty =
             DependencyProperty.Register("AdditionalContent", typeof(object), typeof(PanningTemplate),
+              new PropertyMetadata(null));
+
+        public ScrollBarVisibility IsVertical { get; set; }
+        public static readonly DependencyProperty IsVerticalProperty =
+            DependencyProperty.Register("IsVertical", typeof(ScrollBarVisibility), typeof(PanningTemplate),
+              new PropertyMetadata(null));
+
+        public ScrollBarVisibility IsHorizontal { get; set; }
+        public static readonly DependencyProperty IsHorizontalProperty =
+            DependencyProperty.Register("IsHorizontal", typeof(ScrollBarVisibility), typeof(PanningTemplate),
               new PropertyMetadata(null));
         #endregion
 

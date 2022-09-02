@@ -428,8 +428,8 @@ namespace resto_api.Hubs
 
             DailyModel model = realm.All<DailyModel>().Where(i => i.Date == Date).FirstOrDefault();
 
-            log.Write(model.Orders.ToJson());
-            Clients.Caller.getDaily(model.ToJson());
+            //log.Write(model.Orders.ToBson<IList<OrderModel>>().ToString());
+            Clients.Caller.getDaily(model.Orders.ToJson());
         }
         #endregion
     }

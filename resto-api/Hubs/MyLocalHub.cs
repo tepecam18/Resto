@@ -425,22 +425,19 @@ namespace resto_api.Hubs
         {
             DateTimeOffset Date = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Utc).Date;
 
-            IList<OrderModel> model = realm.All<DailyModel>().Where(i => i.Date == Date).FirstOrDefault().Orders.Take<OrderModel>(200).ToList();
+            DailyModel model = realm.All<DailyModel>().Where(i => i.Date == Date).FirstOrDefault().NonManagedCopy<DailyModel>();
 
-            realm.Write(() =>
+            foreach (OrderModel order in model.Orders)
             {
-                foreach (OrderModel order in model)
-                {
-                    order.SalesPerson = null;
-                    order.PaymantPerson = null;
-                    order.WaiterPerson = null;
-                    order.Device = null;
-                    if (order.Products is not null)
-                        order.Products.Clear();
-                }
-            });
-            log.Write(JsonSerializer.Serialize(model));
-            return model;
+                order.SalesPerson = null;
+                order.PaymantPerson = null;
+                order.WaiterPerson = null;
+                order.Device = null;
+                if (order.Products is not null)
+                    order.Products.Clear();
+            }
+            log.Write(model.DynamicApi.ToString());
+            return model.Orders;
         }
         #endregion
     }

@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.SignalR;
 using Realms;
-using RestoWPF.Core;
+using resto_api.Properties;
 
 public class MyHub : Hub
 {

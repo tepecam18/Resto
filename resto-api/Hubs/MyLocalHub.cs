@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.SignalR;
+using Newtonsoft.Json;
 using Realms;
 using resto_api.Core;
 using resto_api.Modal;
@@ -378,13 +379,13 @@ namespace resto_api.Hubs
                         await Clients.Caller.userLogin(200);
 
                         //today send
-                        await Clients.Caller.getDaily(JsonSerializer.Serialize<IList<OrderModel>>(OderesMask()));
+                        await Clients.Caller.getDaily(JsonSerializer.Serialize(OderesMask()));
 
                         //product list send
                         if (user.productGroups.Count > 0)
-                            await Clients.Caller.getProduct(JsonSerializer.Serialize<IList<ProductGroupModel>>(user.productGroups));
+                            await Clients.Caller.getProduct(JsonSerializer.Serialize(user.productGroups));
                         else
-                            await Clients.Caller.getProduct(JsonSerializer.Serialize<IQueryable<ProductGroupModel>>(realm.All<ProductGroupModel>().Where(i => i.IsActive)));
+                            await Clients.Caller.getProduct(JsonSerializer.Serialize(realm.All<ProductGroupModel>().Where(i => i.IsActive)));
                     }
                     else
                     {
@@ -425,7 +426,7 @@ namespace resto_api.Hubs
         {
             DateTimeOffset Date = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Utc).Date;
 
-            IList<OrderModel> model = realm.All<DailyModel>().Where(i => i.Date == Date).FirstOrDefault().NonManagedCopy<DailyModel>().Orders.Where(j => j.IsClosed).ToList();
+            IList<OrderModel> model = realm.All<DailyModel>().Where(i => i.Date == Date).FirstOrDefault().NonManagedCopy<DailyModel>().Orders.Where(j => j.IsClosed).Take<OrderModel>(100).ToList();
 
             foreach (OrderModel order in model)
             {
@@ -434,6 +435,8 @@ namespace resto_api.Hubs
                 order.WaiterPerson = null;
                 order.Device = null;
             }
+
+            log.Write(JsonConvert.SerializeObject(OderesMask()));
             return model;
         }
         #endregion

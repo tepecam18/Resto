@@ -1,18 +1,18 @@
 ﻿using Microsoft.AspNetCore.SignalR;
+using MongoDB.Bson;
 using Newtonsoft.Json;
 using Realms;
 using resto_api.Core;
 using resto_api.Modal;
 using resto_api.Properties;
 using SushiHangover.RealmJson;
-using System.Text.Json;
 
 namespace resto_api.Hubs
 {
     public class MyLocalHub : Hub<IMessageClient>
     {
         #region Data
-        private Realm realm { get; set; }
+        private static Realm realm;
         private static IQueryable<DeviceModel>? devices { get; set; }
         private static IQueryable<UsersModel>? users { get; set; }
 
@@ -379,13 +379,13 @@ namespace resto_api.Hubs
                         await Clients.Caller.userLogin(200);
 
                         //today send
-                        await Clients.Caller.getDaily(JsonSerializer.Serialize(OderesMask()));
+                        OderesMask();
 
                         //product list send
                         if (user.productGroups.Count > 0)
-                            await Clients.Caller.getProduct(JsonSerializer.Serialize(user.productGroups));
+                            await Clients.Caller.getProduct(JsonConvert.SerializeObject(user.productGroups));
                         else
-                            await Clients.Caller.getProduct(JsonSerializer.Serialize(realm.All<ProductGroupModel>().Where(i => i.IsActive)));
+                            await Clients.Caller.getProduct(JsonConvert.SerializeObject(realm.All<ProductGroupModel>().Where(i => i.IsActive)));
                     }
                     else
                     {
@@ -422,23 +422,14 @@ namespace resto_api.Hubs
         #endregion
 
         #region Method
-        public IList<OrderModel> OderesMask()
+        public void OderesMask()
         {
             DateTimeOffset Date = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Utc).Date;
 
-            DailyModel model = realm.All<DailyModel>().Where(i => i.Date == Date).FirstOrDefault().NonManagedCopy<DailyModel>();
+            DailyModel model = realm.All<DailyModel>().Where(i => i.Date == Date).FirstOrDefault();
 
-            foreach (OrderModel order in model.Orders)
-            {
-                order.SalesPerson = null;
-                order.PaymantPerson = null;
-                order.WaiterPerson = null;
-                order.Device = null;
-                if (order.Products is not null)
-                    order.Products.Clear();
-            }
-            log.Write(model.DynamicApi.ToString());
-            return model.Orders;
+            log.Write(model.Orders.ToJson());
+            Clients.Caller.getDaily(model.ToJson());
         }
         #endregion
     }

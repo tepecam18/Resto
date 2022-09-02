@@ -1,11 +1,13 @@
 ﻿using Microsoft.AspNetCore.SignalR.Client;
 using Microsoft.Win32;
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization;
+using MongoDB.Bson.Serialization.Serializers;
+using Newtonsoft.Json;
 using restocentr.Model;
 using System;
 using System.Collections.Generic;
-using System.Text.Json;
 using System.Threading.Tasks;
-using System.Windows.Documents;
 
 namespace restocentr.Static
 {
@@ -101,7 +103,8 @@ namespace restocentr.Static
         {
             connection.On<string>("getDaily", message =>
             {
-                St.Orders = JsonSerializer.Deserialize<List<OrderModel>>(message);
+                BsonSerializer.Deserialize<List<OrderModel>>(message);
+                St.Orders = JsonConvert.DeserializeObject<List<OrderModel>>(message);
             });
         }
 
@@ -109,7 +112,7 @@ namespace restocentr.Static
         {
             connection.On<string>("getProduct", message =>
             {
-                    St.ProductGroup = JsonSerializer.Deserialize<List<ProductGroupModel>>(message);
+                    St.ProductGroup = JsonConvert.DeserializeObject<List<ProductGroupModel>>(message);
             });
         }
 

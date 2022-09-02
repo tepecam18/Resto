@@ -1,4 +1,6 @@
-﻿public interface IMessageClient
+﻿using resto_api.Modal;
+
+public interface IMessageClient
 {
 
     #region Securty

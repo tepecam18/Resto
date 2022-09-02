@@ -12,8 +12,8 @@ namespace resto_api.Hubs
     {
         #region Data
         private Realm realm { get; set; }
-        private static IQueryable<DeviceModel> devices { get; set; }
-        private static IQueryable<UsersModel> users { get; set; }
+        private static IQueryable<DeviceModel>? devices { get; set; }
+        private static IQueryable<UsersModel>? users { get; set; }
 
         ILog log;
         #endregion
@@ -425,15 +425,21 @@ namespace resto_api.Hubs
         {
             DateTimeOffset Date = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Utc).Date;
 
-            IList<OrderModel> model = realm.All<DailyModel>().Where(i => i.Date == Date).FirstOrDefault().NonManagedCopy<DailyModel>().Orders.Where(j => j.IsClosed).ToList();
+            IList<OrderModel> model = realm.All<DailyModel>().Where(i => i.Date == Date).FirstOrDefault().Orders.Take<OrderModel>(200).ToList();
 
-            foreach (OrderModel order in model)
+            realm.Write(() =>
             {
-                order.SalesPerson = null;
-                order.PaymantPerson = null;
-                order.WaiterPerson = null;
-                order.Device = null;
-            }
+                foreach (OrderModel order in model)
+                {
+                    order.SalesPerson = null;
+                    order.PaymantPerson = null;
+                    order.WaiterPerson = null;
+                    order.Device = null;
+                    if (order.Products is not null)
+                        order.Products.Clear();
+                }
+            });
+            log.Write(JsonSerializer.Serialize(model));
             return model;
         }
         #endregion

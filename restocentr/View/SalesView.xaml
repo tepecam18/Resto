@@ -212,7 +212,7 @@
                             <template:PanningTemplate>
                                 <template:PanningTemplate.AdditionalContent>
                                     <ListBox Width="{Binding ElementName=OrderList, Path=ActualWidth, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
-                                    ItemsSource="{Binding Order.Products}"
+                                    ItemsSource="{Binding Order.Products, UpdateSourceTrigger=PropertyChanged}"
                                     SelectedItem="{Binding SelectedOrderTab}"
                                     Style="{DynamicResource MaterialDesignListBox}">
                                     <ListBox.ItemTemplate>

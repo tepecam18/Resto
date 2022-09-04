@@ -7,6 +7,6 @@ namespace restocentr.Static
     {
         public static List<ProductGroupModel> ProductGroup = new();
         public static DailyModel Today = new();
-        public static OrderModel Order = new();
+        public static OrderModel Order = new OrderModel();
     }
 }

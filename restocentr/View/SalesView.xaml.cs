@@ -25,17 +25,17 @@ namespace restocentr.View
 
         private void CeyrekButton_Click(object sender, RoutedEventArgs e)
         {
-
+            NUDSelectedOrderProductPiece.Value = 0.25;
         }
 
         private void YarımButton_Click(object sender, RoutedEventArgs e)
         {
-
+            NUDSelectedOrderProductPiece.Value = 0.5;
         }
 
         private void DoubleButton_Click(object sender, RoutedEventArgs e)
         {
-
+            NUDSelectedOrderProductPiece.Value = 2;
         }
 
         private void PaymentButton_Click(object sender, RoutedEventArgs e)

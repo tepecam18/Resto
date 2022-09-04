@@ -21,9 +21,9 @@ namespace resto_api.Modal
         public UsersModel? WaiterPerson { get; set; }
         [BsonIgnore]
         public UsersModel? PaymantPerson { get; set; }
-        [BsonElement]
+        [BsonIgnore]
         public IList<OrderProductModel>? Products { get; }
-        [BsonElement]
+        [BsonIgnore]
         public IList<PaymentModel>? Payments { get; }
 
 

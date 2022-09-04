@@ -2,6 +2,7 @@
 using restocentr.Static;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace restocentr.Model
 {
@@ -19,8 +20,9 @@ namespace restocentr.Model
         public UsersModel SalesPerson { get; set; }
         public UsersModel PaymantPerson { get; set; }
         public UsersModel WaiterPerson { get; set; }
-        public IList<OrderProductModel> Products { get; set; }
-        public IList<PaymentModel> Payments { get; set; }
+        public ObservableCollection<OrderProductModel> Products { get; set; }
+
+        public ObservableCollection<PaymentModel> Payments { get; set; }
         public decimal TotalPrice { get; set; }
 
     }

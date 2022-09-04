@@ -4,6 +4,8 @@ using restocentr.Model;
 using restocentr.Static;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Linq;
 
 namespace restocentr.ViewModel
@@ -11,7 +13,6 @@ namespace restocentr.ViewModel
     class SalesViewModel : ViewModelBase
     {
         #region Data
-
         public IList<ProductGroupModel> ProductGroupList { get => St.ProductGroup; }
         public IList<ProductModel> ProductList { get; set; }
         public OrderProductModel SelectedOrderProduct { get; set; }
@@ -49,6 +50,7 @@ namespace restocentr.ViewModel
             get => St.Order;
             set => SetProperty(ref St.Order, value);
         }
+
         public ProductGroupModel SelectedProductGroup
         {
             set
@@ -66,8 +68,13 @@ namespace restocentr.ViewModel
             {
                 if (value is not null)
                 {
-                    int a = Order.Products.Where(i => i.Product.ID == value.ID).Count();
-                    
+                    int a = 0;
+                    if (Order.Products is not null)
+                        a = Order.Products.Where(i => i.Product.ID == value.ID).Count();
+                    else
+                    {
+                        Order.Products = new ObservableCollection<OrderProductModel>();
+                    }
                     //Aynı üründen Sepette var mı
                     if (a > 0)
                     {

@@ -8,7 +8,7 @@ namespace restocentr.Model
     {
         public ObjectId ID { get; set; }
         public DateTimeOffset Date { get; set; }
-        public IList<OrderModel> Orders { get; }
-        public IList<StockModel> Stocks { get; }
+        public IList<OrderModel> Orders { get; set; }
+        public IList<StockModel> Stocks { get; set; }
     }
 }

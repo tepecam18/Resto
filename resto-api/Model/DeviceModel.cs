@@ -1,5 +1,4 @@
 ﻿using MongoDB.Bson;
-using MongoDB.Bson.Serialization.Attributes;
 using Realms;
 namespace resto_api.Modal
 {
@@ -14,10 +13,10 @@ namespace resto_api.Modal
     public string? PrivateKey { get; set; }
     public string? ConnectionId { get; set; }
 
-    [BsonIgnore]
+    [Ignored]
     public UsersModel? User { get; set; }
 
-    [BsonIgnore]
+    [Ignored]
     public int WarningCount { get; set; } = 0;
 }
 }

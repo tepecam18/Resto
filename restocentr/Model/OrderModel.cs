@@ -16,10 +16,11 @@ namespace restocentr.Model
         public CanceledModel Canceled { get; set; }
         public TableModel Tables { get; set; }
         public DeviceModel Device { get; set; }
-        public UsersModel CourierPerson { get; set; }
         public UsersModel SalesPerson { get; set; }
-        public IList<OrderProductModel> Products { get; }
-        public IList<PaymentModel> Payments { get; }
+        public UsersModel PaymantPerson { get; set; }
+        public UsersModel WaiterPerson { get; set; }
+        public IList<OrderProductModel> Products { get; set; }
+        public IList<PaymentModel> Payments { get; set; }
         public decimal TotalPrice { get; set; }
 
     }

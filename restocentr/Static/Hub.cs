@@ -105,15 +105,9 @@ namespace restocentr.Static
 
         public static void getOrders()
         {
-            connection.On<string>("getDaily", message =>
+            connection.On<byte[]>("getDaily", message =>
             {
-                using (var json_reader = new JsonReader(message))
-                {
-                    var serializer = new BsonArraySerializer();
-                    BsonArray bsonArray = serializer.Deserialize(BsonDeserializationContext.CreateRoot(json_reader));
-
-                }
-                St.Orders = JsonConvert.DeserializeObject<List<OrderModel>>(message);
+                St.Today = BsonSerializer.Deserialize<DailyModel>(message);
             });
         }
 
@@ -121,7 +115,7 @@ namespace restocentr.Static
         {
             connection.On<string>("getProduct", message =>
             {
-                    St.ProductGroup = JsonConvert.DeserializeObject<List<ProductGroupModel>>(message);
+                St.ProductGroup = BsonSerializer.Deserialize<List<ProductGroupModel>>(message);
             });
         }
 

@@ -10,7 +10,7 @@ public interface IMessageClient
     #endregion
 
     #region Get
-    Task getDaily(string daily);
+    Task getDaily(byte[] daily);
 
     Task getProduct(string productGroup);
     #endregion

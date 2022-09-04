@@ -20,6 +20,7 @@ namespace restocentr.View
             InitializeComponent();
             DataContext = viewModel;
             snackbar = RootSnackbar;
+            Hub.DeviceLogin();
         }
 
         #region windows border

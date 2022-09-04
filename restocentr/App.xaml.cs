@@ -15,9 +15,6 @@ namespace restocentr
     /// </summary>
     public partial class App : Application
     {
-        public App()
-        {
-            Hub.DeviceLogin();
-        }
+
     }
 }

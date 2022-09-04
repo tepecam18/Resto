@@ -47,7 +47,7 @@ if (app.Environment.IsDevelopment())
     //app.UseRouting();
 
     //signlr
-    app.MapHub<MyHub>("/myhub");
+    //app.MapHub<MyHub>("/myhub");
     app.MapHub<MyLocalHub>("/mylocalhub");
 }
 

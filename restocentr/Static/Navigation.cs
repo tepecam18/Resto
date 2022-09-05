@@ -53,16 +53,20 @@ namespace restocentr.Static
             //yield return new RestoItem(typeof(OrdersView));
         }
 
-        private static void ClearBack()
+        private static void ClearAll()
         {
-            BackList.Clear();
-            BackList.Add(0);
+            ClearBack();
 
             RestoItems.Clear();
             foreach (var item in GenerateRestoItem())
             {
                 RestoItems.Add(item);
             }
+        }
+        public static void ClearBack()
+        {
+            BackList.Clear();
+            BackList.Add(0);
         }
         #endregion
 

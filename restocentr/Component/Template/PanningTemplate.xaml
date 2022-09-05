@@ -12,7 +12,7 @@
     <ScrollViewer 
         Name="sv"
         SnapsToDevicePixels="true"
-        VerticalScrollBarVisibility="{Binding IsVertical}"
+        VerticalScrollBarVisibility="Hidden"
         HorizontalScrollBarVisibility="{Binding IsHorizontal}">
         <ContentPresenter Content="{Binding AdditionalContent, ElementName=userControl}"/>
     </ScrollViewer>

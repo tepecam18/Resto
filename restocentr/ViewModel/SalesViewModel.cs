@@ -35,7 +35,7 @@ namespace restocentr.ViewModel
             {
                 ProductList = ProductGroupList[0].Products;
 
-                OrderCancelCommand = new AnotherCommandImplementation(OrderCancel);
+                OrderCancelCommand = new AnotherCommandImplementation(CancelOrder);
                 SendOrderCommand = new AnotherCommandImplementation(SendOrder);
                 NewOrderCommand = new AnotherCommandImplementation(NewOrder);
                 ChangeOrderTabCommand = new AnotherCommandImplementation(ChangeOrderTab);
@@ -80,6 +80,10 @@ namespace restocentr.ViewModel
                     {
                         SelectedOrderProduct = Order.Products.Where(i => i.Product.ID == value.ID).First();
                         SelectedOrderProduct.Piece++;
+                        //todo daha iyisini yapabilirsin(ObservableCollection değişiklikleri göstermiyor)
+                        a = Order.Products.IndexOf(SelectedOrderProduct);
+                        Order.Products.Remove(SelectedOrderProduct);
+                        Order.Products.Insert(a, SelectedOrderProduct);
                     }
                     else
                     {
@@ -170,10 +174,10 @@ namespace restocentr.ViewModel
         #endregion
 
         #region Command
-        private void OrderCancel(object obj)
+        private void CancelOrder(object obj)
         {
-            //ProductOrder = new ObservableCollection<OrderProductModel>();
-            OnPropertyChanged("Order");
+            Nv.ClearBack();
+            Nv.SetContent(Nv.MainMenu);
         }
 
         private void SendOrder(object obj)

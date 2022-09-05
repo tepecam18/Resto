@@ -21,9 +21,22 @@ namespace restocentr.Model
         public UsersModel PaymantPerson { get; set; }
         public UsersModel WaiterPerson { get; set; }
         public ObservableCollection<OrderProductModel> Products { get; set; }
-
         public ObservableCollection<PaymentModel> Payments { get; set; }
-        public decimal TotalPrice { get; set; }
+        public decimal TotalPrice
+        {
+            get
+            {
+                decimal total = 0;
+                if (Products is not null)
+                {
+                    foreach (OrderProductModel order in Products)
+                    {
+                        total += Convert.ToDecimal(order.TotalPrice);
+                    }
+                }
+                return total;
+            }
+        }
 
     }
 }

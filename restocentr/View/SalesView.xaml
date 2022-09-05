@@ -137,41 +137,14 @@
                 UniformCornerRadius="30">
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition MaxHeight="50"/>
                     <RowDefinition Height="30"/>
                     <RowDefinition/>
-                    <RowDefinition MaxHeight="65"/>
+                    <RowDefinition MaxHeight="40"/>
                     <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
 
-                <Grid Grid.Row="0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition Width="3"/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-                    <Button Grid.Column="0"
-                            Height="50"
-                            Click="BillsButton_Click"
-                            materialDesign:ButtonAssist.CornerRadius="0,0,0,0">
-                        <WrapPanel>
-                            <TextBlock Text="Adisyon: "/>
-                            <TextBlock Text="01"/>
-                        </WrapPanel>
-                    </Button>
-                    <Button Grid.Column="2"
-                            materialDesign:ButtonAssist.CornerRadius="0,30,0,0"
-                            Click="TablesButton_Click"
-                            Height="50">
-                        <WrapPanel>
-                            <TextBlock Text="Masa: "/>
-                            <TextBlock Text="01"/>
-                        </WrapPanel>
-                    </Button>
-                </Grid>
-
                 <Grid Name="OrderList" DockPanel.Dock="Top"
-                          Grid.Row="1">
+                          Grid.Row="0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                         <ColumnDefinition Width="50"/>
@@ -200,7 +173,7 @@
                                VerticalAlignment="Center"/>
                 </Grid>
 
-                <Grid Grid.Row="2">
+                <Grid Grid.Row="1">
                     <TabControl SelectedIndex="{Binding OrderTabIndex, Mode=OneWay}">
                         <TabControl.ItemContainerStyle>
                             <Style TargetType="{x:Type TabItem}">
@@ -411,7 +384,7 @@
                     </TabControl>
                 </Grid>
 
-                <materialDesign:Card Grid.Row="3"
+                <materialDesign:Card Grid.Row="2"
                                      materialDesign:ShadowAssist.ShadowDepth="Depth2">
                     <StackPanel 
                         Orientation="Horizontal"
@@ -427,7 +400,7 @@
                     </StackPanel>
                 </materialDesign:Card>
 
-                <Grid Grid.Row="4">
+                <Grid Grid.Row="3">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                         <ColumnDefinition Width="4"/>
@@ -451,12 +424,11 @@
                                    FontSize="24"/>
                     </Button>
                     <Button Grid.Column="4"
-                            Click="PaymentButton_Click"
+                            Command="{Binding OrderCancelCommand}"
                             Style="{StaticResource MaterialDesignRaisedSecondaryButton}"
                             Height="70" Cursor="Hand">
                         <TextBlock Text="Kapat"
                                    TextAlignment="Center"
-
                                    TextWrapping="WrapWithOverflow"
                                    FontSize="24"/>
                     </Button>

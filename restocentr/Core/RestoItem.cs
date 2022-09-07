@@ -13,7 +13,7 @@ namespace restocentr.Core
         public int SelectedIndex { get; set; }
 
 
-        public RestoItem(Type contentType, int _SelectedIndex = 0)
+        public RestoItem(Type contentType, int _SelectedIndex = 1)
         {
             _contentType = contentType;
             SelectedIndex = _SelectedIndex;

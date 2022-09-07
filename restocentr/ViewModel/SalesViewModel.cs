@@ -5,7 +5,6 @@ using restocentr.Static;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Collections.Specialized;
 using System.Linq;
 
 namespace restocentr.ViewModel
@@ -41,6 +40,11 @@ namespace restocentr.ViewModel
                 ChangeOrderTabCommand = new AnotherCommandImplementation(ChangeOrderTab);
                 OpenDialogCommand = new AnotherCommandImplementation(OpenDialog);
             }
+        }
+
+        public void Change()
+        {
+            OnPropertyChanged("Order");
         }
         #endregion
 

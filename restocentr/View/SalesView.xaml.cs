@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using restocentr.ViewModel;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace restocentr.View

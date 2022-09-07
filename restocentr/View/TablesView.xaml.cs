@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace restocentr.View
 {
     /// <summary>
-    /// Interaction logic for OrderView.xaml
+    /// Interaction logic for TablesView.xaml
     /// </summary>
-    public partial class OrderView : UserControl
+    public partial class TablesView : UserControl
     {
-        public OrderView()
+        public TablesView()
         {
             InitializeComponent();
         }

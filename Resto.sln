@@ -3,17 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32210.308
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "resto-api", "resto-api\resto-api.csproj", "{9E4FA26B-4748-47AA-8A28-A58B6E415B7B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "resto-api", "..\..\MIA\Resto\resto-api\resto-api.csproj", "{9E4FA26B-4748-47AA-8A28-A58B6E415B7B}"
 EndProject
-Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "resto-vue", "resto-vue\resto-vue.esproj", "{A3B979A9-EB00-4CE5-AC01-591FE89912CE}"
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "resto-vue", "..\..\MIA\Resto\resto-vue\resto-vue.esproj", "{A3B979A9-EB00-4CE5-AC01-591FE89912CE}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Client", "Client", "{26140CB9-D104-4DC0-B76F-56E6446DA74E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Server", "Server", "{FF4434C8-B263-4D4B-9659-4BDA03E9FFFB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RestoWPF2", "RestoWPF\RestoWPF2.csproj", "{0ABFA4FA-7B0D-4F83-8375-0FC5756A9604}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RestoWPF2", "..\..\MIA\Resto\RestoWPF\RestoWPF2.csproj", "{0ABFA4FA-7B0D-4F83-8375-0FC5756A9604}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "restocentr", "restocentr\restocentr.csproj", "{CF3008FD-F607-4B74-AE4D-D039EE4304C5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "restocentr", "..\..\MIA\Resto\restocentr\restocentr.csproj", "{CF3008FD-F607-4B74-AE4D-D039EE4304C5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "resto-grpc", "resto-grpc\resto-grpc.csproj", "{1569F5B1-E508-4403-B0CC-EF9EAE58B747}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -99,6 +101,22 @@ Global
 		{CF3008FD-F607-4B74-AE4D-D039EE4304C5}.Release|x64.Build.0 = Release|Any CPU
 		{CF3008FD-F607-4B74-AE4D-D039EE4304C5}.Release|x86.ActiveCfg = Release|Any CPU
 		{CF3008FD-F607-4B74-AE4D-D039EE4304C5}.Release|x86.Build.0 = Release|Any CPU
+		{1569F5B1-E508-4403-B0CC-EF9EAE58B747}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1569F5B1-E508-4403-B0CC-EF9EAE58B747}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1569F5B1-E508-4403-B0CC-EF9EAE58B747}.Debug|arm64.ActiveCfg = Debug|Any CPU
+		{1569F5B1-E508-4403-B0CC-EF9EAE58B747}.Debug|arm64.Build.0 = Debug|Any CPU
+		{1569F5B1-E508-4403-B0CC-EF9EAE58B747}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{1569F5B1-E508-4403-B0CC-EF9EAE58B747}.Debug|x64.Build.0 = Debug|Any CPU
+		{1569F5B1-E508-4403-B0CC-EF9EAE58B747}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{1569F5B1-E508-4403-B0CC-EF9EAE58B747}.Debug|x86.Build.0 = Debug|Any CPU
+		{1569F5B1-E508-4403-B0CC-EF9EAE58B747}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1569F5B1-E508-4403-B0CC-EF9EAE58B747}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1569F5B1-E508-4403-B0CC-EF9EAE58B747}.Release|arm64.ActiveCfg = Release|Any CPU
+		{1569F5B1-E508-4403-B0CC-EF9EAE58B747}.Release|arm64.Build.0 = Release|Any CPU
+		{1569F5B1-E508-4403-B0CC-EF9EAE58B747}.Release|x64.ActiveCfg = Release|Any CPU
+		{1569F5B1-E508-4403-B0CC-EF9EAE58B747}.Release|x64.Build.0 = Release|Any CPU
+		{1569F5B1-E508-4403-B0CC-EF9EAE58B747}.Release|x86.ActiveCfg = Release|Any CPU
+		{1569F5B1-E508-4403-B0CC-EF9EAE58B747}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -108,6 +126,7 @@ Global
 		{A3B979A9-EB00-4CE5-AC01-591FE89912CE} = {26140CB9-D104-4DC0-B76F-56E6446DA74E}
 		{0ABFA4FA-7B0D-4F83-8375-0FC5756A9604} = {FF4434C8-B263-4D4B-9659-4BDA03E9FFFB}
 		{CF3008FD-F607-4B74-AE4D-D039EE4304C5} = {26140CB9-D104-4DC0-B76F-56E6446DA74E}
+		{1569F5B1-E508-4403-B0CC-EF9EAE58B747} = {26140CB9-D104-4DC0-B76F-56E6446DA74E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {FDD6C7EA-39F7-402C-B9A0-946889C35039}

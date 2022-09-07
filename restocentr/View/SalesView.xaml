@@ -6,7 +6,8 @@
              xmlns:local="clr-namespace:restocentr.View" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:ViewModel="clr-namespace:restocentr.ViewModel"
-             xmlns:template="clr-namespace:restocentr.Component.Template" xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:template="clr-namespace:restocentr.Component.Template" 
+             xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.DataContext>

@@ -68,7 +68,7 @@ namespace restocentr.View
 
         private void HesapButton_Click(object sender, RoutedEventArgs e)
         {
-
+            //todo yazdır
         }
     }
 }

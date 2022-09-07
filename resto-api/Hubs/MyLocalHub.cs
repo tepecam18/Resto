@@ -4,6 +4,7 @@ using Realms;
 using resto_api.Core;
 using resto_api.Modal;
 using resto_api.Properties;
+using System.Data;
 
 namespace resto_api.Hubs
 {
@@ -373,7 +374,9 @@ namespace resto_api.Hubs
 
                         //today send
                         DateTimeOffset Date = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Utc).Date;
-                        Clients.Caller.getDaily(realm.All<DailyModel>().Single(i => i.Date == Date).ToBson());
+                        DailyModel today = realm.All<DailyModel>().Single(i => i.Date == Date);
+                        var schema = Schema
+                        Clients.Caller.getDaily(today.ToBson());
 
                         //product list send
                         if (user.productGroups.Count > 0)

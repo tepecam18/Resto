@@ -38,19 +38,19 @@ namespace restocentr.Static
             int i = 0;
 
             Nv.Login = i++;
-            yield return new RestoItem(typeof(LoginView));
+            yield return new RestoItem(typeof(LoginView), 0);
 
             Nv.MainMenu = i++;
-            yield return new RestoItem(typeof(MainView), 1);
+            yield return new RestoItem(typeof(MainView));
 
             Nv.Sales = i++;
             yield return new RestoItem(typeof(SalesView), 2);
 
-            //Nv.Tables = i++;
-            //yield return new RestoItem(typeof(TablesView));
+            Nv.Tables = i++;
+            yield return new RestoItem(typeof(TablesView));
 
-            //Nv.Orders = i++;
-            //yield return new RestoItem(typeof(OrdersView));
+            Nv.Orders = i++;
+            yield return new RestoItem(typeof(OrdersView));
         }
 
         private static void ClearAll()
@@ -90,12 +90,10 @@ namespace restocentr.Static
             {
                 RestoItems[BackList.Last()].IsCache = IsCache;
                 MainWindow.viewModel.SelectedItem = RestoItems[BackList.Last()];
-                MainWindow.viewModel.SelectedIndex=1;
             }
             else
             {
                 MainWindow.viewModel.SelectedItem = RestoItems[0];
-                MainWindow.viewModel.SelectedIndex=0;
                 ClearBack();
             }
         }

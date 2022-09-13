@@ -4,6 +4,27 @@ option csharp_namespace = "resto_grpc";
 
 package greet;
 
+/*
+Ana Makina Baþlatýlýr
+Ana Makina günü baþlatýr ve 
+
+
+Login - select
+
+Sipariþ Ekle - insert
+Sipariþe Ürün Ekle - update/insert
+Sipairþi Ýptal Et - updete
+
+Sipariþleri Göster - select
+Sipariþi Göster - select
+Sipariþi Yazdýr - update
+Sipariþi Kapat - update
+Sipariþi Ödeme - update/insert
+
+Masalarý Göster - select
+Masalarý Birleþtir - update
+*/
+
 // The greeting service definition.
 service Greeter {
   // Sends a greeting

@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+option csharp_namespace = "resto_grpc";
+
+package Message;
+
+
+// The greeting service definition.
+service Message {
+  // Sends a greeting
+  rpc SendMessage (MessageRequest) returns (MessageReply);
+}
+
+// The request message containing the user's name.
+message MessageRequest {
+  string name = 1;
+}
+
+// The response message containing the greetings.
+message MessageReply {
+  string message = 1;
+}

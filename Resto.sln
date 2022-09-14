@@ -15,9 +15,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RestoWPF2", "..\..\MIA\Rest
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "restocentr", "..\..\MIA\Resto\restocentr\restocentr.csproj", "{CF3008FD-F607-4B74-AE4D-D039EE4304C5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "resto-grpc", "resto-grpc\resto-grpc.csproj", "{1569F5B1-E508-4403-B0CC-EF9EAE58B747}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "restoGrpc", "..\..\MIA\Resto\restoGrpc\restoGrpc.csproj", "{1569F5B1-E508-4403-B0CC-EF9EAE58B747}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "test", "test\test.csproj", "{DF8A4FF2-939C-42AE-908C-1BB754586FF0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "test", "..\..\MIA\Resto\test\test.csproj", "{DF8A4FF2-939C-42AE-908C-1BB754586FF0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

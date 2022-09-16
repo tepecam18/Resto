@@ -1,5 +1,4 @@
 using Grpc.Core;
-using resto_grpc;
 
 namespace resto_grpc.Services
 {

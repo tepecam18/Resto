@@ -1,8 +1,9 @@
 ﻿using MongoDB.Bson;
 using Realms;
-namespace resto_api.Modal
+
+namespace restoGrpc.Model
 {
-    public class UsersModel : RealmObject
+    public class UserModel : RealmObject
     {
         [PrimaryKey]
         public ObjectId ID { get; set; } = ObjectId.GenerateNewId();

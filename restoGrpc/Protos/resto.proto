@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+option csharp_namespace = "restoGrpc";
+
+package resto;
+
+
+service Resto {
+  rpc Login (LoginRequest) returns (Response);
+}
+
+message LoginRequest {
+  string device = 1;
+  int32 pin = 2;
+}
+
+message Response {
+  string message = 1;
+  int32 Statu = 2;
+}

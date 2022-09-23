@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32210.308
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "resto-api", "..\..\MIA\Resto\resto-api\resto-api.csproj", "{9E4FA26B-4748-47AA-8A28-A58B6E415B7B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "resto-api", "resto-api\resto-api.csproj", "{9E4FA26B-4748-47AA-8A28-A58B6E415B7B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Client", "Client", "{26140CB9-D104-4DC0-B76F-56E6446DA74E}"
 EndProject
@@ -11,9 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Server", "Server", "{FF4434
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "restocentr", "..\..\MIA\Resto\restocentr\restocentr.csproj", "{CF3008FD-F607-4B74-AE4D-D039EE4304C5}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "restoGrpc", "..\..\MIA\Resto\restoGrpc\restoGrpc.csproj", "{1569F5B1-E508-4403-B0CC-EF9EAE58B747}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "test", "..\..\MIA\Resto\test\test.csproj", "{DF8A4FF2-939C-42AE-908C-1BB754586FF0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "test", "test\test.csproj", "{DF8A4FF2-939C-42AE-908C-1BB754586FF0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

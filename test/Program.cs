@@ -1,7 +1,6 @@
-﻿using Grpc.Core;
-using Grpc.Net.Client;
+﻿using Grpc.Net.Client;
 using restoGrpc;
-using System.Numerics;
+using restoGrpc.Model;
 
 namespace test
 {
@@ -9,17 +8,25 @@ namespace test
     {
         static async Task Main(string[] args)
         {
+            UserModel user = new UserModel
+            {
+                UserName = "tpcm",
+                Password = 972580,
+                Auth = 0,
+                IsActive = true,
+            };
+
             var channel = GrpcChannel.ForAddress("https://localhost:7104");
-            //var greetClient = new Message.MessageClient(channel);
+            var restoClient = new Resto.RestoClient(channel);
 
             //unery
-            //MessageReply hp = await greetClient.SendMessageAsync(new MessageRequest
-            //{
-            //    Name = "world",
-            //    Message = "naber"
-            //});
+            Response rp = await restoClient.LoginAsync(new LoginRequest
+            {
+                Device = "world",
+                Pin = 972580
+            });
 
-            //Console.WriteLine(hp.Message);
+            Console.WriteLine($"mesaj: {rp.Message} \nStatu: {rp.Statu}");
 
             //server streaming
             //var response = greetClient.SendMessage(

@@ -9,7 +9,7 @@
 
 
   <ItemGroup>
-    <Protobuf Include="..\restoGrpc\Protos\greet.proto" GrpcServices="Client" />
+    <Protobuf Include="..\restoGrpc\Protos\resto.proto" GrpcServices="Client" />
     <Protobuf Include="..\restoGrpc\Protos\Message.proto" GrpcServices="Client" />
   </ItemGroup>
 
@@ -21,5 +21,10 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+  </ItemGroup>
+
+  
+  <ItemGroup>
+    <ProjectReference Include="..\restoGrpc\restoGrpc.csproj" />
   </ItemGroup>
 </Project>

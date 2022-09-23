@@ -9,13 +9,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Protobuf Include="Protos\greet.proto" GrpcServices="Server" />
+    <Protobuf Include="Protos\resto.proto" GrpcServices="Server" />
     <Protobuf Include="Protos\message.proto" GrpcServices="Server" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Grpc.AspNetCore" Version="2.48.0" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.17.0" />
+    <PackageReference Include="protobuf-net.Core" Version="3.1.17" />
     <PackageReference Include="Realm" Version="10.15.1" />
   </ItemGroup>
 

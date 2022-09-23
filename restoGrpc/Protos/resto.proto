@@ -7,6 +7,12 @@ package resto;
 
 service Resto {
   rpc Login (LoginRequest) returns (Response);
+  rpc AddUser (UserRequest) returns (Response);
+}
+
+message UserRequest {
+  string device = 1;
+  int32 pin = 2;
 }
 
 message LoginRequest {
